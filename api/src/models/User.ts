@@ -1,5 +1,6 @@
-import { Column } from "typeorm";
+import { Column, OneToMany } from "typeorm";
 import { BaseEntity } from "./BaseEntity";
+import { Certification } from "./Certification";
 
 export class User extends BaseEntity {
   @Column({
@@ -53,6 +54,8 @@ export class User extends BaseEntity {
     nullable: false
   })
   isActive: boolean;
+  @OneToMany(() => Certification, (certification) => certification.user)
+  certifications?: Certification[];
 
   constructor(
     name: string,

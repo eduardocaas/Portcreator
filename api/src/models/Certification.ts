@@ -1,6 +1,7 @@
-import { Column, Entity } from "typeorm";
+import { Column, Entity, JoinColumn, ManyToOne } from "typeorm";
 import { BaseEntity } from "./BaseEntity";
 import { CertificationType } from "./enums/CertificationType";
+import { User } from "./User";
 
 @Entity()
 export class Certification extends BaseEntity {
@@ -34,13 +35,21 @@ export class Certification extends BaseEntity {
   })
   imagePath?: string;
 
+  @ManyToOne(() => User, (user) => user.certifications)
+  @JoinColumn({
+    name: 'userId',
+    referencedColumnName: 'id'
+  })
+  user: User;
+
   constructor(
     title: string,
     description: string,
     type: CertificationType,
     issueDate: Date,
     hours: number,
-    institutionName: string
+    institutionName: string,
+    user: User
   ) {
     super();
     this.title = title;
@@ -49,6 +58,7 @@ export class Certification extends BaseEntity {
     this.issueDate = issueDate;
     this.hours = hours;
     this.institutionName = institutionName;
+    this.user = user
   }
 
   updateImage(imagePath: string) { this.imagePath = imagePath; }
