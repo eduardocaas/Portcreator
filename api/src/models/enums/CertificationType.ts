@@ -1,4 +1,4 @@
 export enum CertificationType {
-  CERTFICIATION,
+  CERTIFICATION,
   COURSE
 }
