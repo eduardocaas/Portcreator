@@ -54,6 +54,11 @@ export class User extends BaseEntity {
     nullable: false
   })
   isActive: boolean;
+  @Column({
+    type: 'boolean',
+    nullable: false
+  })
+  firstUpdate: boolean;
   @OneToMany(() => Certification, (certification) => certification.user)
   certifications?: Certification[];
 
@@ -67,6 +72,7 @@ export class User extends BaseEntity {
     this.email = email;
     this.password = password;
     this.isActive = true;
+    this.firstUpdate = true;
   }
   
   update(
@@ -84,6 +90,7 @@ export class User extends BaseEntity {
     this.goal = goal;
     this.github = github;
     this.linkedin = linkedin;
+    this.firstUpdate = false;
   }
 
   updatePassword(password: string) { this.password = password }
