@@ -1,7 +1,8 @@
-import { Column, OneToMany } from "typeorm";
+import { Column, Entity, OneToMany } from "typeorm";
 import { BaseEntity } from "./BaseEntity";
 import { Certification } from "./Certification";
 
+@Entity()
 export class User extends BaseEntity {
   @Column({
     type: 'varchar',

@@ -2,7 +2,7 @@ import { CreateDateColumn, PrimaryGeneratedColumn, UpdateDateColumn } from "type
 
 export abstract class BaseEntity {
   @PrimaryGeneratedColumn('uuid')
-  readonly id!: number;
+  readonly id!: string;
   @CreateDateColumn()
   readonly createdAt!: Date;
   @UpdateDateColumn()
