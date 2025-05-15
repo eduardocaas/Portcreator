@@ -1,10 +1,9 @@
-import { Repository } from "typeorm";
-import { User } from "../models/User";
+import { UserService } from "../services/UserService";
 
 export class UserController {
-  private _repository: Repository<User>;
+    private _service: UserService;
   
-    constructor(repository: Repository<User>) {
-      this._repository = repository;
+    constructor(service: UserService) {
+      this._service = service;
     }
 }

@@ -1,10 +1,9 @@
-import { Repository } from "typeorm";
-import { Certification } from "../models/Certification";
+import { CertificationService } from "../services/CertificationService";
 
 export class CertificationController {
-  private _repository: Repository<Certification>;
-
-  constructor(repository: Repository<Certification>) {
-    this._repository = repository;
-  }
+    private _service: CertificationService;
+  
+    constructor(service: CertificationService) {
+      this._service = service;
+    }
 }
