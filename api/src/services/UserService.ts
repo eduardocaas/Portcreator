@@ -18,14 +18,18 @@ export class UserService implements IUserService {
 
   async save(input: SignupInputModel): Promise<UserPartialViewModel> {
     if (!input?.name || input?.email || !input?.password) {
-      throw new Error("Campos obrigatórios: nome, email e senha");
+      throw ({ id: 400, msg: "Campos obrigatórios: nome, email e senha" });
     }
 
-    let hashPassword = await this._authService.generateHash(input.password);
+    try {
+      let hashPassword = await this._authService.generateHash(input.password);
+      let user = new User(input.name, input.email, hashPassword);
+      let userSave = await this._repository.save(user);
 
-    let user = new User(input.name, input.email, hashPassword);
-    let userSave = await this._repository.save(user);
-
-    return new UserPartialViewModel(userSave.id, userSave.email);
+      return new UserPartialViewModel(userSave.id, userSave.email);
+    }
+    catch (err) {
+      throw ({ id: 500, msg: err })
+    }
   }
 }

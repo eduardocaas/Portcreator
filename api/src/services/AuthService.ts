@@ -9,8 +9,10 @@ export class AuthService implements IAuthService {
   constructor(repository: Repository<User>) {
     this._repository = repository;
   }
-  
-  generateHash(input: string): Promise<string> {
-    throw new Error("Method not implemented.");
+
+  async generateHash(password: string): Promise<string> {
+    let saltRounds = 10;
+    const hashPassword = await bcrypt.hash(password, saltRounds);
+    return hashPassword;
   }
 }
