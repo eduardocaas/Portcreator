@@ -1,3 +1,4 @@
+import { SigninInputModel } from "../models/input/user/SigninInputModel";
 import { SignupInputModel } from "../models/input/user/SignupInputModel";
 import { User } from "../models/User";
 import { UserPartialViewModel } from "../models/view/user/UserPartialViewModel";
@@ -20,10 +21,18 @@ export class AuthFacade implements IAuthFacade {
     }
 
     let hashPassword = await this._authService.generateHash(input.password);
-    
+
     let user = new User(input.name, input.email, hashPassword);
     let userCreated = await this._userService.save(user);
 
     return new UserPartialViewModel(userCreated.id, userCreated.email);
+  }
+
+  signin(input: SigninInputModel): Promise<string> {
+    if (!input?.email || input?.password) {
+      throw ({ id: 400, msg: "Campos obrigatórios: email e senha" })
+
+      
+    }
   }
 }

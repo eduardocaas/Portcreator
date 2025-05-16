@@ -1,7 +1,11 @@
+import "dotenv/config";
 import { Repository } from "typeorm";
 import { User } from "../models/User";
 import { IAuthService } from "./interfaces/IAuthService";
 import * as bcrypt from 'bcrypt';
+import { sign } from 'jsonwebtoken';
+
+const SECRET = process.env.APP_SECRET;
 
 export class AuthService implements IAuthService {
   private readonly _repository: Repository<User>;
@@ -19,5 +23,14 @@ export class AuthService implements IAuthService {
   async compareHash(password: string, hashPassword: string): Promise<boolean> {
     let result = await bcrypt.compare(password, hashPassword);
     return result;
+  }
+
+  generateToken(id: string, email: string): string {
+    let token = sign({
+      userId: id,
+      userEmail: email
+    }, SECRET,
+      { expiresIn: '1h' }
+    );
   }
 }
