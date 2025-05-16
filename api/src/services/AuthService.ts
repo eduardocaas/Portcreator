@@ -15,4 +15,9 @@ export class AuthService implements IAuthService {
     const hashPassword = await bcrypt.hash(password, saltRounds);
     return hashPassword;
   }
+
+  async compareHash(password: string, hashPassword: string): Promise<boolean> {
+    let result = await bcrypt.compare(password, hashPassword);
+    return result;
+  }
 }

@@ -1,3 +1,4 @@
 export interface IAuthService {
-    generateHash(input: string): Promise<string>;
+    generateHash(password: string): Promise<string>;
+    compareHash(password: string, hashPassword: string): Promise<boolean>;
 }
