@@ -1,6 +1,6 @@
-import { SignupInputModel } from "../../models/input/user/SignupInputModel";
+import { User } from "../../models/User";
 import { UserPartialViewModel } from "../../models/view/user/UserPartialViewModel";
 
 export interface IUserService {
-  save(input: SignupInputModel): Promise<UserPartialViewModel>
+  save(user: User): Promise<User>
 }
