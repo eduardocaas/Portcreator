@@ -1,10 +1,42 @@
 import { AppDataSource } from "./data-source";
 import express from 'express';
 import "dotenv/config"
+import { User } from "./models/User";
+import { UserService } from "./services/UserService";
+import { UserController } from "./controllers/UserController";
+import { AuthService } from "./services/AuthService";
+import { AuthFacade } from "./facades/AuthFacade";
+import { AuthController } from "./controllers/AuthController";
+import { Certification } from "./models/Certification";
+import { CertificationService } from "./services/CertificationService";
+import { CertificationController } from "./controllers/CertificationController";
+import { userRoutes } from "./routes/UserRouter";
+import { authRoutes } from "./routes/AuthRouter";
+import { certificationRoutes } from "./routes/CertificationRouter";
 
 AppDataSource.initialize().then(async => {
   const app = express();
   app.use(express.json())
+
+  // User
+  const userRepository = AppDataSource.getRepository(User);
+  const userService = new UserService(userRepository);
+  const userController = new UserController(userService);
+
+  // Auth
+  const authService = new AuthService(userRepository);
+  const authFacade = new AuthFacade(authService, userService);
+  const authController = new AuthController(authFacade);
+
+  // Certification
+  const certificationRepository = AppDataSource.getRepository(Certification);
+  const certificationService = new CertificationService(certificationRepository);
+  const certificationController = new CertificationController(certificationService);
+
+  // Routes
+  app.use('/api/auth', authRoutes(authController));
+  app.use('/api/users', userRoutes(userController));
+  app.use('/api/certifications', certificationRoutes(certificationController));
 
   const PORT = process.env.APP_PORT;
   app.listen(PORT, () => {
