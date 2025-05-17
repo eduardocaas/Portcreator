@@ -28,11 +28,18 @@ export class AuthFacade implements IAuthFacade {
     return new UserPartialViewModel(userCreated.id, userCreated.email);
   }
 
-  signin(input: SigninInputModel): Promise<string> {
+  async signin(input: SigninInputModel): Promise<string> {
     if (!input?.email || input?.password) {
       throw ({ id: 400, msg: "Campos obrigatórios: email e senha" })
-
-      
     }
+
+    let user = await this._userService.getByEmail(input.email);
+
+    let result = await this._authService.compareHash(input.password, user.password);
+    if (result) {
+      let token = this._authService.generateToken(user.id, user.email);
+      return token;
+    }
+    throw({ id: 500, msg: "Falha ao realizar login!"});
   }
 }

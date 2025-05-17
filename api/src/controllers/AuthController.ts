@@ -17,4 +17,15 @@ export class AuthController {
       res.status(err.id).json({ message: err.msg });
     }
   }
+
+  signIn = async (req: Request, res: Response): Promise<void> => {
+    const { email, password } = req.body;
+
+    try {
+      const token = await this._facade.signin({ email, password});
+      res.status(200).json({ token: token });
+    } catch (err: any) {
+      res.status(err.id).json({ message: err.msg });
+    }
+  }
 }

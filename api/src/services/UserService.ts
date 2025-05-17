@@ -20,4 +20,12 @@ export class UserService implements IUserService {
       throw ({ id: 500, msg: err })
     }
   }
+
+  async getByEmail(email: string): Promise<User> {
+    let user = await this._repository.findOneBy({ email: email });
+    if (user) {
+      return user;
+    }
+    throw ({ id: 404, msg: `Usuário com o email ${email} não encontrado`})
+  }
 }

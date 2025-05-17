@@ -5,7 +5,7 @@ import { IAuthService } from "./interfaces/IAuthService";
 import * as bcrypt from 'bcrypt';
 import { sign } from 'jsonwebtoken';
 
-const SECRET = process.env.APP_SECRET;
+const SECRET = process.env.APP_SECRET!;
 
 export class AuthService implements IAuthService {
   private readonly _repository: Repository<User>;
@@ -32,5 +32,6 @@ export class AuthService implements IAuthService {
     }, SECRET,
       { expiresIn: '1h' }
     );
+    return token;
   }
 }
