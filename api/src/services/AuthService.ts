@@ -25,10 +25,11 @@ export class AuthService implements IAuthService {
     return result;
   }
 
-  generateToken(id: string, email: string): string {
+  generateToken(id: string, email: string, firstAccess: boolean): string {
     let token = sign({
       userId: id,
-      userEmail: email
+      userEmail: email,
+      firstAccess: firstAccess
     }, SECRET,
       { expiresIn: '1h' , 
         algorithm: 'HS256' }

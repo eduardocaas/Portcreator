@@ -42,7 +42,7 @@ export class AuthFacade implements IAuthFacade {
 
     let result = await this._authService.compareHash(input.password, user.password);
     if (result) {
-      let token = this._authService.generateToken(user.id, user.email);
+      let token = this._authService.generateToken(user.id, user.email, user.firstUpdate);
       return token;
     }
     throw({ id: 400, msg: "Email ou senha incorretos!"});
