@@ -13,6 +13,7 @@ import { CertificationController } from "./controllers/CertificationController";
 import { userRoutes } from "./routes/UserRouter";
 import { authRoutes } from "./routes/AuthRouter";
 import { certificationRoutes } from "./routes/CertificationRouter";
+import { TokenMiddleware } from "./middlewares/TokenMiddleware";
 
 AppDataSource.initialize().then(async => {
   const app = express();
@@ -33,8 +34,14 @@ AppDataSource.initialize().then(async => {
   const certificationService = new CertificationService(certificationRepository);
   const certificationController = new CertificationController(certificationService);
 
+  // Middlewares
+  const tokenMiddleware = new TokenMiddleware(authService);
+
   // Routes
   app.use('/api/auth', authRoutes(authController));
+
+  app.use(tokenMiddleware.verifyAccess.bind(tokenMiddleware));
+
   app.use('/api/users', userRoutes(userController));
   app.use('/api/certifications', certificationRoutes(certificationController));
 
