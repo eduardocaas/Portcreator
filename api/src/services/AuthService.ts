@@ -30,7 +30,8 @@ export class AuthService implements IAuthService {
       userId: id,
       userEmail: email
     }, SECRET,
-      { expiresIn: '1h' }
+      { expiresIn: '1h' , 
+        algorithm: 'HS256' }
     );
     return token;
   }

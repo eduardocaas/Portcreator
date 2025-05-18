@@ -16,8 +16,13 @@ export class AuthFacade implements IAuthFacade {
   }
 
   async signup(input: SignupInputModel): Promise<UserPartialViewModel> {
-    if (!input?.name || input?.email || !input?.password) {
+    if (!input?.name || !input?.email || !input?.password) {
       throw ({ id: 400, msg: "Campos obrigatórios: nome, email e senha" });
+    }
+
+    let userExists = await this._userService.existsByEmail(input.email);
+    if (userExists) {
+      throw ({ id: 409, msg: "Email já cadastrado" });
     }
 
     let hashPassword = await this._authService.generateHash(input.password);
@@ -29,7 +34,7 @@ export class AuthFacade implements IAuthFacade {
   }
 
   async signin(input: SigninInputModel): Promise<string> {
-    if (!input?.email || input?.password) {
+    if (!input?.email || !input?.password) {
       throw ({ id: 400, msg: "Campos obrigatórios: email e senha" })
     }
 
@@ -40,6 +45,6 @@ export class AuthFacade implements IAuthFacade {
       let token = this._authService.generateToken(user.id, user.email);
       return token;
     }
-    throw({ id: 500, msg: "Falha ao realizar login!"});
+    throw({ id: 400, msg: "Email ou senha incorretos!"});
   }
 }

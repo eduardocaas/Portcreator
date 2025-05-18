@@ -26,6 +26,12 @@ export class UserService implements IUserService {
     if (user) {
       return user;
     }
-    throw ({ id: 404, msg: `Usuário com o email ${email} não encontrado`})
+    throw ({ id: 404, msg: `Usuário com o email ${email} não encontrado` })
   }
+
+  async existsByEmail(email: string): Promise<boolean> {
+    let exists = await this._repository.existsBy({ email: email })
+    return exists;
+  }
+
 }

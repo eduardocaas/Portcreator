@@ -4,4 +4,5 @@ import { UserPartialViewModel } from "../../models/view/user/UserPartialViewMode
 export interface IUserService {
   save(user: User): Promise<User>
   getByEmail(email: string): Promise<User>
+  existsByEmail(email: string): Promise<boolean>
 }
