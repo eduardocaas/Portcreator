@@ -2,6 +2,7 @@ import { Repository } from "typeorm";
 import { User } from "../models/User";
 import { IUserService } from "./interfaces/IUserService";
 import { UserUpdateInputModel } from "../models/input/user/UserUpdateInputModel";
+import { UserViewModel } from "../models/view/user/UserViewModel";
 
 export class UserService implements IUserService {
   private _repository: Repository<User>;
@@ -35,7 +36,30 @@ export class UserService implements IUserService {
     return exists;
   }
 
-  update(input: UserUpdateInputModel): Promise<void> {
-    throw new Error("Method not implemented.");
+  async update(id: string, input: UserUpdateInputModel): Promise<boolean> {
+    if (!input?.name || !input?.email) {
+      throw ({ id: 400, msg: "Campos obrigatórios: nome e email" });
+    }
+
+    let user = await this._repository.findOneBy({ id: id });
+    if (!user || user == null) {
+      throw ({ id: 404, msg: "Usuário não encontrado" });
+    }
+    else {
+      user.update(
+        input.name,
+        input.email,
+        input.location,
+        input.description,
+        input.goal,
+        input.github,
+        input.linkedin);
+      let userUpdated = await this._repository.save(user);
+      if (!userUpdated || !userUpdated.id) {
+        return false;
+      }
+      return true;
+    }
+    return false;
   }
 }

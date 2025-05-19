@@ -6,5 +6,5 @@ export interface IUserService {
   save(user: User): Promise<User>
   getByEmail(email: string): Promise<User>
   existsByEmail(email: string): Promise<boolean>
-  update(input: UserUpdateInputModel): Promise<void>
+  update(id: string, input: UserUpdateInputModel): Promise<boolean>
 }
