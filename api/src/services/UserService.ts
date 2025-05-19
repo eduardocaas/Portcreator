@@ -2,7 +2,7 @@ import { Repository } from "typeorm";
 import { User } from "../models/User";
 import { IUserService } from "./interfaces/IUserService";
 import { UserUpdateInputModel } from "../models/input/user/UserUpdateInputModel";
-import { UserViewModel } from "../models/view/user/UserViewModel";
+import * as validator from 'validator';
 
 export class UserService implements IUserService {
   private _repository: Repository<User>;
@@ -37,6 +37,10 @@ export class UserService implements IUserService {
   }
 
   async update(id: string, input: UserUpdateInputModel): Promise<boolean> {
+    if (!validator.isUUID(id)) {
+      throw ({ id: 400, msg: "Id inválido" });
+    }
+
     if (!input?.name || !input?.email) {
       throw ({ id: 400, msg: "Campos obrigatórios: nome e email" });
     }
@@ -55,11 +59,10 @@ export class UserService implements IUserService {
         input.github,
         input.linkedin);
       let userUpdated = await this._repository.save(user);
-      if (!userUpdated || !userUpdated.id) {
+      if (!userUpdated?.id) {
         return false;
       }
       return true;
     }
-    return false;
   }
 }
