@@ -79,11 +79,11 @@ export class User extends BaseEntity {
   update(
     name: string,
     email: string,
-    location: string,
-    description: string,
-    goal: string,
-    github: string,
-    linkedin: string) {
+    location?: string,
+    description?: string,
+    goal?: string,
+    github?: string,
+    linkedin?: string) {
     this.name = name;
     this.email = email;
     this.location = location;
