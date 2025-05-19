@@ -3,6 +3,7 @@ import { User } from "../models/User";
 import { IUserService } from "./interfaces/IUserService";
 import { UserUpdateInputModel } from "../models/input/user/UserUpdateInputModel";
 import * as validator from 'validator';
+import { UserViewModel } from "../models/view/user/UserViewModel";
 
 export class UserService implements IUserService {
   private _repository: Repository<User>;
@@ -21,6 +22,29 @@ export class UserService implements IUserService {
     catch (err) {
       throw ({ id: 500, msg: err })
     }
+  }
+
+  async getById(id: string): Promise<UserViewModel> {
+    if (!validator.isUUID(id)) {
+      throw ({ id: 400, msg: "Id inválido" });
+    }
+
+    let user = await this._repository.findOneBy({ id: id })
+    if (!user || user == null) {
+      throw ({ id: 404, msg: "Usuário não encontrado" });
+    }
+    let viewModel = new UserViewModel(
+      user.id,
+      user.name,
+      user.email,
+      user.location,
+      user.description,
+      user.goal,
+      user.github,
+      user.linkedin,
+      user.imagePath);
+
+    return viewModel;
   }
 
   async getByEmail(email: string): Promise<User> {

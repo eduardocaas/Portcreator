@@ -29,4 +29,20 @@ export class UserController {
       }
     }
   }
+
+  getById = async (req: Request, res: Response): Promise<void> => {
+    let token = req.get("Token");
+    // TODO: Enviar id via token
+    try {
+      const userViewModel = await this._service.getById(id);
+      res.status(200).json({ userViewModel });
+    } catch (err: any) {
+      if (err.id) {
+        res.status(err.id).json({ message: err.msg });
+      }
+      else {
+        res.status(500).json({ message: err });
+      }
+    }
+  }
 }
