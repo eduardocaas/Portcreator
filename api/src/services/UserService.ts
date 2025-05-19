@@ -1,6 +1,7 @@
 import { Repository } from "typeorm";
 import { User } from "../models/User";
 import { IUserService } from "./interfaces/IUserService";
+import { UserUpdateInputModel } from "../models/input/user/UserUpdateInputModel";
 
 export class UserService implements IUserService {
   private _repository: Repository<User>;
@@ -34,4 +35,7 @@ export class UserService implements IUserService {
     return exists;
   }
 
+  update(input: UserUpdateInputModel): Promise<void> {
+    throw new Error("Method not implemented.");
+  }
 }

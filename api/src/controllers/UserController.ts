@@ -1,3 +1,4 @@
+import { Request, Response } from "express";
 import { UserService } from "../services/UserService";
 
 export class UserController {
@@ -5,5 +6,9 @@ export class UserController {
   
     constructor(service: UserService) {
       this._service = service;
+    }
+
+    update = async (req: Request, res: Response): Promise<void> => {
+      
     }
 }
