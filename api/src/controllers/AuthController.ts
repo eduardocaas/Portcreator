@@ -3,7 +3,7 @@ import { IAuthFacade } from "../facades/interfaces/IAuthFacade";
 import { log } from "console";
 
 export class AuthController {
-  private _facade: IAuthFacade;
+  private readonly _facade: IAuthFacade;
 
   constructor(facade: IAuthFacade) {
     this._facade = facade;
@@ -18,7 +18,9 @@ export class AuthController {
       if (err.id) {
         res.status(err.id).json({ message: err.msg });
       }
-      res.status(500).json({ message: err });
+      else {
+        res.status(500).json({ message: err });
+      }
     }
   }
 
@@ -26,13 +28,15 @@ export class AuthController {
     const { email, password } = req.body;
 
     try {
-      const token = await this._facade.signin({ email, password});
+      const token = await this._facade.signin({ email, password });
       res.status(200).json({ token: token });
     } catch (err: any) {
       if (err.id) {
         res.status(err.id).json({ message: err.msg });
       }
-      res.status(500).json({ message: err });
+      else {
+        res.status(500).json({ message: err });
+      }
     }
   }
 }
