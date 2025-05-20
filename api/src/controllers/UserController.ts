@@ -1,12 +1,17 @@
 import { Request, Response } from "express";
-import { UserService } from "../services/UserService";
 import { UserUpdateInputModel } from "../models/input/user/UserUpdateInputModel";
+import { IUserService } from "../services/interfaces/IUserService";
+import { IUserFacade } from "../facades/interfaces/IUserFacade";
 
 export class UserController {
-  private readonly _service: UserService;
+  private readonly _service: IUserService;
+  private readonly _userFacade: IUserFacade;
 
-  constructor(service: UserService) {
+  constructor(
+    service: IUserService,
+    userFacade: IUserFacade) {
     this._service = service;
+    this._userFacade = userFacade;
   }
 
   update = async (req: Request, res: Response): Promise<void> => {
@@ -31,10 +36,9 @@ export class UserController {
   }
 
   getById = async (req: Request, res: Response): Promise<void> => {
-    let token = req.get("Token");
-    // TODO: Enviar id via token
     try {
-      const userViewModel = await this._service.getById(id);
+      const token = req.get("Token");
+      const userViewModel = await this._userFacade.getUserByToken(token);
       res.status(200).json({ userViewModel });
     } catch (err: any) {
       if (err.id) {

@@ -25,7 +25,7 @@ export class UserService implements IUserService {
   }
 
   async getById(id: string): Promise<UserViewModel> {
-    if (!validator.isUUID(id)) {
+    if (!validator.isUUID(id!)) {
       throw ({ id: 400, msg: "Id inválido" });
     }
 

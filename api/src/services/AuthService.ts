@@ -3,7 +3,7 @@ import { Repository } from "typeorm";
 import { User } from "../models/User";
 import { IAuthService } from "./interfaces/IAuthService";
 import * as bcrypt from 'bcrypt';
-import { sign, verify } from 'jsonwebtoken';
+import { sign, verify, decode } from 'jsonwebtoken';
 
 const SECRET = process.env.APP_SECRET!;
 
@@ -51,5 +51,10 @@ export class AuthService implements IAuthService {
     catch (err) {
       return false;
     }
+  }
+
+  getIdByToken(token: string): string | undefined {
+    const decoded = decode(token) as any;
+    return decoded?.userId;
   }
 }

@@ -14,20 +14,24 @@ import { userRoutes } from "./routes/UserRouter";
 import { authRoutes } from "./routes/AuthRouter";
 import { certificationRoutes } from "./routes/CertificationRouter";
 import { TokenMiddleware } from "./middlewares/TokenMiddleware";
+import { UserFacade } from "./facades/UserFacade";
 
 AppDataSource.initialize().then(async => {
   const app = express();
   app.use(express.json())
 
-  // User
+  // User 1
   const userRepository = AppDataSource.getRepository(User);
   const userService = new UserService(userRepository);
-  const userController = new UserController(userService);
 
   // Auth
   const authService = new AuthService(userRepository);
   const authFacade = new AuthFacade(authService, userService);
   const authController = new AuthController(authFacade);
+
+  // User 2
+  const userFacade = new UserFacade(authService, userService);
+  const userController = new UserController(userService, userFacade);
 
   // Certification
   const certificationRepository = AppDataSource.getRepository(Certification);

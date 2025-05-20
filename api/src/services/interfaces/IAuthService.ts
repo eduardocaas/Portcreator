@@ -3,4 +3,5 @@ export interface IAuthService {
     compareHash(password: string, hashPassword: string): Promise<boolean>;
     generateToken(id: string, email: string, firstAccess: boolean): string;
     validateToken(token: string): boolean;
+    getIdByToken(token: string): string | undefined;
 }
