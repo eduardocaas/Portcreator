@@ -22,7 +22,7 @@ export class CertificationFacade implements ICertificationFacade {
   }
 
   async save(token: string | undefined, input: CertificationSaveInputModel): Promise<CertificationPartialViewModel> {
-    if (!input?.title || !input?.description || !input?.type || !input?.issueDate || !input?.hours|| !input?.institutionName ) {
+    if (!input?.title || !input?.description || input?.type === undefined || !input?.issueDate || !input?.hours|| !input?.institutionName ) {
       throw ({ id: 400, msg: "Campos obrigatórios: Título, descrição, tipo, data de emissão, horas, nome da instituição" });
     }
 
@@ -43,6 +43,6 @@ export class CertificationFacade implements ICertificationFacade {
 
     let certificationCreated = await this._certificationService.save(certification);
 
-    return certificationCreated;
+    return new CertificationPartialViewModel(certificationCreated.id, certificationCreated.title);
   }
 }

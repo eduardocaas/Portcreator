@@ -3,7 +3,7 @@ import { ICertificationFacade } from "../facades/interfaces/ICertificationFacade
 import { CertificationSaveInputModel } from "../models/input/certification/CertificationSaveInputModel";
 
 export class CertificationController {
-  private _certificationFacade: ICertificationFacade;
+  private readonly _certificationFacade: ICertificationFacade;
 
   constructor(certificationFacade: ICertificationFacade) {
     this._certificationFacade = certificationFacade;
@@ -13,7 +13,7 @@ export class CertificationController {
     const input: CertificationSaveInputModel = req.body;
     try {
       const token = req.get("Token");
-      let certificationViewModel = this._certificationFacade.save(token, input);
+      let certificationViewModel = await this._certificationFacade.save(token, input);
       res.status(200).json({ certificationViewModel });
     } catch (err: any) {
       if (err.id) {
