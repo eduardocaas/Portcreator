@@ -15,6 +15,7 @@ import { authRoutes } from "./routes/AuthRouter";
 import { certificationRoutes } from "./routes/CertificationRouter";
 import { TokenMiddleware } from "./middlewares/TokenMiddleware";
 import { UserFacade } from "./facades/UserFacade";
+import { CertificationFacade } from "./facades/CertificationFacade";
 
 AppDataSource.initialize().then(async => {
   const app = express();
@@ -36,7 +37,8 @@ AppDataSource.initialize().then(async => {
   // Certification
   const certificationRepository = AppDataSource.getRepository(Certification);
   const certificationService = new CertificationService(certificationRepository);
-  const certificationController = new CertificationController(certificationService);
+  const certificationFacade = new CertificationFacade(certificationService, authService, userService);
+  const certificationController = new CertificationController(certificationFacade);
 
   // Middlewares
   const tokenMiddleware = new TokenMiddleware(authService);

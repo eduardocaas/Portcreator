@@ -24,7 +24,19 @@ export class UserFacade implements IUserFacade {
     if (!id || id == undefined) {
       throw ({ id: 400, msg: "Id inválido" });
     }
-    const userViewModel = await this._userService.getById(id);
+    const user = await this._userService.getById(id);
+
+    let userViewModel = new UserViewModel(
+      user.id,
+      user.name,
+      user.email,
+      user.location,
+      user.description,
+      user.goal,
+      user.github,
+      user.linkedin,
+      user.imagePath);
+      
     return userViewModel;
   }
 }

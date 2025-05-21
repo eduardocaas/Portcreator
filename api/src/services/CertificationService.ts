@@ -11,8 +11,8 @@ export class CertificationService implements ICertificationService {
 
   async save(certification: Certification): Promise<Certification> {
     try {
-      let certificationSave = await this._repository.save(certification);
-      return certificationSave;
+      let certificationCreated = await this._repository.save(certification);
+      return certificationCreated;
     }
     catch (err) {
       throw ({ id: 500, msg: err })
