@@ -24,7 +24,7 @@ export class UserService implements IUserService {
     }
   }
 
-  async getById(id: string): Promise<UserViewModel> {
+  async getById(id: string): Promise<User> {
     if (!validator.isUUID(id!)) {
       throw ({ id: 400, msg: "Id inválido" });
     }
@@ -33,18 +33,8 @@ export class UserService implements IUserService {
     if (!user || user == null) {
       throw ({ id: 404, msg: "Usuário não encontrado" });
     }
-    let viewModel = new UserViewModel(
-      user.id,
-      user.name,
-      user.email,
-      user.location,
-      user.description,
-      user.goal,
-      user.github,
-      user.linkedin,
-      user.imagePath);
 
-    return viewModel;
+    return user;
   }
 
   async getByEmail(email: string): Promise<User> {
