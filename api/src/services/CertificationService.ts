@@ -1,6 +1,8 @@
 import { Repository } from "typeorm";
 import { Certification } from "../models/Certification";
 import { ICertificationService } from "./interfaces/ICertificationService";
+import { User } from "../models/User";
+import * as validator from 'validator';
 
 export class CertificationService implements ICertificationService {
   private _repository: Repository<Certification>;
@@ -18,4 +20,35 @@ export class CertificationService implements ICertificationService {
       throw ({ id: 500, msg: err })
     }
   }
+
+  async getAll(user: User): Promise<Certification[]> {
+    try {
+      let certifications = await this._repository.find({
+        where: { user: user },
+        relations: []
+      });
+      return certifications;
+    }
+    catch (err) {
+      throw ({ id: 500, msg: err })
+    }
+  }
+
+  async getById(id: string): Promise<Certification | null> {
+    try {
+      if (!validator.isUUID(id!)) {
+        throw ({ id: 400, msg: "Id inválido" });
+      }
+
+      let certification = await this._repository.findOne({
+        where: { id: id },
+        relations: []
+      });
+      return certification;
+    }
+    catch (err) {
+      throw ({ id: 500, msg: err })
+    }
+  }
+
 }

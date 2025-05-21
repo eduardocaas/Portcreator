@@ -24,4 +24,35 @@ export class CertificationController {
       }
     }
   }
+
+  getAllByUser = async (req: Request, res: Response): Promise<void> => {
+    try {
+      const token = req.get("Token");
+      let certificationsViewModel = await this._certificationFacade.getAllByUser(token);
+      res.status(200).json({ certificationsViewModel });
+    } catch (err: any) {
+      if (err.id) {
+        res.status(err.id).json({ message: err.msg });
+      }
+      else {
+        res.status(500).json({ message: err });
+      }
+    }
+  }
+
+  getById = async (req: Request, res: Response): Promise<void> => {
+    const id = req.params.id;
+    try {
+      let certificationViewModel = await this._certificationFacade.getById(id);
+      res.status(200).json({ certificationViewModel });
+    }
+    catch (err: any) {
+      if (err.id) {
+        res.status(err.id).json({ message: err.msg });
+      }
+      else {
+        res.status(500).json({ message: err });
+      }
+    }
+  }
 }
