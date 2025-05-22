@@ -79,4 +79,15 @@ export class UserService implements IUserService {
       return true;
     }
   }
+
+  async delete(id: string): Promise<void> {
+    try {
+      await this._repository.update(
+        { id: id },
+        { isActive: false }
+      )
+    } catch (err: any) {
+      throw ({ id: 500, msg: "Falha ao desativar usuário" })
+    }
+  }
 }

@@ -49,4 +49,18 @@ export class UserController {
       }
     }
   }
+
+  delete = async (req: Request, res: Response): Promise<void> => {
+    try {
+      const token = req.get("Token");
+      await this._userFacade.delete(token);
+    } catch (err: any) {
+      if (err.id) {
+        res.status(err.id).json({ message: err.msg });
+      }
+      else {
+        res.status(500).json({ message: err });
+      }
+    }
+  }
 }

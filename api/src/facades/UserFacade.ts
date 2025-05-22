@@ -36,7 +36,20 @@ export class UserFacade implements IUserFacade {
       user.github,
       user.linkedin,
       user.imagePath);
-      
+
     return userViewModel;
+  }
+
+  async delete(token: string | undefined): Promise<void> {
+    if (!token || token == undefined) {
+      throw ({ id: 400, msg: "Token inválido" });
+    }
+    const id = this._authService.getIdByToken(token);
+
+    if (!id || id == undefined) {
+      throw ({ id: 400, msg: "Id inválido" });
+    }
+
+    await this._userService.delete(id);
   }
 }

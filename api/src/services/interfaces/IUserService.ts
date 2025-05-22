@@ -8,4 +8,5 @@ export interface IUserService {
   getByEmail(email: string): Promise<User>
   existsByEmail(email: string): Promise<boolean>
   update(id: string, input: UserUpdateInputModel): Promise<boolean>
+  delete(id: string): Promise<void>
 }
