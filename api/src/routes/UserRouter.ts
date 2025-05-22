@@ -6,6 +6,7 @@ export const userRoutes = (controller: UserController) => {
 
   router.get('/', controller.getById)
   router.put('/:id', controller.update);
+  router.delete('/', controller.delete);
 
   return router;
 }
