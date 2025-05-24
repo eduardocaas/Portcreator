@@ -3,6 +3,10 @@
     <form class="col-12 col-sm-10 col-md-8 col-lg-6 col-xl-4 rounded pt-5 pb-5 p-4">
       <h3>Cadastro</h3>
       <div class="mb-3">
+        <label for="inputNome" class="form-label">Nome</label>
+        <input type="text" class="form-control" id="inputNome" [required]="true">
+      </div>
+      <div class="mb-3">
         <label for="inputEmail" class="form-label">E-mail</label>
         <input type="email" class="form-control" id="inputEmail" [required]="true">
       </div>
