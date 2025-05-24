@@ -21,7 +21,7 @@
       "prefix": "app",
       "architect": {
         "build": {
-          "builder": "@ngx-env/builder:application",
+          "builder": "@angular-devkit/build-angular:application",
           "options": {
             "outputPath": "dist/app",
             "index": "src/index.html",
@@ -47,7 +47,6 @@
           },
           "configurations": {
             "production": {
-              "envFile" : ".env.prod",
               "budgets": [
                 {
                   "type": "initial",
@@ -63,7 +62,6 @@
               "outputHashing": "all"
             },
             "development": {
-              "envFile": ".env.local",
               "optimization": false,
               "extractLicenses": false,
               "sourceMap": true,
@@ -78,7 +76,7 @@
           "defaultConfiguration": "production"
         },
         "serve": {
-          "builder": "@ngx-env/builder:dev-server",
+          "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
               "buildTarget": "app:build:production"
@@ -91,11 +89,11 @@
           "options": {}
         },
         "extract-i18n": {
-          "builder": "@ngx-env/builder:extract-i18n",
+          "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {}
         },
         "test": {
-          "builder": "@ngx-env/builder:karma",
+          "builder": "@angular-devkit/build-angular:karma",
           "options": {
             "polyfills": [
               "zone.js",
@@ -115,8 +113,7 @@
             ],
             "scripts": [
               "node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"
-            ],
-            "builderMode": "browser"
+            ]
           }
         }
       }
