@@ -29,7 +29,7 @@ AppDataSource.initialize().then(async => {
 
   const corsOptions = {
     origin: process.env.FRONTEND_URL,
-    methods: process.env.CORS_METHODS
+    methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH', 'OPTIONS']
   };
 
   app.use(cors(corsOptions));
