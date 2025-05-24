@@ -1,6 +1,7 @@
 import { AppDataSource } from "./data-source";
 import express from 'express';
-import "dotenv/config"
+import "dotenv/config";
+import cors from "cors";
 import { User } from "./models/User";
 import { UserService } from "./services/UserService";
 import { UserController } from "./controllers/UserController";
@@ -20,6 +21,18 @@ import { CertificationFacade } from "./facades/CertificationFacade";
 AppDataSource.initialize().then(async => {
   const app = express();
   app.use(express.json())
+
+  // CORS
+  // TODO: JWT em Cookies HTTP-Only, com credentials: true no CORS, e credentials: include no FRONT
+
+  const cors = require('cors');
+
+  const corsOptions = {
+    origin: process.env.FRONTEND_URL,
+    methods: process.env.CORS_METHODS
+  };
+
+  app.use(cors(corsOptions));
 
   // User 1
   const userRepository = AppDataSource.getRepository(User);
