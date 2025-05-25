@@ -1,9 +1,9 @@
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Credentials } from '../models/Credentials';
 import { environment } from '../../environments/environment';
 import { JwtHelperService } from '@auth0/angular-jwt';
-import { catchError, Observable, of, tap } from 'rxjs';
+import { catchError, Observable, of, tap, throwError } from 'rxjs';
 
 const httpOptions = {
   headers: new HttpHeaders({
@@ -33,7 +33,9 @@ export class AuthService {
           }
 
         }),
-        catchError(error => of(false))
+        catchError((error: HttpErrorResponse) => {
+          return throwError(() => error);
+        })
       );
   }
 
