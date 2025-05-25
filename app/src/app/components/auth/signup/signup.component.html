@@ -1,20 +1,33 @@
 <div class="container">
   <div class="row min-vh-100 d-flex justify-content-center align-items-center">
-    <form class="col-12 col-sm-10 col-md-8 col-lg-6 col-xl-4 rounded pt-5 pb-5 p-4">
+    <form [formGroup]="signupFormGroup" class="col-12 col-sm-10 col-md-8 col-lg-6 col-xl-4 rounded pt-5 pb-5 p-4">
       <h3>Cadastro</h3>
-      <div class="mb-3">
+      <hr>
+      <div class="mb-1">
         <label for="inputNome" class="form-label">Nome</label>
-        <input type="text" class="form-control" id="inputNome" [required]="true">
+        <input type="text" formControlName="nameControl" [(ngModel)]="model.name" class="form-control" id="inputNome"
+          [required]="true">
+        <div class="invalid-feedback d-block" [style.visibility]="isNameInvalid() ? 'visible' : 'hidden'">
+          {{ isNameInvalid() ? getErrorMessageName() : '&nbsp;' }}
+        </div>
       </div>
-      <div class="mb-3">
+      <div class="mb-1">
         <label for="inputEmail" class="form-label">E-mail</label>
-        <input type="email" class="form-control" id="inputEmail" [required]="true">
+        <input type="email" formControlName="emailControl" [(ngModel)]="model.email" class="form-control"
+          id="inputEmail" [required]="true">
+        <div class="invalid-feedback d-block" [style.visibility]="isEmailInvalid() ? 'visible' : 'hidden'">
+          {{ isEmailInvalid() ? getErrorMessageEmail() : '&nbsp;' }}
+        </div>
       </div>
-      <div class="mb-3">
+      <div class="mb-1">
         <label for="inputSenha" class="form-label">Senha</label>
-        <input type="password" class="form-control" id="inputSenha" [required]="true">
+        <input type="password" formControlName="passwordControl" [(ngModel)]="model.password" class="form-control"
+          id="inputSenha" [required]="true">
+        <div class="invalid-feedback d-block" [style.visibility]="isPasswordInvalid() ? 'visible' : 'hidden'">
+          {{ isPasswordInvalid() ? getErrorMessagePwd() : '&nbsp;' }}
+        </div>
       </div>
-      <button type="submit" class="btn btn-primary col-12 col-md-3 mb-3">Cadastrar</button>
+      <button [disabled]="!this.signupFormGroup.valid" type="submit" class="btn btn-primary col-12 col-md-3 mb-3">Cadastrar</button>
       <p>Já possui uma conta? <a routerLink="/signin">Login</a></p>
     </form>
   </div>

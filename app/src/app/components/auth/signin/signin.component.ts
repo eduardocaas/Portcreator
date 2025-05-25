@@ -1,5 +1,5 @@
 import { Component, ElementRef, ViewChild } from '@angular/core';
-import { Credentials } from '../../../models/Credentials';
+import { Credentials } from '../../../models/auth/Credentials';
 import { AuthService } from '../../../services/auth.service';
 import { HttpErrorResponse } from '@angular/common/http';
 import { Toast } from 'bootstrap';

@@ -1,6 +1,6 @@
 import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Credentials } from '../models/Credentials';
+import { Credentials } from '../models/auth/Credentials';
 import { environment } from '../../environments/environment';
 import { JwtHelperService } from '@auth0/angular-jwt';
 import { catchError, Observable, of, tap, throwError } from 'rxjs';
