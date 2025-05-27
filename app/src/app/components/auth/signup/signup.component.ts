@@ -5,6 +5,7 @@ import { AuthService } from '../../../services/auth.service';
 import { Router } from '@angular/router';
 import { Toast } from 'bootstrap';
 import { UserService } from '../../../services/user.service';
+import { HttpErrorResponse } from '@angular/common/http';
 
 @Component({
   selector: 'app-signup',
@@ -33,7 +34,14 @@ export class SignupComponent {
   signup() {
     this.errorMessage = null;
     if (this.signupFormGroup.valid) {
-      this.
+      this._authService.signup(this.model).subscribe({
+        next: (res) => {
+
+        },
+        error: (err: HttpErrorResponse) => {
+
+        }
+      })
     }
     else {
       this.errorMessage = "Campos inválidos";
