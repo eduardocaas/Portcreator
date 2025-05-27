@@ -4,12 +4,13 @@ import { SignupComponent } from './components/auth/signup/signup.component';
 import { SigninComponent } from './components/auth/signin/signin.component';
 import { NavComponent } from './components/admin/nav/nav.component';
 import { authGuard } from './auth/auth.guard';
+import { DashboardComponent } from './components/admin/dashboard/dashboard.component';
 
 const routes: Routes = [
   { path: 'signup', component: SignupComponent },
   { path: 'signin', component: SigninComponent },
   { path: '', component: NavComponent, canActivate: [authGuard], children: [
-
+    { path: '', component: DashboardComponent }
   ]}
 ];
 

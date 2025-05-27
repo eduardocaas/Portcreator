@@ -10,13 +10,15 @@ import { SigninComponent } from './components/auth/signin/signin.component';
 import { SignupComponent } from './components/auth/signup/signup.component';
 import { NavComponent } from './components/admin/nav/nav.component';
 import { provideHttpClient } from '@angular/common/http';
+import { DashboardComponent } from './components/admin/dashboard/dashboard.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     SigninComponent,
     SignupComponent,
-    NavComponent
+    NavComponent,
+    DashboardComponent
   ],
   imports: [
     // Angular
