@@ -6,6 +6,7 @@ import { Toast } from 'bootstrap';
 import { AuthMessage } from '../../../models/messages/AuthMessages';
 import { Router } from '@angular/router';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { timer } from 'rxjs';
 
 @Component({
   selector: 'app-signin',
@@ -34,7 +35,7 @@ export class SigninComponent {
     if (this.signinFormGroup.valid) {
       this._authService.authenticate(this.credentials).subscribe({
         next: () => {
-          console.log("Sucesso!");
+          timer(500).subscribe(x => { this._router.navigate(['']) });
         },
         error: (err: HttpErrorResponse) => {
           if (err.status == 404) {

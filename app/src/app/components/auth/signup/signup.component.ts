@@ -46,7 +46,7 @@ export class SignupComponent {
             this.errorMessage = AuthMessage.SIGNUP_ERROR_409;
             this.showErrorToast();
           }
-          if (err.status == 400) {
+          else if (err.status == 400) {
             this.errorMessage = AuthMessage.SIGNUP_ERROR_400;
             this.showErrorToast();
           }
