@@ -6,6 +6,8 @@ import { Router } from '@angular/router';
 import { Toast } from 'bootstrap';
 import { UserService } from '../../../services/user.service';
 import { HttpErrorResponse } from '@angular/common/http';
+import { timer } from 'rxjs';
+import { AuthMessage } from '../../../models/messages/AuthMessages';
 
 @Component({
   selector: 'app-signup',
@@ -36,10 +38,22 @@ export class SignupComponent {
     if (this.signupFormGroup.valid) {
       this._authService.signup(this.model).subscribe({
         next: (res) => {
-
+          this.showSuccessToast();
+          timer(1500).subscribe(x => { this._router.navigate(['signin']) })
         },
         error: (err: HttpErrorResponse) => {
-
+          if (err.status == 409) {
+            this.errorMessage = AuthMessage.SIGNUP_ERROR_409;
+            this.showErrorToast();
+          }
+          if (err.status == 400) {
+            this.errorMessage = AuthMessage.SIGNUP_ERROR_400;
+            this.showErrorToast();
+          }
+          else {
+            this.errorMessage = AuthMessage.ERROR_500;
+            this.showErrorToast();
+          }
         }
       })
     }
@@ -51,6 +65,14 @@ export class SignupComponent {
 
   showErrorToast(): void {
     const toastElement = document.getElementById('errorToast');
+    if (toastElement) {
+      const toast = new Toast(toastElement);
+      toast.show();
+    }
+  }
+
+  showSuccessToast(): void {
+    const toastElement = document.getElementById('successToast');
     if (toastElement) {
       const toast = new Toast(toastElement);
       toast.show();
