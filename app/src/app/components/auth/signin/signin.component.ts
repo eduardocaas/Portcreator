@@ -30,26 +30,32 @@ export class SigninComponent {
     private readonly _router: Router) { }
 
   signin() {
-    this._authService.authenticate(this.credentials).subscribe({
-      next: () => {
-        this.errorMessage = null;
-        console.log("Sucesso!");
-      },
-      error: (err: HttpErrorResponse) => {
-        if (err.status == 404) {
-          this.errorMessage = AuthMessage.SIGNIN_ERROR_404;
-          this.showErrorToast();
+    this.errorMessage = null;
+    if (this.signinFormGroup.valid) {
+      this._authService.authenticate(this.credentials).subscribe({
+        next: () => {
+          console.log("Sucesso!");
+        },
+        error: (err: HttpErrorResponse) => {
+          if (err.status == 404) {
+            this.errorMessage = AuthMessage.SIGNIN_ERROR_404;
+            this.showErrorToast();
+          }
+          else if (err.status == 400) {
+            this.errorMessage = AuthMessage.SIGNIN_ERROR_400;
+            this.showErrorToast();
+          }
+          else {
+            this.errorMessage = AuthMessage.ERROR_500;
+            this.showErrorToast();
+          }
         }
-        else if (err.status == 400) {
-          this.errorMessage = AuthMessage.SIGNIN_ERROR_400;
-          this.showErrorToast();
-        }
-        else {
-          this.errorMessage = AuthMessage.ERROR_500;
-          this.showErrorToast();
-        }
-      }
-    })
+      })
+    }
+    else {
+      this.errorMessage = "Campos inválidos";
+      this.showErrorToast();
+    }
   }
 
   showErrorToast(): void {

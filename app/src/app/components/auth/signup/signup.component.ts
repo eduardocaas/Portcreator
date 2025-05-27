@@ -4,6 +4,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { AuthService } from '../../../services/auth.service';
 import { Router } from '@angular/router';
 import { Toast } from 'bootstrap';
+import { UserService } from '../../../services/user.service';
 
 @Component({
   selector: 'app-signup',
@@ -30,7 +31,14 @@ export class SignupComponent {
     private readonly _router: Router) { }
 
   signup() {
-
+    this.errorMessage = null;
+    if (this.signupFormGroup.valid) {
+      this.
+    }
+    else {
+      this.errorMessage = "Campos inválidos";
+      this.showErrorToast();
+    }
   }
 
   showErrorToast(): void {

@@ -4,6 +4,7 @@ import { Credentials } from '../models/auth/Credentials';
 import { environment } from '../../environments/environment';
 import { JwtHelperService } from '@auth0/angular-jwt';
 import { catchError, Observable, of, tap, throwError } from 'rxjs';
+import { SignupModel } from '../models/auth/SignupModel';
 
 const httpOptions = {
   headers: new HttpHeaders({
@@ -45,5 +46,13 @@ export class AuthService {
       return !this.jwtHelper.isTokenExpired(token);
     }
     return false
+  }
+
+  signup(signupModel: SignupModel) {
+    return this._http.post<any>(`${environment.apiUrl}/api/auth/signup`, signupModel, {
+      headers: httpOptions.headers,
+      observe: 'response',
+      responseType: 'json'
+    });
   }
 }

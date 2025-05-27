@@ -30,5 +30,29 @@
       <button [disabled]="!this.signupFormGroup.valid" type="submit" class="btn btn-primary col-12 col-md-3 mb-3">Cadastrar</button>
       <p>Já possui uma conta? <a routerLink="/signin">Login</a></p>
     </form>
+    <div class="toast-container position-fixed bottom-0 start-50 translate-middle-x p-3">
+      <div id="errorToast" class="toast bg-danger bg-opacity-75 text-white" role="alert" aria-live="assertive"
+        aria-atomic="true">
+        <div class="toast-header bg-danger bg-opacity-75 text-white border-0">
+          <strong class="me-auto">&#9989; Sucesso</strong>
+          <small class="text-white-50">Cadastro realizado com sucesso! Redirecionando...</small>
+          <button type="button" class="btn-close btn-close-white" data-bs-dismiss="toast" aria-label="Close"></button>
+        </div>
+        <div *ngIf="errorMessage != null" class="toast-body">
+          {{ errorMessage }}
+        </div>
+      </div>
+      <div id="errorToast" class="toast bg-danger bg-opacity-75 text-white" role="alert" aria-live="assertive"
+        aria-atomic="true">
+        <div class="toast-header bg-danger bg-opacity-75 text-white border-0">
+          <strong class="me-auto">❌ Erro</strong>
+          <small class="text-white-50">Falha no login</small>
+          <button type="button" class="btn-close btn-close-white" data-bs-dismiss="toast" aria-label="Close"></button>
+        </div>
+        <div *ngIf="errorMessage != null" class="toast-body">
+          {{ errorMessage }}
+        </div>
+      </div>
+    </div>
   </div>
 </div>
