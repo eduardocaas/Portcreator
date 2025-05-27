@@ -27,7 +27,7 @@
           {{ isPasswordInvalid() ? getErrorMessagePwd() : '&nbsp;' }}
         </div>
       </div>
-      <button [disabled]="!this.signupFormGroup.valid" type="submit" class="btn btn-primary col-12 col-md-3 mb-3">Cadastrar</button>
+      <button [disabled]="!this.signupFormGroup.valid" type="submit" (click)="signup()" class="btn btn-primary col-12 col-md-3 mb-3">Cadastrar</button>
       <p>Já possui uma conta? <a routerLink="/signin">Login</a></p>
     </form>
     <div class="toast-container position-fixed bottom-0 start-50 translate-middle-x p-3">
