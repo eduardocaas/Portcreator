@@ -13,6 +13,9 @@ import { provideHttpClient } from '@angular/common/http';
 import { DashboardComponent } from './components/admin/dashboard/dashboard.component';
 import { ProfileComponent } from './components/admin/user/profile/profile.component';
 import { FormProfileComponent } from './components/admin/user/form-profile/form-profile.component';
+import { FormCertificationComponent } from './components/admin/certification/form-certification/form-certification.component';
+import { CertificationCardComponent } from './components/admin/certification/certification-card/certification-card.component';
+import { CertificationDetailsComponent } from './components/admin/certification/certification-details/certification-details.component';
 
 @NgModule({
   declarations: [
@@ -23,6 +26,9 @@ import { FormProfileComponent } from './components/admin/user/form-profile/form-
     DashboardComponent,
     ProfileComponent,
     FormProfileComponent,
+    FormCertificationComponent,
+    CertificationCardComponent,
+    CertificationDetailsComponent,
   ],
   imports: [
     // Angular
