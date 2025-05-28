@@ -3,59 +3,45 @@
   <div class="row">
     <div class="mb-3 col-12 col-md-6">
       <label for="title" class="form-label">Título</label>
-      <input type="text" class="form-control" id="title" [required]="true">
-      <div class="invalid-feedback d-block" [style.visibility]="">
-        teste
-      </div>
+      <input type="text" class="form-control" id="title" [(ngModel)]="certification.title" name="title" required>
     </div>
 
     <div class="mb-3 col-12 col-md-6">
-      <label for="instituition" class="form-label">Instituição</label>
-      <input type="text" class="form-control" id="instituition" [required]="true">
-      <div class="invalid-feedback d-block" [style.visibility]="">
-        teste
-      </div>
+      <label for="institution" class="form-label">Instituição</label>
+      <input type="text" class="form-control" id="institution" [(ngModel)]="certification.institutionName" name="institutionName" required>
     </div>
 
     <div class="mb-3 col-12">
-      <label for="title" class="form-label">Descrição</label>
-      <textarea class="form-control" id="description" rows="4" [required]="true"></textarea>
-      <div class="invalid-feedback d-block" [style.visibility]="">
-        teste
-      </div>
+      <label for="description" class="form-label">Descrição</label>
+      <textarea class="form-control" id="description" rows="4" [(ngModel)]="certification.description" name="description" required></textarea>
     </div>
 
     <div class="mb-3 col-12 col-md-6">
       <label for="issueDate" class="form-label">Data de emissão</label>
-      <input type="date" class="form-control" id="issueDate" [required]="true">
-      <div class="invalid-feedback d-block" [style.visibility]="">
-        teste
-      </div>
+      <input type="date" class="form-control" id="issueDate" [(ngModel)]="certification.issueDate" name="issueDate" required>
     </div>
 
     <div class="mb-3 col-12 col-md-6">
       <label for="hours" class="form-label">Duração (horas)</label>
-      <input type="number" class="form-control" id="hours" [required]="true">
-      <div class="invalid-feedback d-block" [style.visibility]="">
-        teste
-      </div>
+      <input type="number" class="form-control" id="hours" [(ngModel)]="certification.hours" name="hours" required>
     </div>
 
     <div class="mb-3 col-12 col-md-6">
-      <label for="title" class="form-label">Tipo de certificado</label>
+      <p class="form-label">Tipo de certificado</p>
       <div class="form-check">
-        <input class="form-check-input" type="radio" name="radioDefault" id="radioDefault1">
-        <label class="form-check-label" for="radioDefault1">
+        <input class="form-check-input" type="radio" [(ngModel)]="certification.type" name="type" [value]="0" id="radioCertification">
+        <label class="form-check-label" for="radioCertification">
           Certificação
         </label>
       </div>
       <div class="form-check">
-        <input class="form-check-input" type="radio" name="radioDefault" id="radioDefault2" checked>
-        <label class="form-check-label" for="radioDefault2">
+        <input class="form-check-input" type="radio" [(ngModel)]="certification.type" name="type" [value]="1" id="radioCourse">
+        <label class="form-check-label" for="radioCourse">
           Curso
         </label>
       </div>
     </div>
+
     <div class="mb-3 col-12 col-md-3 offset-md-3 d-flex align-items-center justify-content-end">
       <button type="submit" class="btn btn-primary w-100 w-md-auto px-md-4 py-md-2">Registrar</button>
     </div>
