@@ -1,1 +1,45 @@
-<p>form-profile works!</p>
+<form class="container">
+  <h1>Atualize seu dados</h1>
+  <div class="row">
+    <div class="mb-3 col-12 col-md-6">
+      <label for="name" class="form-label">Nome</label>
+      <input type="text" class="form-control" id="name" [required]="true">
+      <div class="invalid-feedback d-block" [style.visibility]="">
+        teste
+      </div>
+    </div>
+
+    <div class="mb-3 col-12 col-md-6">
+      <label for="email" class="form-label">Email</label>
+      <input type="email" class="form-control" id="email" [required]="true">
+      <div class="invalid-feedback d-block" [style.visibility]="">
+        teste
+      </div>
+    </div>
+
+    <div class="mb-3 col-12">
+      <label for="location" class="form-label">Localização</label>
+      <input type="text" class="form-control" id="location">
+    </div>
+
+    <div class="mb-3 col-12 col-lg-6">
+      <label for="description" class="form-label">Descrição</label>
+      <textarea class="form-control" id="description" rows="3"></textarea>
+    </div>
+
+    <div class="mb-3 col-12 col-lg-6">
+      <label for="goal" class="form-label">Objetivo</label>
+      <textarea class="form-control" id="goal" rows="3"></textarea>
+    </div>
+
+    <div class="mb-3 col-12 col-md-6">
+      <label for="github" class="form-label">Github</label>
+      <input type="text" class="form-control" id="github">
+    </div>
+
+    <div class="mb-3 col-12 col-md-6">
+      <label for="linkedin" class="form-label">LinkedIn</label>
+      <input type="text" class="form-control" id="linkedin">
+    </div>
+  </div>
+</form>

@@ -1,0 +1,12 @@
+form {
+  border: 1px solid #dadada;
+  border-radius: 6px;
+  padding: 2rem;
+  overflow-x: auto;
+}
+
+@media only screen and (max-width: 520px) {
+  form {
+    padding: 0.5rem;
+  }
+}
