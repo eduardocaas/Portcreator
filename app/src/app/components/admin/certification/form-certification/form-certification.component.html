@@ -1,1 +1,63 @@
-<p>form-certification works!</p>
+<form class="container">
+  <h1>Registrar certificação</h1>
+  <div class="row">
+    <div class="mb-3 col-12 col-md-6">
+      <label for="title" class="form-label">Título</label>
+      <input type="text" class="form-control" id="title" [required]="true">
+      <div class="invalid-feedback d-block" [style.visibility]="">
+        teste
+      </div>
+    </div>
+
+    <div class="mb-3 col-12 col-md-6">
+      <label for="instituition" class="form-label">Instituição</label>
+      <input type="text" class="form-control" id="instituition" [required]="true">
+      <div class="invalid-feedback d-block" [style.visibility]="">
+        teste
+      </div>
+    </div>
+
+    <div class="mb-3 col-12">
+      <label for="title" class="form-label">Descrição</label>
+      <textarea class="form-control" id="description" rows="4" [required]="true"></textarea>
+      <div class="invalid-feedback d-block" [style.visibility]="">
+        teste
+      </div>
+    </div>
+
+    <div class="mb-3 col-12 col-md-6">
+      <label for="issueDate" class="form-label">Data de emissão</label>
+      <input type="date" class="form-control" id="issueDate" [required]="true">
+      <div class="invalid-feedback d-block" [style.visibility]="">
+        teste
+      </div>
+    </div>
+
+    <div class="mb-3 col-12 col-md-6">
+      <label for="hours" class="form-label">Duração (horas)</label>
+      <input type="number" class="form-control" id="hours" [required]="true">
+      <div class="invalid-feedback d-block" [style.visibility]="">
+        teste
+      </div>
+    </div>
+
+    <div class="mb-3 col-12 col-md-6">
+      <label for="title" class="form-label">Tipo de certificado</label>
+      <div class="form-check">
+        <input class="form-check-input" type="radio" name="radioDefault" id="radioDefault1">
+        <label class="form-check-label" for="radioDefault1">
+          Certificação
+        </label>
+      </div>
+      <div class="form-check">
+        <input class="form-check-input" type="radio" name="radioDefault" id="radioDefault2" checked>
+        <label class="form-check-label" for="radioDefault2">
+          Curso
+        </label>
+      </div>
+    </div>
+    <div class="mb-3 col-12 col-md-3 offset-md-3 d-flex align-items-center justify-content-end">
+      <button type="submit" class="btn btn-primary w-100 w-md-auto px-md-4 py-md-2">Registrar</button>
+    </div>
+  </div>
+</form>
