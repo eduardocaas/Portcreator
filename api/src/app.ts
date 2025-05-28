@@ -45,7 +45,7 @@ AppDataSource.initialize().then(async => {
 
   // User 2
   const userFacade = new UserFacade(authService, userService);
-  const userController = new UserController(userService, userFacade);
+  const userController = new UserController(authService, userService, userFacade);
 
   // Certification
   const certificationRepository = AppDataSource.getRepository(Certification);

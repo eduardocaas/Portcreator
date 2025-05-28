@@ -90,4 +90,22 @@ export class UserService implements IUserService {
       throw ({ id: 500, msg: "Falha ao desativar usuário" })
     }
   }
+
+  async updateImage(id: string, imagePath: string): Promise<boolean> {
+    if (!validator.isUUID(id)) {
+      throw ({ id: 400, msg: "Id inválido" });
+    }
+
+    let user = await this._repository.findOneBy({ id: id });
+    if (!user || user == null) {
+      throw ({ id: 404, msg: "Usuário não encontrado" });
+    }
+
+    user.updateImage(imagePath);
+    let userUpdated = await this._repository.save(user);
+    if (!userUpdated?.id) {
+      return false;
+    }
+    return true;
+  }
 }

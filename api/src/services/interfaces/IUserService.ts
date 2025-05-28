@@ -9,4 +9,5 @@ export interface IUserService {
   existsByEmail(email: string): Promise<boolean>
   update(id: string, input: UserUpdateInputModel): Promise<boolean>
   delete(id: string): Promise<void>
+  updateImage(id: string, imagePath: string): Promise<boolean>
 }
