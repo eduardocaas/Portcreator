@@ -11,6 +11,8 @@ import { SignupComponent } from './components/auth/signup/signup.component';
 import { NavComponent } from './components/admin/nav/nav.component';
 import { provideHttpClient } from '@angular/common/http';
 import { DashboardComponent } from './components/admin/dashboard/dashboard.component';
+import { ProfileComponent } from './components/admin/user/profile/profile.component';
+import { FormProfileComponent } from './components/admin/user/form-profile/form-profile.component';
 
 @NgModule({
   declarations: [
@@ -18,7 +20,9 @@ import { DashboardComponent } from './components/admin/dashboard/dashboard.compo
     SigninComponent,
     SignupComponent,
     NavComponent,
-    DashboardComponent
+    DashboardComponent,
+    ProfileComponent,
+    FormProfileComponent,
   ],
   imports: [
     // Angular
