@@ -16,6 +16,7 @@ import { FormProfileComponent } from './components/admin/user/form-profile/form-
 import { FormCertificationComponent } from './components/admin/certification/form-certification/form-certification.component';
 import { CertificationCardComponent } from './components/admin/certification/certification-card/certification-card.component';
 import { CertificationDetailsComponent } from './components/admin/certification/certification-details/certification-details.component';
+import { CertificationComponent } from './components/admin/certification/certification/certification.component';
 
 @NgModule({
   declarations: [
@@ -29,6 +30,7 @@ import { CertificationDetailsComponent } from './components/admin/certification/
     FormCertificationComponent,
     CertificationCardComponent,
     CertificationDetailsComponent,
+    CertificationComponent,
   ],
   imports: [
     // Angular
