@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { Credentials } from '../models/auth/Credentials';
 import { environment } from '../../environments/environment';
 import { JwtHelperService } from '@auth0/angular-jwt';
+import { decode } from 'jsonwebtoken';
 import { catchError, Observable, of, tap, throwError } from 'rxjs';
 import { SignupModel } from '../models/auth/SignupModel';
 
@@ -26,6 +27,7 @@ export class AuthService {
       .pipe(
         tap((resp: any) => {
           if (resp?.token) {
+            this.setClaims(resp.token);
             sessionStorage.setItem('token', resp.token);
             return true;
           }
@@ -54,5 +56,20 @@ export class AuthService {
       observe: 'response',
       responseType: 'json'
     });
+  }
+
+  setClaims(token: string) {
+     const decoded = decode(token) as any;
+     if (decoded?.userId && decoded?.userEmail && decoded?.firstAccess) {
+      sessionStorage.setItem('userId', decoded.userId);
+      sessionStorage.setItem('userEmail', decoded.userEmail);
+      sessionStorage.setItem('firstAccess', decoded.firstAccess);
+     }
+  }
+
+  getId(): string | null {
+    let id = sessionStorage.getItem('userId');
+    if (id) { return id }
+    return null;
   }
 }
