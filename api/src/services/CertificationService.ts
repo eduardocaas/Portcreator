@@ -24,7 +24,7 @@ export class CertificationService implements ICertificationService {
   async getAll(user: User): Promise<Certification[]> {
     try {
       let certifications = await this._repository.find({
-        where: { user: user },
+        where: { user: { id: user.id } },
         relations: []
       });
       return certifications;

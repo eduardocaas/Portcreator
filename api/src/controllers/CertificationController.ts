@@ -14,7 +14,7 @@ export class CertificationController {
     try {
       const token = req.get("Token");
       let certificationViewModel = await this._certificationFacade.save(token, input);
-      res.status(200).json({ certificationViewModel });
+      res.status(200).json(certificationViewModel);
     } catch (err: any) {
       if (err.id) {
         res.status(err.id).json({ message: err.msg });
@@ -29,7 +29,7 @@ export class CertificationController {
     try {
       const token = req.get("Token");
       let certificationsViewModel = await this._certificationFacade.getAllByUser(token);
-      res.status(200).json({ certificationsViewModel });
+      res.status(200).json(certificationsViewModel);
     } catch (err: any) {
       if (err.id) {
         res.status(err.id).json({ message: err.msg });
@@ -44,7 +44,7 @@ export class CertificationController {
     const id = req.params.id;
     try {
       let certificationViewModel = await this._certificationFacade.getById(id);
-      res.status(200).json({ certificationViewModel });
+      res.status(200).json( certificationViewModel );
     }
     catch (err: any) {
       if (err.id) {

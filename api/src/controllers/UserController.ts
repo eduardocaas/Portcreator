@@ -60,6 +60,7 @@ export class UserController {
     try {
       const token = req.get("Token");
       await this._userFacade.delete(token);
+      res.status(204).send();
     } catch (err: any) {
       if (err.id) {
         res.status(err.id).json({ message: err.msg });
