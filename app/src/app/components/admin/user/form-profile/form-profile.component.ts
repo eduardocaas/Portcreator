@@ -3,6 +3,7 @@ import { UserUpdate } from '../../../../models/admin/UserUpdate';
 import { UserService } from '../../../../services/user.service';
 import { Router } from '@angular/router';
 import { HttpErrorResponse } from '@angular/common/http';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-form-profile',
@@ -16,6 +17,11 @@ export class FormProfileComponent {
     private readonly _router: Router) { }
 
   errorMessage: string | null = null;
+  updateFormGroup = new FormGroup({
+    nameControl: new FormControl('', [Validators.required]),
+    emailControl: new FormControl('', [Validators.required, Validators.email])
+  })
+
   user: UserUpdate = {
     id: '',
     name: '',
