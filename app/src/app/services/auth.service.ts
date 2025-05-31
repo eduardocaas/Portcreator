@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { Credentials } from '../models/auth/Credentials';
 import { environment } from '../../environments/environment';
 import { JwtHelperService } from '@auth0/angular-jwt';
-import { decode } from 'jsonwebtoken';
+import { jwtDecode } from 'jwt-decode';
 import { catchError, Observable, of, tap, throwError } from 'rxjs';
 import { SignupModel } from '../models/auth/SignupModel';
 
@@ -59,7 +59,7 @@ export class AuthService {
   }
 
   setClaims(token: string) {
-     const decoded = decode(token) as any;
+     const decoded = jwtDecode<any>(token);
      if (decoded?.userId && decoded?.userEmail && decoded?.firstAccess) {
       sessionStorage.setItem('userId', decoded.userId);
       sessionStorage.setItem('userEmail', decoded.userEmail);

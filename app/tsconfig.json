@@ -22,7 +22,25 @@
     "lib": [
       "ES2022",
       "dom"
-    ]
+    ],
+    "baseUrl": ".",
+    "paths": {
+      "crypto": [
+        "node_modules/crypto-js"
+      ],
+      "stream": [
+        "node_modules/stream"
+      ],
+      "util": [
+        "node_modules/util"
+      ], // O pacote 'util' já é o polyfill
+      "buffer": [
+        "node_modules/buffer"
+      ], // O pacote 'buffer' já é o polyfill
+      "process": [
+        "node_modules/process"
+      ] // O pacote 'process' já é o polyfill
+    }
   },
   "angularCompilerOptions": {
     "enableI18nLegacyMessageIdFormat": false,

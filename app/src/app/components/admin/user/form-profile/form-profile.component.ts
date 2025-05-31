@@ -56,4 +56,32 @@ export class FormProfileComponent {
 
     }
   }
+
+  get nameControl() {
+    return this.updateFormGroup.get('nameControl') as FormControl;
+  }
+
+  get emailControl() {
+    return this.updateFormGroup.get('emailControl') as FormControl;
+  }
+
+  isNameInvalid(): boolean {
+    return this.nameControl.invalid && (this.nameControl.dirty || this.nameControl.touched);
+  }
+
+  isEmailInvalid(): boolean {
+    return this.emailControl.invalid && (this.emailControl.dirty || this.emailControl.touched);
+  }
+
+  getErrorMessageName() {
+    return this.nameControl.hasError('required') ? 'Insira um nome' : '';
+  }
+
+  getErrorMessageEmail() {
+    if (this.emailControl.hasError('required')) {
+      return 'Insira um email';
+    }
+    return this.emailControl.hasError('email') ? 'Insira um email válido' : '';
+  }
+
 }
