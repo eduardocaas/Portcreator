@@ -72,4 +72,10 @@ export class AuthService {
     if (id) { return id }
     return null;
   }
+
+   getEmail(): string | null {
+    let email = sessionStorage.getItem('userEmail');
+    if (email) { return email }
+    return null;
+  }
 }
