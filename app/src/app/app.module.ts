@@ -18,6 +18,8 @@ import { CertificationCardComponent } from './components/admin/certification/cer
 import { CertificationDetailsComponent } from './components/admin/certification/certification-details/certification-details.component';
 import { CertificationComponent } from './components/admin/certification/certification/certification.component';
 import { authInterceptor } from './interceptors/auth.interceptor';
+import { NotFoundComponent } from './components/public/not-found/not-found.component';
+import { HomeComponent } from './components/public/home/home.component';
 
 @NgModule({
   declarations: [
@@ -32,6 +34,8 @@ import { authInterceptor } from './interceptors/auth.interceptor';
     CertificationCardComponent,
     CertificationDetailsComponent,
     CertificationComponent,
+    NotFoundComponent,
+    HomeComponent,
   ],
   imports: [
     // Angular

@@ -35,7 +35,7 @@ export class SigninComponent {
     if (this.signinFormGroup.valid) {
       this._authService.authenticate(this.credentials).subscribe({
         next: () => {
-          timer(500).subscribe(x => { this._router.navigate(['']) });
+          timer(500).subscribe(x => { this._router.navigate(['app']) });
         },
         error: (err: HttpErrorResponse) => {
           if (err.status == 404) {

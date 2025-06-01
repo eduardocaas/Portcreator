@@ -7,15 +7,22 @@ import { authGuard } from './auth/auth.guard';
 import { DashboardComponent } from './components/admin/dashboard/dashboard.component';
 import { ProfileComponent } from './components/admin/user/profile/profile.component';
 import { CertificationComponent } from './components/admin/certification/certification/certification.component';
+import { NotFoundComponent } from './components/public/not-found/not-found.component';
+import { HomeComponent } from './components/public/home/home.component';
 
 const routes: Routes = [
+  { path: '', component: HomeComponent },
   { path: 'signup', component: SignupComponent },
   { path: 'signin', component: SigninComponent },
-  { path: '', component: NavComponent, canActivate: [authGuard], children: [
-    { path: '', component: DashboardComponent },
-    { path: 'profile', component: ProfileComponent },
-    { path: 'certifications', component: CertificationComponent}
-  ]}
+  {
+    path: 'app', component: NavComponent, canActivate: [authGuard], children: [
+      { path: '', component: DashboardComponent },
+      { path: 'profile', component: ProfileComponent },
+      { path: 'certifications', component: CertificationComponent },
+      { path: '**', redirectTo: '' }
+    ]
+  },
+  { path: '**', component: NotFoundComponent },
 ];
 
 @NgModule({
