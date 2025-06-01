@@ -1,54 +1,53 @@
-<form [formGroup]="updateFormGroup" class="container">
+<form class="container">
   <h2>Atualize seus dados</h2>
   <div class="row">
     <div class="mb-3 col-12 col-md-6">
       <label for="name" class="form-label">Nome</label>
-      <input type="text" class="form-control" formControlName="nameControl" id="name" [(ngModel)]="user.name"
+      <input type="text" class="form-control" [formControl]="nameControl" [(ngModel)]="user.name" name="name" id="name"
         [required]="true">
       <div class="invalid-feedback d-block" [style.visibility]="isNameInvalid() ? 'visible' : 'hidden'">
-        {{ getErrorMessageName() }}
+        {{ isNameInvalid() ? getErrorMessageName() : '&nbsp;' }}
       </div>
     </div>
 
     <div class="mb-3 col-12 col-md-6">
       <label for="email" class="form-label">Email</label>
-      <input type="email" class="form-control" formControlName="emailControl" id="email" [(ngModel)]="user.email"
-        [required]="true">
-      <div class="invalid-feedback d-block" [style.visibility]="isEmailInvalid() ? 'visible' : 'hidden'">
-        {{ getErrorMessageEmail() }}
-      </div>
+      <input type="email" class="form-control" id="email" name="email" [(ngModel)]="user.email"
+        [required]="true" [disabled]="true" disabled>
     </div>
 
     <div class="mb-3 col-12">
       <label for="location" class="form-label">Localização</label>
-      <input type="text" class="form-control" [(ngModel)]="user.location" id="location">
+      <input type="text" class="form-control" [(ngModel)]="user.location" name="location" id="location">
     </div>
 
     <div class="mb-3 col-12 col-lg-6">
       <label for="description" class="form-label">Descrição</label>
-      <textarea class="form-control" id="description" [(ngModel)]="user.description" rows="3"></textarea>
+      <textarea class="form-control" id="description" [(ngModel)]="user.description" name="description" rows="3"></textarea>
     </div>
 
     <div class="mb-3 col-12 col-lg-6">
       <label for="goal" class="form-label">Objetivo</label>
-      <textarea class="form-control" id="goal" [(ngModel)]="user.goal" rows="3"></textarea>
+      <textarea class="form-control" id="goal" [(ngModel)]="user.goal" name="goal" rows="3"></textarea>
     </div>
 
     <div class="mb-3 col-12 col-md-6">
       <label for="github" class="form-label">Github</label>
-      <input type="text" class="form-control" [(ngModel)]="user.github" id="github">
+      <input type="text" class="form-control" [(ngModel)]="user.github" name="github" id="github">
     </div>
 
     <div class="mb-3 col-12 col-md-6">
       <label for="linkedin" class="form-label">LinkedIn</label>
-      <input type="text" class="form-control" [(ngModel)]="user.linkedin" id="linkedin">
+      <input type="text" class="form-control" [(ngModel)]="user.linkedin" name="linkedin" id="linkedin">
     </div>
 
     <div class="mt-2 col-12 col-md-4 col-lg-2">
-      <button type="submit" class="btn btn-primary w-100 w-md-auto px-md-4 py-md-2">Atualizar</button>
+      <button type="submit" [disabled]="!this.nameControl.valid" (click)="update()" class="btn btn-primary w-100 w-md-auto px-md-4 py-md-2">Atualizar</button>
     </div>
   </div>
-  <div class="toast-container position-fixed bottom-0 start-50 translate-middle-x p-3">
+
+</form>
+<div class="toast-container position-fixed bottom-0 start-50 translate-middle-x p-3">
     <div id="errorToast" class="toast bg-danger bg-opacity-75 text-white" role="alert" aria-live="assertive"
       aria-atomic="true">
       <div class="toast-header bg-danger bg-opacity-75 text-white border-0">
@@ -72,4 +71,3 @@
       </div>
     </div>
   </div>
-</form>

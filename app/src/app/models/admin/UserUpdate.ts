@@ -1,7 +1,7 @@
-export interface UserUpdate {
-  id: string,
+export interface User {
+  id: string | null,
   name: string,
-  email: string,
+  email: string | null,
   location?: string,
   description?: string,
   goal?: string,

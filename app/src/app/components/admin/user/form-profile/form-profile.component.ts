@@ -1,11 +1,12 @@
 import { Component } from '@angular/core';
-import { UserUpdate } from '../../../../models/admin/UserUpdate';
+import { User } from '../../../../models/admin/UserUpdate';
 import { UserService } from '../../../../services/user.service';
 import { Router } from '@angular/router';
 import { HttpErrorResponse } from '@angular/common/http';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormControl, Validators } from '@angular/forms';
 import { UserMessage } from 'src/app/models/messages/UserMessage';
 import { Toast } from 'bootstrap';
+import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
   selector: 'app-form-profile',
@@ -15,16 +16,16 @@ import { Toast } from 'bootstrap';
 export class FormProfileComponent {
 
   constructor(
+    private readonly _authService: AuthService,
     private readonly _userService: UserService,
-    private readonly _router: Router) { }
+    private readonly _router: Router) {
+      this.getById();
+  }
 
   toastMessage: string | null = null;
-  updateFormGroup = new FormGroup({
-    nameControl: new FormControl('', [Validators.required]),
-    emailControl: new FormControl('', [Validators.required, Validators.email])
-  })
+  nameControl = new FormControl('', [Validators.required])
 
-  user: UserUpdate = {
+  user: User = {
     id: '',
     name: '',
     email: '',
@@ -35,9 +36,28 @@ export class FormProfileComponent {
     linkedin: ''
   }
 
+  getById() {
+    this._userService.getById().subscribe({
+      next: (res) => {
+        this.user = res;
+      },
+      error: (err: HttpErrorResponse) => {
+        if (err.status == 404) {
+          this.toastMessage = UserMessage.ERROR_404;
+          this.showErrorToast();
+        } else {
+          this.toastMessage = UserMessage.ERROR_500;
+          this.showErrorToast();
+        }
+      }
+    })
+  }
+
   update() { // TODO: Remover opção de trocar email
+    this.user.id = this._authService.getId();
+    this.user.email = this._authService.getEmail();
     this.toastMessage = null;
-    if (true) { // FORMS GROUP
+    if (this.nameControl.valid) {
       this._userService.update(this.user).subscribe({
         next: (res) => {
           this.showSuccessToast()
@@ -58,7 +78,8 @@ export class FormProfileComponent {
         }
       })
     } else {
-
+      this.toastMessage = "Campos inválidos";
+      this.showErrorToast();
     }
   }
 
@@ -78,31 +99,11 @@ export class FormProfileComponent {
     }
   }
 
-  get nameControl() {
-    return this.updateFormGroup.get('nameControl') as FormControl;
-  }
-
-  get emailControl() {
-    return this.updateFormGroup.get('emailControl') as FormControl;
-  }
-
   isNameInvalid(): boolean {
     return this.nameControl.invalid && (this.nameControl.dirty || this.nameControl.touched);
-  }
-
-  isEmailInvalid(): boolean {
-    return this.emailControl.invalid && (this.emailControl.dirty || this.emailControl.touched);
   }
 
   getErrorMessageName() {
     return this.nameControl.hasError('required') ? 'Insira um nome' : '';
   }
-
-  getErrorMessageEmail() {
-    if (this.emailControl.hasError('required')) {
-      return 'Insira um email';
-    }
-    return this.emailControl.hasError('email') ? 'Insira um email válido' : '';
-  }
-
 }
