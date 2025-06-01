@@ -45,7 +45,7 @@ export class UserController {
     try {
       const token = req.get("Token");
       const userViewModel = await this._userFacade.getUserByToken(token);
-      res.status(200).json({ userViewModel });
+      res.status(200).json( userViewModel );
     } catch (err: any) {
       if (err.id) {
         res.status(err.id).json({ message: err.msg });

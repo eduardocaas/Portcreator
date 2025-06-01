@@ -31,7 +31,7 @@ export class UserService {
         statusText: 'Not Found'
       }));
     }
-    return this._http.get<User>(`${environment.apiUrl}/api/users/${id}`);
+    return this._http.get<User>(`${environment.apiUrl}/api/users`);
   }
 
   update(user: User) {
