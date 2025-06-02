@@ -9,6 +9,7 @@ import { ProfileComponent } from './components/admin/user/profile/profile.compon
 import { CertificationComponent } from './components/admin/certification/certification/certification.component';
 import { NotFoundComponent } from './components/public/not-found/not-found.component';
 import { HomeComponent } from './components/public/home/home.component';
+import { FormCertificationComponent } from './components/admin/certification/form-certification/form-certification.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -19,6 +20,7 @@ const routes: Routes = [
       { path: '', component: DashboardComponent },
       { path: 'profile', component: ProfileComponent },
       { path: 'certifications', component: CertificationComponent },
+      { path: 'certifications/create', component: FormCertificationComponent },
       { path: '**', redirectTo: '' }
     ]
   },

@@ -1,41 +1,58 @@
-<form class="container">
+<form class="container" [formGroup]="certificationFormGroup">
   <h2>Registrar certificação</h2>
   <div class="row">
     <div class="mb-3 col-12 col-md-6">
       <label for="title" class="form-label">Título</label>
-      <input type="text" class="form-control" id="title" [(ngModel)]="certification.title" name="title" required>
+      <input type="text" class="form-control" id="title" name="title" formControlName="titleControl" required>
+      <div class="invalid-feedback d-block" [style.visibility]="isInvalid(titleControl) ? 'visible' : 'hidden'">
+        {{ isInvalid(titleControl) ? 'Insira um título' : '&nbsp;' }}
+      </div>
     </div>
 
     <div class="mb-3 col-12 col-md-6">
       <label for="institution" class="form-label">Instituição</label>
-      <input type="text" class="form-control" id="institution" [(ngModel)]="certification.institutionName" name="institutionName" required>
+      <input type="text" class="form-control" id="institution" formControlName="institutionControl"
+        name="institutionName" required>
+      <div class="invalid-feedback d-block" [style.visibility]="isInvalid(institutionControl) ? 'visible' : 'hidden'">
+        {{ isInvalid(institutionControl) ? 'Insira uma instituição' : '&nbsp;' }}
+      </div>
     </div>
 
     <div class="mb-3 col-12">
       <label for="description" class="form-label">Descrição</label>
-      <textarea class="form-control" id="description" rows="4" [(ngModel)]="certification.description" name="description" required></textarea>
+      <textarea class="form-control" id="description" rows="4" name="description" formControlName="descriptionControl"
+        required></textarea>
+      <div class="invalid-feedback d-block" [style.visibility]="isInvalid(descriptionControl) ? 'visible' : 'hidden'">
+        {{ isInvalid(descriptionControl) ? 'Insira uma descrição' : '&nbsp;' }}
+      </div>
     </div>
 
     <div class="mb-3 col-12 col-md-6">
       <label for="issueDate" class="form-label">Data de emissão</label>
-      <input type="date" class="form-control" id="issueDate" [(ngModel)]="certification.issueDate" name="issueDate" required>
+      <input type="date" class="form-control" id="issueDate" formControlName="issueDateControl">
+      <div class="invalid-feedback d-block" [style.visibility]="isInvalid(issueDateControl) ? 'visible' : 'hidden'">
+        {{ isInvalid(issueDateControl) ? getErrorMessageDate() : '&nbsp;' }}
+      </div>
     </div>
 
     <div class="mb-3 col-12 col-md-6">
       <label for="hours" class="form-label">Duração (horas)</label>
-      <input type="number" class="form-control" id="hours" [(ngModel)]="certification.hours" name="hours" required>
+      <input type="number" class="form-control" id="hours" name="hours" formControlName="hoursControl" required>
+      <div class="invalid-feedback d-block" [style.visibility]="isInvalid(hoursControl) ? 'visible' : 'hidden'">
+        {{ isInvalid(hoursControl) ? 'Mínimo: 1 hora' : '&nbsp;' }}
+      </div>
     </div>
 
     <div class="mb-3 col-12 col-md-6">
       <p class="form-label">Tipo de certificado</p>
       <div class="form-check">
-        <input class="form-check-input" type="radio" [(ngModel)]="certification.type" name="type" [value]="0" id="radioCertification">
+        <input class="form-check-input" type="radio" formControlName="typeControl" [value]="0" id="radioCertification">
         <label class="form-check-label" for="radioCertification">
           Certificação
         </label>
       </div>
       <div class="form-check">
-        <input class="form-check-input" type="radio" [(ngModel)]="certification.type" name="type" [value]="1" id="radioCourse">
+        <input class="form-check-input" type="radio" formControlName="typeControl" [value]="1" id="radioCourse">
         <label class="form-check-label" for="radioCourse">
           Curso
         </label>
@@ -43,7 +60,32 @@
     </div>
 
     <div class="mb-3 col-12 col-md-3 offset-md-3 d-flex align-items-center justify-content-end">
-      <button type="submit" class="btn btn-primary w-100 w-md-auto px-md-4 py-md-2">Registrar</button>
+      <button type="submit" [disabled]="!this.certificationFormGroup.valid" (click)="create()"
+        class="btn btn-primary w-100 w-md-auto px-md-4 py-md-2">Registrar</button>
     </div>
   </div>
 </form>
+<div class="toast-container position-fixed bottom-0 start-50 translate-middle-x p-3">
+  <div id="errorToast" class="toast bg-danger bg-opacity-75 text-white" role="alert" aria-live="assertive"
+      aria-atomic="true">
+      <div class="toast-header bg-danger bg-opacity-75 text-white border-0">
+        <strong class="me-auto">❌ Erro</strong>
+        <small class="text-white-50">Falha ao atualizar</small>
+        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="toast" aria-label="Close"></button>
+      </div>
+      <div *ngIf="errorMessage != null" class="toast-body">
+        {{ errorMessage }}
+      </div>
+    </div>
+    <div id="successToast" class="toast bg-success bg-opacity-75 text-white" role="alert" aria-live="assertive"
+      aria-atomic="true">
+      <div class="toast-header bg-success bg-opacity-75 text-white border-0">
+        <strong class="me-auto">&#9989; Sucesso</strong>
+        <small class="text-white-50">Atualização</small>
+        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="toast" aria-label="Close"></button>
+      </div>
+      <div class="toast-body">
+        Atualizado com sucesso!
+      </div>
+    </div>
+  </div>

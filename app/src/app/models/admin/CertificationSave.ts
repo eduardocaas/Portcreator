@@ -4,7 +4,7 @@ export interface CertificationSave {
     title: string,
     description: string,
     type: CertificationType,
-    issueDate: Date,
+    issueDate?: Date,
     hours: number,
     institutionName: string;
 }
