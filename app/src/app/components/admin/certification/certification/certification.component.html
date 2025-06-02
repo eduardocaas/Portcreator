@@ -1,1 +1,19 @@
 <button routerLink="create">Adicionar</button>
+
+<div class="container">
+
+</div>
+
+<div class="toast-container position-fixed bottom-0 start-50 translate-middle-x p-3">
+  <div id="errorToast" class="toast bg-danger bg-opacity-75 text-white" role="alert" aria-live="assertive"
+    aria-atomic="true">
+    <div class="toast-header bg-danger bg-opacity-75 text-white border-0">
+      <strong class="me-auto">❌ Erro</strong>
+      <small class="text-white-50">Certificações</small>
+      <button type="button" class="btn-close btn-close-white" data-bs-dismiss="toast" aria-label="Close"></button>
+    </div>
+    <div *ngIf="toastMessage  != null" class="toast-body">
+      {{ toastMessage }}
+    </div>
+  </div>
+</div>
