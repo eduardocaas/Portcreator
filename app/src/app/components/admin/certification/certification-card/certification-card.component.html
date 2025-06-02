@@ -1,5 +1,13 @@
-<div>
-  <ng-content select="[title]"></ng-content>
-  <ng-content select="[hours]"></ng-content>
-  <ng-content select="[id]"></ng-content> <!-- USAR [routerLink] dinâmico -->
+<div class="card">
+  <div class="card-body">
+    <h5 class="card-title">{{ certification.title }}</h5>
+    <p class="card-text">{{ certification.hours }}</p>
+    <ng-content select="[details]"></ng-content>
+    <button class="btn btn-outline-primary ms-1">
+      <i class="bi bi-pencil"></i>
+    </button>
+    <button class="btn btn-outline-danger ms-1">
+      <i class="bi bi-trash"></i>
+    </button>
+  </div>
 </div>

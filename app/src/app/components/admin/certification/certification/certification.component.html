@@ -1,7 +1,16 @@
-<button routerLink="create">Adicionar</button>
+<div class="container mt-5">
+  <button class="btn btn-outline-dark btn-lg" routerLink="create">  <i class="bi bi-save me-3"></i>Adicionar certificação</button>
 
-<div class="container">
-
+  <hr>
+  <h2 class="mb-3">Certificações</h2>
+  <div class="row">
+    <div *ngFor="let cert of certifications" class="col-12 col-md-6 col-xl-4 mb-3">
+      <app-certification-card [certification]="cert">
+        <button class="btn btn-secondary" details [routerLink]="[]">Detalhes</button>
+      </app-certification-card>
+    </div>
+  </div>
+  <hr>
 </div>
 
 <div class="toast-container position-fixed bottom-0 start-50 translate-middle-x p-3">

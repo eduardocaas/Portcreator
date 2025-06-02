@@ -7,6 +7,8 @@ import { CertificationService } from 'src/app/services/certification.service';
 import { Toast } from 'bootstrap';
 import { CertificationMessage } from 'src/app/models/messages/CertificationMessage';
 import { UserMessage } from 'src/app/models/messages/UserMessage';
+import { timer } from 'rxjs';
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-form-certification',
   templateUrl: './form-certification.component.html',
@@ -14,7 +16,9 @@ import { UserMessage } from 'src/app/models/messages/UserMessage';
 })
 export class FormCertificationComponent {
 
-  constructor(private readonly _service: CertificationService) { }
+  constructor(
+    private readonly _service: CertificationService,
+    private readonly _router: Router) { }
 
   certificationFormGroup = new FormGroup({
     titleControl: new FormControl('', [Validators.required]),
@@ -44,6 +48,7 @@ export class FormCertificationComponent {
       this._service.save(this.certification).subscribe({
         next: (res) => {
           this.showSuccessToast();
+          timer(1500).subscribe(x => { this._router.navigate(['/app/certifications'])})
         },
         error: (err) => {
           if (err.status == 400) {

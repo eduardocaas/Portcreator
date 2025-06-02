@@ -23,7 +23,7 @@ export class CertificationService {
   ) { }
 
   getAll(): Observable<CertificationPartial[]> {
-    return this._http.get<CertificationPartial[]>(`${environment}/api/certifications`)
+    return this._http.get<CertificationPartial[]>(`${environment.apiUrl}/api/certifications`)
   }
 
   getById(id: string): Observable<Certification> {
@@ -34,11 +34,11 @@ export class CertificationService {
         statusText: 'Not Found'
       }));
     }
-    return this._http.get<Certification>(`${environment}/api/certifications/${id}`,)
+    return this._http.get<Certification>(`${environment.apiUrl}/api/certifications/${id}`,)
   }
 
   save(certification: CertificationSave) {
-    return this._http.post<void>(`${environment}/api/certifications`, certification, {
+    return this._http.post<void>(`${environment.apiUrl}/api/certifications`, certification, {
       headers: httpOptions.headers,
       observe: 'response',
       responseType: 'json'

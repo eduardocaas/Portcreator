@@ -2,7 +2,6 @@ import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { Toast } from 'bootstrap';
 import { CertificationPartial } from 'src/app/models/admin/CertificationPartial';
-import { UserMessage } from 'src/app/models/messages/UserMessage';
 import { CertificationService } from 'src/app/services/certification.service';
 
 @Component({
@@ -37,6 +36,4 @@ export class CertificationComponent implements OnInit {
       toast.show();
     }
   }
-
-
 }

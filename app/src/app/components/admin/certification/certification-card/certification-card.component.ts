@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
+import { CertificationPartial } from 'src/app/models/admin/CertificationPartial';
 
 @Component({
   selector: 'app-certification-card',
@@ -6,5 +7,6 @@ import { Component } from '@angular/core';
   styleUrl: './certification-card.component.css'
 })
 export class CertificationCardComponent {
-
+  @Input()
+  certification!: CertificationPartial;
 }
