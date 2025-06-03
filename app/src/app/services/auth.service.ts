@@ -58,6 +58,10 @@ export class AuthService {
     });
   }
 
+  logout() {
+    sessionStorage.clear();
+  }
+
   setClaims(token: string) {
      const decoded = jwtDecode<any>(token);
      if (decoded?.userId && decoded?.userEmail && decoded?.firstAccess) {

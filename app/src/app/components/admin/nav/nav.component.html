@@ -22,6 +22,11 @@
           <a class="nav-link" routerLink="/app/profile" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">Perfil</a>
         </li>
       </ul>
+      <ul class="navbar-nav ms-auto">
+        <li class="nav-item">
+          <button class="btn btn-outline-light" (click)="logout()">Logout</button>
+        </li>
+      </ul>
     </div>
   </div>
 </nav>
