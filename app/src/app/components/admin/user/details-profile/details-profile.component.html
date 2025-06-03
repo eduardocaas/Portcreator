@@ -19,17 +19,17 @@
     <tr>
       <td class="fw-bold col-1 col-sm-2">Localização</td>
       <td *ngIf="user.location">{{ user.location }}</td>
-      <td *ngIf="!user.location">*</td>
+      <td *ngIf="!user.location" class="text-secondary">Não informado</td>
     </tr>
     <tr>
       <td class="fw-bold col-1 col-sm-2">Github</td>
       <td *ngIf="user.github">{{ user.github }}</td>
-      <td *ngIf="!user.github">*</td>
+      <td *ngIf="!user.github" class="text-secondary">Não informado</td>
     </tr>
     <tr>
       <td class="fw-bold col-1 col-sm-2">LinkedIn</td>
       <td *ngIf="user.linkedin">{{ user.linkedin }}</td>
-      <td *ngIf="!user.linkedin">*</td>
+      <td *ngIf="!user.linkedin" class="text-secondary">Não informado</td>
     </tr>
   </tbody>
 </table>
