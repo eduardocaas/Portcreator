@@ -43,7 +43,7 @@ export class FormCertificationComponent {
         issueDate: new Date(formValues.issueDateControl! + "T00:00:00"),
         hours: formValues.hoursControl!,
         institutionName: formValues.institutionControl!,
-        type: formValues.typeControl! as CertificationType
+        type: formValues.typeControl as CertificationType
       };
       this._service.save(this.certification).subscribe({
         next: (res) => {
