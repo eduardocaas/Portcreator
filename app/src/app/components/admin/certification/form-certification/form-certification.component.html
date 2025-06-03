@@ -1,9 +1,9 @@
-<form class="container" [formGroup]="certificationFormGroup">
+<form class="container mt-5" [formGroup]="certificationFormGroup">
   <h2>Registrar certificação</h2>
   <div class="row">
     <div class="mb-3 col-12 col-md-6">
       <label for="title" class="form-label">Título</label>
-      <input type="text" class="form-control" id="title" name="title" formControlName="titleControl" required>
+      <input type="text" class="form-control" [ngClass]="isInvalid(titleControl) ? 'is-invalid' : ''"  id="title" name="title" formControlName="titleControl" required>
       <div class="invalid-feedback d-block" [style.visibility]="isInvalid(titleControl) ? 'visible' : 'hidden'">
         {{ isInvalid(titleControl) ? 'Insira um título' : '&nbsp;' }}
       </div>
@@ -11,7 +11,7 @@
 
     <div class="mb-3 col-12 col-md-6">
       <label for="institution" class="form-label">Instituição</label>
-      <input type="text" class="form-control" id="institution" formControlName="institutionControl"
+      <input type="text" class="form-control" [ngClass]="isInvalid(institutionControl) ? 'is-invalid' : ''"  id="institution" formControlName="institutionControl"
         name="institutionName" required>
       <div class="invalid-feedback d-block" [style.visibility]="isInvalid(institutionControl) ? 'visible' : 'hidden'">
         {{ isInvalid(institutionControl) ? 'Insira uma instituição' : '&nbsp;' }}
@@ -20,7 +20,7 @@
 
     <div class="mb-3 col-12">
       <label for="description" class="form-label">Descrição</label>
-      <textarea class="form-control" id="description" rows="4" name="description" formControlName="descriptionControl"
+      <textarea class="form-control" id="description" rows="4" name="description" [ngClass]="isInvalid(descriptionControl) ? 'is-invalid' : ''"  formControlName="descriptionControl"
         required></textarea>
       <div class="invalid-feedback d-block" [style.visibility]="isInvalid(descriptionControl) ? 'visible' : 'hidden'">
         {{ isInvalid(descriptionControl) ? 'Insira uma descrição' : '&nbsp;' }}
@@ -29,7 +29,7 @@
 
     <div class="mb-3 col-12 col-md-6">
       <label for="issueDate" class="form-label">Data de emissão</label>
-      <input type="date" class="form-control" id="issueDate" formControlName="issueDateControl">
+      <input type="date" class="form-control" id="issueDate" [ngClass]="isInvalid(issueDateControl) ? 'is-invalid' : ''" formControlName="issueDateControl">
       <div class="invalid-feedback d-block" [style.visibility]="isInvalid(issueDateControl) ? 'visible' : 'hidden'">
         {{ isInvalid(issueDateControl) ? getErrorMessageDate() : '&nbsp;' }}
       </div>
@@ -37,7 +37,7 @@
 
     <div class="mb-3 col-12 col-md-6">
       <label for="hours" class="form-label">Duração (horas)</label>
-      <input type="number" class="form-control" id="hours" name="hours" formControlName="hoursControl" required>
+      <input type="number" class="form-control" [ngClass]="isInvalid(hoursControl) ? 'is-invalid' : ''" id="hours" name="hours" formControlName="hoursControl" required>
       <div class="invalid-feedback d-block" [style.visibility]="isInvalid(hoursControl) ? 'visible' : 'hidden'">
         {{ isInvalid(hoursControl) ? 'Mínimo: 1 hora' : '&nbsp;' }}
       </div>

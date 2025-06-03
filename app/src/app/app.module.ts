@@ -20,6 +20,7 @@ import { CertificationComponent } from './components/admin/certification/certifi
 import { authInterceptor } from './interceptors/auth.interceptor';
 import { NotFoundComponent } from './components/public/not-found/not-found.component';
 import { HomeComponent } from './components/public/home/home.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [
@@ -42,7 +43,8 @@ import { HomeComponent } from './components/public/home/home.component';
     BrowserModule,
     AppRoutingModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    BrowserAnimationsModule
   ],
   providers: [provideHttpClient(withInterceptors([authInterceptor]))],
   bootstrap: [AppComponent]
