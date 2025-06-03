@@ -21,6 +21,7 @@ import { authInterceptor } from './interceptors/auth.interceptor';
 import { NotFoundComponent } from './components/public/not-found/not-found.component';
 import { HomeComponent } from './components/public/home/home.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { DetailsProfileComponent } from './components/admin/user/details-profile/details-profile.component';
 
 @NgModule({
   declarations: [
@@ -37,6 +38,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     CertificationComponent,
     NotFoundComponent,
     HomeComponent,
+    DetailsProfileComponent,
   ],
   imports: [
     // Angular
