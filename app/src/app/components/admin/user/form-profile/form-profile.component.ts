@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input, Output } from '@angular/core';
 import { User } from '../../../../models/admin/UserUpdate';
 import { UserService } from '../../../../services/user.service';
 import { Router } from '@angular/router';
@@ -7,6 +7,8 @@ import { FormControl, Validators } from '@angular/forms';
 import { UserMessage } from 'src/app/models/messages/UserMessage';
 import { Toast } from 'bootstrap';
 import { AuthService } from 'src/app/services/auth.service';
+import { EventEmitter } from '@angular/core';
+import { timer } from 'rxjs';
 
 @Component({
   selector: 'app-form-profile',
@@ -19,39 +21,16 @@ export class FormProfileComponent {
     private readonly _authService: AuthService,
     private readonly _userService: UserService,
     private readonly _router: Router) {
-      this.getById();
+
   }
 
   toastMessage: string | null = null;
   nameControl = new FormControl('', [Validators.required])
 
-  user: User = {
-    id: '',
-    name: '',
-    email: '',
-    location: '',
-    description: '',
-    goal: '',
-    github: '',
-    linkedin: ''
-  }
-
-  getById() {
-    this._userService.getById().subscribe({
-      next: (res) => {
-        this.user = res;
-      },
-      error: (err: HttpErrorResponse) => {
-        if (err.status == 404) {
-          this.toastMessage = UserMessage.ERROR_404;
-          this.showErrorToast();
-        } else {
-          this.toastMessage = UserMessage.ERROR_500;
-          this.showErrorToast();
-        }
-      }
-    })
-  }
+  @Input()
+  user!: User;
+  @Output()
+  updated = new EventEmitter<void>();
 
   update() { // TODO: Remover opção de trocar email
     this.user.id = this._authService.getId();
@@ -61,6 +40,7 @@ export class FormProfileComponent {
       this._userService.update(this.user).subscribe({
         next: (res) => {
           this.showSuccessToast()
+          timer(1000).subscribe(x => { this.updated.emit() })
         },
         error: (err: HttpErrorResponse) => {
           if (err.status == 400) {

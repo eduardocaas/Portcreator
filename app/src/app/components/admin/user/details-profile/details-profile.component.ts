@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
+import { User } from 'src/app/models/admin/UserUpdate';
 
 @Component({
   selector: 'app-details-profile',
@@ -7,4 +8,6 @@ import { Component } from '@angular/core';
 })
 export class DetailsProfileComponent {
 
+  @Input()
+  user!: User;
 }

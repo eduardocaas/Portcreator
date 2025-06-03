@@ -1,1 +1,35 @@
-<p>details-profile works!</p>
+<h2>Informações</h2>
+<h5>Sobre</h5>
+<p>{{ user.description }}</p>
+<p class="text-secondary" *ngIf="!user.description">Adicione uma descrição</p>
+<h5>Objetivo</h5>
+<p>{{ user.goal }}</p>
+<p class="text-secondary" *ngIf="!user.description">Adicione um objetivo</p>
+<h5>Perfil</h5>
+<table class="table table-striped-columns table-hover table-bordered">
+  <tbody>
+    <tr>
+      <td class="fw-bold col-1 col-sm-2">Nome</td>
+      <td>{{ user.name }}</td>
+    </tr>
+    <tr>
+      <td class="fw-bold col-1 col-sm-2">Email</td>
+      <td>{{ user.email }}</td>
+    </tr>
+    <tr>
+      <td class="fw-bold col-1 col-sm-2">Localização</td>
+      <td *ngIf="user.location">{{ user.location }}</td>
+      <td *ngIf="!user.location">*</td>
+    </tr>
+    <tr>
+      <td class="fw-bold col-1 col-sm-2">Github</td>
+      <td *ngIf="user.github">{{ user.github }}</td>
+      <td *ngIf="!user.github">*</td>
+    </tr>
+    <tr>
+      <td class="fw-bold col-1 col-sm-2">LinkedIn</td>
+      <td *ngIf="user.linkedin">{{ user.linkedin }}</td>
+      <td *ngIf="!user.linkedin">*</td>
+    </tr>
+  </tbody>
+</table>

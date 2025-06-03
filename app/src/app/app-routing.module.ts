@@ -10,7 +10,6 @@ import { CertificationComponent } from './components/admin/certification/certifi
 import { NotFoundComponent } from './components/public/not-found/not-found.component';
 import { HomeComponent } from './components/public/home/home.component';
 import { FormCertificationComponent } from './components/admin/certification/form-certification/form-certification.component';
-import { FormProfileComponent } from './components/admin/user/form-profile/form-profile.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -20,7 +19,6 @@ const routes: Routes = [
     path: 'app', component: NavComponent, canActivate: [authGuard], children: [
       { path: '', component: DashboardComponent },
       { path: 'profile', component: ProfileComponent },
-      { path: 'profile/edit', component: FormProfileComponent },
       { path: 'certifications', component: CertificationComponent },
       { path: 'certifications/create', component: FormCertificationComponent },
       { path: '**', redirectTo: '' }

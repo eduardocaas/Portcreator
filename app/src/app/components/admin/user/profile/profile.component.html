@@ -1,6 +1,21 @@
-<div class="container mt-5">
-  <h2>Informações</h2>
+<div class="container mt-5 mb-5">
+  <app-details-profile [user]="viewUser!"></app-details-profile>
   <hr>
-  <button class="btn btn-outline-primary btn-lg" routerLink="edit">  <i class="bi bi-pen me-2"></i>Editar perfil</button>
-  <!-- TODO: Adicionar accordion -->
+  <button class="btn btn-outline-primary" (click)="toggleEdit()"> <i
+      [class]="showEdit ? 'bi bi-chevron-up' : 'bi bi-chevron-down'" class="me-2"></i>Editar perfil</button>
+  <app-form-profile *ngIf="showEdit" [@fadeInOut] [user]="user!" (updated)="onUpdate()"></app-form-profile>
+</div>
+
+<div class="toast-container position-fixed bottom-0 start-50 translate-middle-x p-3">
+  <div id="errorToast" class="toast bg-danger bg-opacity-75 text-white" role="alert" aria-live="assertive"
+    aria-atomic="true">
+    <div class="toast-header bg-danger bg-opacity-75 text-white border-0">
+      <strong class="me-auto">❌ Erro</strong>
+      <small class="text-white-50">Perfil</small>
+      <button type="button" class="btn-close btn-close-white" data-bs-dismiss="toast" aria-label="Close"></button>
+    </div>
+    <div class="toast-body">
+      Falha ao carregar dados
+    </div>
+  </div>
 </div>
