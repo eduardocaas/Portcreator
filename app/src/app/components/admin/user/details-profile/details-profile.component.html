@@ -1,10 +1,10 @@
-<h2>Informações</h2>
+<h3>Informações</h3>
 <h5>Sobre</h5>
-<p>{{ user.description }}</p>
+<p *ngIf="user.description">{{ user.description }}</p>
 <p class="text-secondary" *ngIf="!user.description">Adicione uma descrição</p>
 <h5>Objetivo</h5>
-<p>{{ user.goal }}</p>
-<p class="text-secondary" *ngIf="!user.description">Adicione um objetivo</p>
+<p *ngIf="user.goal">{{ user.goal }}</p>
+<p class="text-secondary" *ngIf="!user.goal">Adicione um objetivo</p>
 <h5>Perfil</h5>
 <table class="table table-striped-columns table-hover table-bordered">
   <tbody>
