@@ -6,7 +6,7 @@
     <button class="btn btn-outline-primary ms-1">
       <i class="bi bi-pencil"></i>
     </button>
-    <button class="btn btn-outline-danger ms-1" data-bs-toggle="modal" data-bs-target="#deleteModal">
+    <button class="btn btn-outline-danger ms-1" data-bs-toggle="modal" (click)="showModal()">
       <i class="bi bi-trash"></i>
     </button>
   </div>
@@ -44,30 +44,3 @@
     </div>
   </div>
 </div>
-
-<!-- Toast -->
-<div class="toast-container position-fixed bottom-0 start-50 translate-middle-x p-3">
-  <div id="errorToast" class="toast bg-danger bg-opacity-75 text-white" role="alert" aria-live="assertive"
-      aria-atomic="true">
-      <div class="toast-header bg-danger bg-opacity-75 text-white border-0">
-        <strong class="me-auto">❌ Erro</strong>
-        <small class="text-white-50">Certificação</small>
-        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="toast" aria-label="Close"></button>
-      </div>
-      <div class="toast-body">
-        Falha ao remover certificação
-      </div>
-    </div>
-    <div id="successToast" class="toast bg-success bg-opacity-75 text-white" role="alert" aria-live="assertive"
-      aria-atomic="true">
-      <div class="toast-header bg-success bg-opacity-75 text-white border-0">
-        <strong class="me-auto">&#9989; Sucesso</strong>
-        <small class="text-white-50">Certificação</small>
-        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="toast" aria-label="Close"></button>
-      </div>
-      <div class="toast-body">
-        Certificação removida com sucesso!
-      </div>
-    </div>
-  </div>
-

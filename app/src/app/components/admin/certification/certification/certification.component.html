@@ -1,8 +1,9 @@
 <div class="container mt-5">
-  <button class="btn btn-outline-dark btn-lg" routerLink="create">  <i class="bi bi-save me-3"></i>Adicionar certificação</button>
+  <button class="btn btn-outline-dark" routerLink="create"> <i class="bi bi-save me-3"></i>Adicionar
+    certificação</button>
 
   <hr>
-  <h2 class="mb-3">Certificações</h2>
+  <h3 class="mb-3">Certificações</h3>
   <div class="row">
     <div *ngFor="let cert of certifications" class="col-12 col-md-6 col-xl-4 mb-3">
       <app-certification-card [certification]="cert" (deleted)="onDelete()">
@@ -14,6 +15,17 @@
 </div>
 
 <div class="toast-container position-fixed bottom-0 start-50 translate-middle-x p-3">
+  <div id="successToast" class="toast bg-success bg-opacity-75 text-white" role="alert" aria-live="assertive"
+    aria-atomic="true">
+    <div class="toast-header bg-success bg-opacity-75 text-white border-0">
+      <strong class="me-auto">&#9989; Sucesso</strong>
+      <small class="text-white-50">Certificação</small>
+      <button type="button" class="btn-close btn-close-white" data-bs-dismiss="toast" aria-label="Close"></button>
+    </div>
+    <div class="toast-body">
+      Certificação removida com sucesso!
+    </div>
+  </div>
   <div id="errorToast" class="toast bg-danger bg-opacity-75 text-white" role="alert" aria-live="assertive"
     aria-atomic="true">
     <div class="toast-header bg-danger bg-opacity-75 text-white border-0">

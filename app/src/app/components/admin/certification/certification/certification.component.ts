@@ -35,10 +35,19 @@ export class CertificationComponent implements OnInit {
 
   onDelete() {
     this.loadData();
+    this.showSuccessToast();
   }
 
   showErrorToast() {
     const toastElement = document.getElementById('errorToast');
+    if (toastElement) {
+      const toast = new Toast(toastElement);
+      toast.show();
+    }
+  }
+
+  showSuccessToast() {
+    const toastElement = document.getElementById('successToast');
     if (toastElement) {
       const toast = new Toast(toastElement);
       toast.show();

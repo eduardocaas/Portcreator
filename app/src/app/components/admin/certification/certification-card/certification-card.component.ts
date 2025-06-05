@@ -1,7 +1,6 @@
 import { HttpErrorResponse } from '@angular/common/http';
 import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { Router } from '@angular/router';
-import { Toast } from 'bootstrap';
+import { Modal, Toast } from 'bootstrap';
 import { CertificationPartial } from 'src/app/models/admin/CertificationPartial';
 import { CertificationService } from 'src/app/services/certification.service';
 
@@ -24,28 +23,27 @@ export class CertificationCardComponent {
   delete() {
     this._service.delete(this.certification.id).subscribe({
       next: (res) => {
+        this.closeModal();
         this.deleted.emit();
-        this.showSuccessToast();
       },
       error: (err: HttpErrorResponse) => {
-        this.showErrorToast();
       }
     })
   }
 
-  showSuccessToast() {
-    const toastElement = document.getElementById('successToast');
-    if (toastElement) {
-      const toast = new Toast(toastElement);
-      toast.show();
+  showModal() {
+    const modalElement = document.getElementById('deleteModal');
+    if (modalElement) {
+      const modal = Modal.getOrCreateInstance(modalElement);
+      modal.show();
     }
   }
 
-  showErrorToast() {
-    const toastElement = document.getElementById('errorToast');
-    if (toastElement) {
-      const toast = new Toast(toastElement);
-      toast.show();
+  closeModal() {
+    const modalElement = document.getElementById('deleteModal');
+    if (modalElement) {
+      const modal = Modal.getOrCreateInstance(modalElement);
+      modal.hide();
     }
   }
 }
