@@ -1,5 +1,5 @@
 import { HttpErrorResponse } from '@angular/common/http';
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { Router } from '@angular/router';
 import { Toast } from 'bootstrap';
 import { CertificationPartial } from 'src/app/models/admin/CertificationPartial';
@@ -14,19 +14,18 @@ export class CertificationCardComponent {
 
   constructor(
     private readonly _service: CertificationService,
-    private readonly _router: Router
   ) { }
 
   @Input()
   certification!: CertificationPartial;
+  @Output()
+  deleted = new EventEmitter<void>();
 
   delete() {
     this._service.delete(this.certification.id).subscribe({
       next: (res) => {
-        const currentUrl = this._router.url;
-        this._router.navigate([currentUrl]);
+        this.deleted.emit();
         this.showSuccessToast();
-
       },
       error: (err: HttpErrorResponse) => {
         this.showErrorToast();

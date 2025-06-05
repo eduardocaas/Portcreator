@@ -16,6 +16,10 @@ export class CertificationComponent implements OnInit {
   certifications: CertificationPartial[] = [];
 
   ngOnInit(): void {
+    this.loadData();
+  }
+
+  loadData() {
     this.toastMessage = null;
     this._service.getAll().subscribe({
       next: (res) => {
@@ -27,6 +31,10 @@ export class CertificationComponent implements OnInit {
         this.showErrorToast();
       },
     });
+  }
+
+  onDelete() {
+    this.loadData();
   }
 
   showErrorToast() {
