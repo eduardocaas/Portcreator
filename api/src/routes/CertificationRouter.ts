@@ -7,6 +7,7 @@ export const certificationRoutes = (controller: CertificationController): Router
   router.post('/', controller.save);
   router.get('/', controller.getAllByUser);
   router.get('/:id', controller.getById);
+  router.delete('/:id', controller.delete);
 
   return router;
 }

@@ -44,7 +44,23 @@ export class CertificationController {
     const id = req.params.id;
     try {
       let certificationViewModel = await this._certificationFacade.getById(id);
-      res.status(200).json( certificationViewModel );
+      res.status(200).json(certificationViewModel);
+    }
+    catch (err: any) {
+      if (err.id) {
+        res.status(err.id).json({ message: err.msg });
+      }
+      else {
+        res.status(500).json({ message: err });
+      }
+    }
+  }
+
+  delete = async (req: Request, res: Response): Promise<void> => {
+    const id = req.params.id;
+    try {
+      await this._certificationFacade.delete(id);
+      res.status(204).send();
     }
     catch (err: any) {
       if (err.id) {

@@ -86,4 +86,11 @@ export class CertificationFacade implements ICertificationFacade {
       certification.imagePath);
   }
 
+  async delete(id: string): Promise<void> {
+    if (!id || id == undefined) {
+      throw ({ id: 400, msg: "Id inválido" });
+    }
+    await this._certificationService.delete(id);
+  }
+
 }

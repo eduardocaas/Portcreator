@@ -51,4 +51,15 @@ export class CertificationService implements ICertificationService {
     }
   }
 
+  async delete(id: string): Promise<void> {
+    try {
+      await this._repository.delete({
+        id: id
+      })
+    }
+    catch (err) {
+      throw ({ id: 500, msg: err })
+    }
+  }
+
 }

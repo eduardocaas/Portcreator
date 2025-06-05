@@ -34,7 +34,7 @@ export class CertificationService {
         statusText: 'Not Found'
       }));
     }
-    return this._http.get<Certification>(`${environment.apiUrl}/api/certifications/${id}`,)
+    return this._http.get<Certification>(`${environment.apiUrl}/api/certifications/${id}`)
   }
 
   save(certification: CertificationSave) {
@@ -43,5 +43,9 @@ export class CertificationService {
       observe: 'response',
       responseType: 'json'
     })
+  }
+
+  delete(id: string) {
+    return this._http.delete<void>(`${environment.apiUrl}/app/certifications/${id}`)
   }
 }
