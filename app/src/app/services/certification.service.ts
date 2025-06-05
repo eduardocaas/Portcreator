@@ -46,6 +46,6 @@ export class CertificationService {
   }
 
   delete(id: string) {
-    return this._http.delete<void>(`${environment.apiUrl}/app/certifications/${id}`)
+    return this._http.delete<void>(`${environment.apiUrl}/api/certifications/${id}`)
   }
 }

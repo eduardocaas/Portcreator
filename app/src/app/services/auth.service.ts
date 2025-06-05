@@ -64,7 +64,7 @@ export class AuthService {
 
   setClaims(token: string) {
      const decoded = jwtDecode<any>(token);
-     if (decoded?.userId && decoded?.userEmail && decoded?.firstAccess) {
+     if (decoded?.userId && decoded?.userEmail) {
       sessionStorage.setItem('userId', decoded.userId);
       sessionStorage.setItem('userEmail', decoded.userEmail);
       sessionStorage.setItem('firstAccess', decoded.firstAccess);
