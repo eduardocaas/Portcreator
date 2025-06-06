@@ -6,8 +6,13 @@
   <h3 class="mb-3">Certificações</h3>
   <div class="row">
     <div *ngFor="let cert of certifications" class="col-12 col-md-6 col-xl-4 mb-3">
+<<<<<<< HEAD
       <app-certification-card [certification]="cert" (deleted)="onDelete()">
         <button class="btn btn-secondary" details [routerLink]="['/app/certifications', cert.id]">Detalhes</button>
+=======
+      <app-certification-card [certification]="cert" (deleted)="onDelete($event)">
+        <button class="btn btn-secondary" details [routerLink]="[]">Detalhes</button>
+>>>>>>> 59c2fed5015c3caf134cb94e85f9a06544a12d19
       </app-certification-card>
     </div>
   </div>

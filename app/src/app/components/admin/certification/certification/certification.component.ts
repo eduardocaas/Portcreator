@@ -33,9 +33,15 @@ export class CertificationComponent implements OnInit {
     });
   }
 
-  onDelete() {
-    this.loadData();
-    this.showSuccessToast();
+  onDelete(status: boolean) {
+    if (status == true) {
+      this.loadData();
+      this.showSuccessToast();
+    }
+    else {
+      this.toastMessage = "Falha ao remover certificação";
+      this.showErrorToast();
+    }
   }
 
   showErrorToast() {

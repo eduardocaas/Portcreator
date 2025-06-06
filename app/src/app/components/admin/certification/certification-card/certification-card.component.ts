@@ -18,15 +18,17 @@ export class CertificationCardComponent {
   @Input()
   certification!: CertificationPartial;
   @Output()
-  deleted = new EventEmitter<void>();
+  deleted = new EventEmitter<boolean>();
 
   delete() {
     this._service.delete(this.certification.id).subscribe({
       next: (res) => {
         this.closeModal();
-        this.deleted.emit();
+        this.deleted.emit(true);
       },
       error: (err: HttpErrorResponse) => {
+        this.closeModal();
+        this.deleted.emit(false);
       }
     })
   }
