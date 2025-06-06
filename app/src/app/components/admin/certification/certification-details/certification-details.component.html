@@ -1,1 +1,43 @@
-<p>certification-details works!</p>
+<div class="container mt-5">
+  <h3>Informações</h3>
+  <!-- TODO: Imagem aqui -->
+  <h5>Título</h5>
+  <p>{{ certification?.title }}</p>
+  <h5>Descrição</h5>
+  <p>{{ certification?.description }}</p>
+  <h5>Certificação</h5>
+  <table class="table table-striped-columns table-hover table-bordered">
+    <tbody>
+      <tr>
+        <td class="fw-bold col-1 col-sm-2">Instituição</td>
+        <td>{{ certification?.institutionName }}</td>
+      </tr>
+      <tr>
+        <td class="fw-bold col-1 col-sm-2">Tipo</td>
+        <td>{{ certification?.type }}</td>
+      </tr>
+      <tr>
+        <td class="fw-bold col-1 col-sm-2">Horas</td>
+        <td>{{ certification?.hours }}</td>
+      </tr>
+      <tr>
+        <td class="fw-bold col-1 col-sm-2">Data de emissão</td>
+        <td>{{ certification?.issueDate }}</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="toast-container position-fixed bottom-0 start-50 translate-middle-x p-3">
+    <div id="errorToast" class="toast bg-danger bg-opacity-75 text-white" role="alert" aria-live="assertive"
+      aria-atomic="true">
+      <div class="toast-header bg-danger bg-opacity-75 text-white border-0">
+        <strong class="me-auto">❌ Erro</strong>
+        <small class="text-white-50">Certificação</small>
+        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="toast" aria-label="Close"></button>
+      </div>
+      <div class="toast-body">
+        Falha ao carregar dados
+      </div>
+    </div>
+  </div>
+</div>
