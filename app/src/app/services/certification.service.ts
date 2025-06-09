@@ -48,4 +48,12 @@ export class CertificationService {
   delete(id: string) {
     return this._http.delete<void>(`${environment.apiUrl}/api/certifications/${id}`)
   }
+
+  update(id: string, certification: CertificationSave) {
+    return this._http.put<any>(`${environment.apiUrl}/api/certifications/${id}`, certification, {
+      headers: httpOptions.headers,
+      observe: 'response',
+      responseType: 'json'
+    })
+  }
 }

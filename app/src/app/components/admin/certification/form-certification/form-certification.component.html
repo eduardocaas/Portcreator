@@ -83,8 +83,8 @@
       <small class="text-white-50">Falha ao salvar</small>
       <button type="button" class="btn-close btn-close-white" data-bs-dismiss="toast" aria-label="Close"></button>
     </div>
-    <div *ngIf="errorMessage != null" class="toast-body">
-      {{ errorMessage }}
+    <div *ngIf="toastMessage != null" class="toast-body">
+      {{ toastMessage }}
     </div>
   </div>
   <div id="successToast" class="toast bg-success bg-opacity-75 text-white" role="alert" aria-live="assertive"
@@ -94,8 +94,8 @@
       <small class="text-white-50">Certificação</small>
       <button type="button" class="btn-close btn-close-white" data-bs-dismiss="toast" aria-label="Close"></button>
     </div>
-    <div class="toast-body">
-      Certificação criada com sucesso!
+    <div *ngIf="toastMessage != null" class="toast-body">
+      {{ toastMessage }}
     </div>
   </div>
 </div>

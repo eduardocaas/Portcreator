@@ -40,7 +40,7 @@ export class FormCertificationComponent implements OnInit {
     typeControl: new FormControl(CertificationType.CERTIFICATION, [Validators.required])
   })
 
-  errorMessage: string | null = null;
+  toastMessage: string | null = null;
   certification: CertificationSave | undefined;
 
   loadCertification() {
@@ -57,7 +57,7 @@ export class FormCertificationComponent implements OnInit {
           })
         },
         error: (err: HttpErrorResponse) => {
-          this.errorMessage = CertificationMessage.ERROR_404;
+          this.toastMessage = CertificationMessage.ERROR_404;
           this.showErrorToast();
           this.idRoute = null;
         }
@@ -66,11 +66,45 @@ export class FormCertificationComponent implements OnInit {
   }
 
   update() {
+    this.toastMessage = null;
+    if (this.certificationFormGroup.valid) {
+      const formValues = this.certificationFormGroup.value;
+      this.certification = {
+        title: formValues.titleControl!,
+        description: formValues.descriptionControl!,
+        issueDate: new Date(formValues.issueDateControl! + "T00:00:00"),
+        hours: formValues.hoursControl!,
+        institutionName: formValues.institutionControl!,
+        type: formValues.typeControl as CertificationType
+      };
+      this._service.update(this.idRoute!, this.certification).subscribe({
+        next: (res) => {
+          this.toastMessage = "Certificação atualizada com sucesso!"
+          this.showSuccessToast();
+          timer(500).subscribe(x => { this.loadCertification() })
+        },
+        error: (err) => {
+          if (err.status == 400) {
+            this.toastMessage = CertificationMessage.ERROR_400
+            this.showErrorToast();
+          } else if (err.status == 404) {
+            this.toastMessage = UserMessage.ERROR_404
+            this.showErrorToast();
+          } else {
+            this.toastMessage = CertificationMessage.ERROR_500
+            this.showErrorToast();
+          }
+        }
+      })
+    } else {
+      this.toastMessage = "Campos inválidos";
+      this.showErrorToast();
+    }
     // TODO: Criar pipe no details - typeEnum
   }
 
   create() {
-    this.errorMessage = null;
+    this.toastMessage = null;
     if (this.certificationFormGroup.valid) {
 
       const formValues = this.certificationFormGroup.value;
@@ -84,24 +118,25 @@ export class FormCertificationComponent implements OnInit {
       };
       this._service.save(this.certification).subscribe({
         next: (res) => {
+          this.toastMessage = "Certificação criada com sucesso!";
           this.showSuccessToast();
           timer(1500).subscribe(x => { this._router.navigate(['/app/certifications']) })
         },
         error: (err) => {
           if (err.status == 400) {
-            this.errorMessage = CertificationMessage.ERROR_400
+            this.toastMessage = CertificationMessage.ERROR_400
             this.showErrorToast();
           } else if (err.status == 404) {
-            this.errorMessage = UserMessage.ERROR_404
+            this.toastMessage = UserMessage.ERROR_404
             this.showErrorToast();
           } else {
-            this.errorMessage = CertificationMessage.ERROR_500
+            this.toastMessage = CertificationMessage.ERROR_500
             this.showErrorToast();
           }
         }
       })
     } else {
-      this.errorMessage = "Campos inválidos"
+      this.toastMessage = "Campos inválidos";
       this.showErrorToast();
     }
   }
