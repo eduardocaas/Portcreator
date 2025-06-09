@@ -22,6 +22,7 @@ const routes: Routes = [
       { path: 'profile', component: ProfileComponent },
       { path: 'certifications', component: CertificationComponent },
       { path: 'certifications/create', component: FormCertificationComponent },
+      { path: 'certifications/create/:id', component: FormCertificationComponent },
       { path: 'certifications/:id', component: CertificationDetailsComponent },
       { path: '**', redirectTo: '' }
     ]
