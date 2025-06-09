@@ -22,6 +22,7 @@ import { NotFoundComponent } from './components/public/not-found/not-found.compo
 import { HomeComponent } from './components/public/home/home.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { DetailsProfileComponent } from './components/admin/user/details-profile/details-profile.component';
+import { TypePipe } from './pipes/type.pipe';
 
 @NgModule({
   declarations: [
@@ -39,6 +40,7 @@ import { DetailsProfileComponent } from './components/admin/user/details-profile
     NotFoundComponent,
     HomeComponent,
     DetailsProfileComponent,
+    TypePipe,
   ],
   imports: [
     // Angular
