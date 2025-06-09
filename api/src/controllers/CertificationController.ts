@@ -1,6 +1,7 @@
 import { Request, Response } from "express";
 import { ICertificationFacade } from "../facades/interfaces/ICertificationFacade";
 import { CertificationSaveInputModel } from "../models/input/certification/CertificationSaveInputModel";
+import { CertificationUpdateInputModel } from "../models/input/certification/CertificationUpdateInputModel";
 
 export class CertificationController {
   private readonly _certificationFacade: ICertificationFacade;
@@ -61,6 +62,28 @@ export class CertificationController {
     try {
       await this._certificationFacade.delete(id);
       res.status(204).send();
+    }
+    catch (err: any) {
+      if (err.id) {
+        res.status(err.id).json({ message: err.msg });
+      }
+      else {
+        res.status(500).json({ message: err });
+      }
+    }
+  }
+
+  update = async (req: Request, res: Response): Promise<void> => {
+    const id = req.params.id;
+    const input: CertificationUpdateInputModel = req.body;
+    try {
+      const result = await this._certificationFacade.update(id, input);
+      if (result) {
+        res.status(200).json({ message: "Certificação atualizada com sucesso" });
+      }
+      else {
+        res.status(500).json({ message: "Falha ao atualizar certificação" });
+      }
     }
     catch (err: any) {
       if (err.id) {

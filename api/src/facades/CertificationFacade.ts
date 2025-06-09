@@ -1,11 +1,13 @@
 import { Certification } from "../models/Certification";
 import { CertificationSaveInputModel } from "../models/input/certification/CertificationSaveInputModel";
+import { CertificationUpdateInputModel } from "../models/input/certification/CertificationUpdateInputModel";
 import { CertificationPartialViewModel } from "../models/view/certification/CertificationPartialViewModel";
 import { CertificationViewModel } from "../models/view/certification/CertificationViewModel";
 import { IAuthService } from "../services/interfaces/IAuthService";
 import { ICertificationService } from "../services/interfaces/ICertificationService";
 import { IUserService } from "../services/interfaces/IUserService";
 import { ICertificationFacade } from "./interfaces/ICertificationFacade";
+import * as validator from 'validator';
 
 export class CertificationFacade implements ICertificationFacade {
   private readonly _certificationService: ICertificationService;
@@ -74,7 +76,7 @@ export class CertificationFacade implements ICertificationFacade {
     if (!certification || certification == null) {
       throw ({ id: 400, msg: "Certificação não encontrada" });
     }
-    
+
     return new CertificationViewModel(
       certification.id,
       certification.title,
@@ -91,6 +93,19 @@ export class CertificationFacade implements ICertificationFacade {
       throw ({ id: 400, msg: "Id inválido" });
     }
     await this._certificationService.delete(id);
+  }
+
+  async update(id: string, input: CertificationUpdateInputModel): Promise<boolean> {
+    if (!id || !validator.isUUID(id!)) {
+        throw ({ id: 400, msg: "Id inválido" });
+      }
+
+    if (!input?.title || !input?.description || input?.type === undefined || !input?.issueDate || !input?.hours || !input?.institutionName) {
+      throw ({ id: 400, msg: "Campos obrigatórios: Título, descrição, tipo, data de emissão, horas, nome da instituição" });
+    }
+
+    let res = await this._certificationService.update(id, input);
+    return res
   }
 
 }

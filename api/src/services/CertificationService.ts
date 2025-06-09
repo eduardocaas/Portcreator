@@ -3,6 +3,7 @@ import { Certification } from "../models/Certification";
 import { ICertificationService } from "./interfaces/ICertificationService";
 import { User } from "../models/User";
 import * as validator from 'validator';
+import { CertificationUpdateInputModel } from "../models/input/certification/CertificationUpdateInputModel";
 
 export class CertificationService implements ICertificationService {
   private _repository: Repository<Certification>;
@@ -62,4 +63,30 @@ export class CertificationService implements ICertificationService {
     }
   }
 
+  async update(id: string, inputModel: CertificationUpdateInputModel): Promise<boolean> {
+    try {
+      let certification = await this.getById(id);
+      if (!certification || certification == null) {
+        throw ({ id: 404, msg: "Certificação não encontrada" });
+      }
+
+      certification.update(
+        inputModel.title,
+        inputModel.description,
+        inputModel.type,
+        inputModel.issueDate,
+        inputModel.hours,
+        inputModel.institutionName
+      );
+
+      let certificationUpdated = await this._repository.save(certification);
+      if (!certificationUpdated?.id) {
+        return false;
+      }
+      return true;
+    }
+    catch (err) {
+      throw ({ id: 500, msg: err })
+    }
+  }
 }

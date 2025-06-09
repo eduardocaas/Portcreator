@@ -1,4 +1,5 @@
 import { Certification } from "../../models/Certification";
+import { CertificationUpdateInputModel } from "../../models/input/certification/CertificationUpdateInputModel";
 import { User } from "../../models/User";
 
 export interface ICertificationService {
@@ -6,4 +7,5 @@ export interface ICertificationService {
   getAll(user: User): Promise<Certification[]>;
   getById(id: string): Promise<Certification | null>;
   delete(id: string): Promise<void>
+  update(id: string, inputModel: CertificationUpdateInputModel): Promise<boolean>;
 }

@@ -61,5 +61,21 @@ export class Certification extends BaseEntity {
     this.user = user
   }
 
+  update(
+    title: string,
+    description: string,
+    type: CertificationType,
+    issueDate: Date,
+    hours: number,
+    institutionName: string
+  ) {
+    this.title = title;
+    this.description = description;
+    this.type = type;
+    this.issueDate = issueDate;
+    this.hours = hours;
+    this.institutionName = institutionName;
+  }
+
   updateImage(imagePath: string) { this.imagePath = imagePath; }
 }
