@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Certification } from '../../../../models/admin/Certification';
 import { CertificationType } from '../../../../models/admin/enums/CertificationType';
 import { CertificationSave } from '../../../../models/admin/CertificationSave';
@@ -8,29 +8,66 @@ import { Toast } from 'bootstrap';
 import { CertificationMessage } from 'src/app/models/messages/CertificationMessage';
 import { UserMessage } from 'src/app/models/messages/UserMessage';
 import { timer } from 'rxjs';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
+import { HttpErrorResponse } from '@angular/common/http';
 @Component({
   selector: 'app-form-certification',
   templateUrl: './form-certification.component.html',
   styleUrl: './form-certification.component.css'
 })
-export class FormCertificationComponent {
+export class FormCertificationComponent implements OnInit {
 
   constructor(
     private readonly _service: CertificationService,
-    private readonly _router: Router) { }
+    private readonly _router: Router,
+    private readonly _activeRoute: ActivatedRoute) { }
+
+  idRoute: string | null = null;
+
+  ngOnInit(): void {
+    this._activeRoute.paramMap.subscribe(params => {
+      this.idRoute = params.get('id');
+    })
+    this.loadCertification();
+  }
 
   certificationFormGroup = new FormGroup({
     titleControl: new FormControl('', [Validators.required]),
     descriptionControl: new FormControl('', [Validators.required]),
     issueDateControl: new FormControl('', [Validators.required, this.validDateValidator.bind(this)]),
-    hoursControl: new FormControl(null, [Validators.required, Validators.min(1)]),
+    hoursControl: new FormControl<number | null>(null, [Validators.required, Validators.min(1)]),
     institutionControl: new FormControl('', [Validators.required]),
     typeControl: new FormControl(CertificationType.CERTIFICATION, [Validators.required])
   })
 
   errorMessage: string | null = null;
   certification: CertificationSave | undefined;
+
+  loadCertification() {
+    if (this.idRoute) {
+      this._service.getById(this.idRoute).subscribe({
+        next: (res) => {
+          this.certificationFormGroup.patchValue({
+            titleControl: res.title,
+            descriptionControl: res.description,
+            issueDateControl: res.issueDate ? new Date(res.issueDate).toISOString().substring(0, 10) : '',
+            hoursControl: res.hours,
+            institutionControl: res.institutionName,
+            typeControl: res.type
+          })
+        },
+        error: (err: HttpErrorResponse) => {
+          this.errorMessage = CertificationMessage.ERROR_404;
+          this.showErrorToast();
+          this.idRoute = null;
+        }
+      })
+    }
+  }
+
+  update() {
+    // TODO: Criar pipe no details - typeEnum
+  }
 
   create() {
     this.errorMessage = null;
@@ -48,7 +85,7 @@ export class FormCertificationComponent {
       this._service.save(this.certification).subscribe({
         next: (res) => {
           this.showSuccessToast();
-          timer(1500).subscribe(x => { this._router.navigate(['/app/certifications'])})
+          timer(1500).subscribe(x => { this._router.navigate(['/app/certifications']) })
         },
         error: (err) => {
           if (err.status == 400) {
