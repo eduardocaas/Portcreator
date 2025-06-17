@@ -23,6 +23,7 @@ import { HomeComponent } from './components/public/home/home.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { DetailsProfileComponent } from './components/admin/user/details-profile/details-profile.component';
 import { TypePipe } from './pipes/type.pipe';
+import { CertificationSearchPipe } from './pipes/certification-search.pipe';
 
 @NgModule({
   declarations: [
@@ -41,6 +42,7 @@ import { TypePipe } from './pipes/type.pipe';
     HomeComponent,
     DetailsProfileComponent,
     TypePipe,
+    CertificationSearchPipe,
   ],
   imports: [
     // Angular
