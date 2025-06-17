@@ -3,15 +3,38 @@
     certificação</button>
 
   <hr>
-  <h3 class="mb-3">Certificações</h3>
+  <div class="d-flex">
+    <h3 class="mb-3">Certificações</h3>
+    <div class="mb-3 ms-3 me-3 vr"></div>
+
+    <div class="mb-3 w-100">
+      <div class="row g-2">
+        <div class="col-12 col-md-8 col-lg-3">
+          <div class="input-group">
+            <span class="input-group-text">&#8981;</span>
+            <input type="text" [(ngModel)]="searchText" class="form-control" placeholder="Pesquisa">
+          </div>
+        </div>
+        <div class="col-12 col-md-4 col-lg-2">
+          <select [(ngModel)]="searchOption" class="form-select">
+            <option *ngFor="let option of searchOptions" [value]="option">{{ option }}</option>
+          </select>
+        </div>
+      </div>
+    </div>
+  </div>
   <div class="row">
-    <div *ngFor="let cert of certifications" class="col-12 col-md-6 col-xl-4 mb-3">
+    <div *ngFor="let cert of (certifications | certificationSearch:searchText:searchOption)"
+      class="col-12 col-md-6 col-xl-4 mb-3">
       <app-certification-card [certification]="cert" (deleted)="onDelete($event)">
         <button class="btn btn-secondary" details [routerLink]="['/app/certifications', cert.id]">Detalhes</button>
       </app-certification-card>
     </div>
   </div>
-  <p class="text-secondary" *ngIf="certifications.length == 0">Você ainda não possui certificações registradas!</p>
+  <p class="text-secondary mt-1" *ngIf="certifications.length == 0">Você ainda não possui certificações registradas!</p>
+  <p class="text-secondary mt-1"
+    *ngIf="(certifications | certificationSearch:searchText:searchOption).length == 0 && certifications.length != 0">
+    Nenhuma certificação encontrada!</p>
 </div>
 
 <div class="toast-container position-fixed bottom-0 start-50 translate-middle-x p-3">

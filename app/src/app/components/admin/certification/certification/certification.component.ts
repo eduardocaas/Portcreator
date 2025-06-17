@@ -1,7 +1,9 @@
 import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
+import { FormControl } from '@angular/forms';
 import { Toast } from 'bootstrap';
 import { CertificationPartial } from 'src/app/models/admin/CertificationPartial';
+import { CertificationSearch } from 'src/app/models/admin/enums/CertificationSearch';
 import { CertificationService } from 'src/app/services/certification.service';
 
 @Component({
@@ -18,6 +20,10 @@ export class CertificationComponent implements OnInit {
   ngOnInit(): void {
     this.loadData();
   }
+
+  searchText?: string;
+  searchOptions = Object.values(CertificationSearch);
+  searchOption: CertificationSearch = CertificationSearch.TITLE;
 
   loadData() {
     this.toastMessage = null;

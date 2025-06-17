@@ -1,7 +1,7 @@
 <div class="card">
   <div class="card-body">
     <h5 class="card-title">{{ certification.title }}</h5>
-    <p class="card-text">{{ certification.hours }}</p>
+    <p class="card-text">{{ certification.hours }} horas</p>
     <ng-content select="[details]"></ng-content>
     <button [routerLink]="['/app/certifications/create', certification.id]" class="btn btn-outline-primary ms-1">
       <i class="bi bi-pencil"></i>

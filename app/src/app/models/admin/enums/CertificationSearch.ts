@@ -1,3 +1,3 @@
 export enum CertificationSearch {
-  TITLE, // TODO: Adicionar mais campos
+  TITLE = "Título", // TODO: Adicionar mais campos
 }
