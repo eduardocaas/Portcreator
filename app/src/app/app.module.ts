@@ -24,6 +24,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { DetailsProfileComponent } from './components/admin/user/details-profile/details-profile.component';
 import { TypePipe } from './pipes/type.pipe';
 import { CertificationSearchPipe } from './pipes/certification-search.pipe';
+import { PortfolioDetailsComponent } from './components/admin/portfolio/portfolio-details/portfolio-details.component';
+import { PortfolioFormComponent } from './components/admin/portfolio/portfolio-form/portfolio-form.component';
 
 @NgModule({
   declarations: [
@@ -43,6 +45,8 @@ import { CertificationSearchPipe } from './pipes/certification-search.pipe';
     DetailsProfileComponent,
     TypePipe,
     CertificationSearchPipe,
+    PortfolioDetailsComponent,
+    PortfolioFormComponent,
   ],
   imports: [
     // Angular
