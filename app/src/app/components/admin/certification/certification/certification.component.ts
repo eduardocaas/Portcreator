@@ -27,7 +27,7 @@ export class CertificationComponent implements OnInit {
 
   loadData() {
     this.toastMessage = null;
-    this._service.getAll().subscribe({
+    this._service.getAll(false).subscribe({
       next: (res) => {
         this.certifications = res;
       },

@@ -1,4 +1,4 @@
-import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, throwError } from 'rxjs';
 import { Certification } from '../models/admin/Certification';
@@ -13,6 +13,12 @@ const httpOptions = {
   })
 }
 
+const portfolioParam = {
+  params: new HttpParams({
+    fromString: 'portfolio=true'
+  })
+}
+
 @Injectable({
   providedIn: 'root'
 })
@@ -22,7 +28,13 @@ export class CertificationService {
     private readonly _http: HttpClient,
   ) { }
 
-  getAll(): Observable<CertificationPartial[]> {
+  // Overloads
+  getAll(portfolio: true): Observable<Certification[]>
+  getAll(portfolio: false): Observable<CertificationPartial[]>
+  getAll(portfolio: boolean): Observable<CertificationPartial[] | Certification[]> {
+    if (portfolio) {
+      return this._http.get<Certification[]>(`${environment.apiUrl}/api/certifications`, { params: portfolioParam.params })
+    }
     return this._http.get<CertificationPartial[]>(`${environment.apiUrl}/api/certifications`)
   }
 

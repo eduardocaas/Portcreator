@@ -22,4 +22,8 @@ export class Portfolio {
     this.github = user.github;
     this.linkedin = user.linkedin;
   }
+
+  setCertifications(certifications: Certification[]) {
+    this.certifications = certifications;
+  }
 }
