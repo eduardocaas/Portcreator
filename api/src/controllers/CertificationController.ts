@@ -2,6 +2,8 @@ import { Request, Response } from "express";
 import { ICertificationFacade } from "../facades/interfaces/ICertificationFacade";
 import { CertificationSaveInputModel } from "../models/input/certification/CertificationSaveInputModel";
 import { CertificationUpdateInputModel } from "../models/input/certification/CertificationUpdateInputModel";
+import { CertificationPartialViewModel } from "../models/view/certification/CertificationPartialViewModel";
+import { CertificationViewModel } from "../models/view/certification/CertificationViewModel";
 
 export class CertificationController {
   private readonly _certificationFacade: ICertificationFacade;
@@ -28,8 +30,15 @@ export class CertificationController {
 
   getAllByUser = async (req: Request, res: Response): Promise<void> => {
     try {
+      const portfolio = req.query.portfolio;
       const token = req.get("Token");
-      let certificationsViewModel = await this._certificationFacade.getAllByUser(token);
+
+      let certificationsViewModel: CertificationPartialViewModel[] | CertificationViewModel[] = [];
+      if (portfolio) {
+        certificationsViewModel = await this._certificationFacade.getAllByUser(token, true);
+      } else {
+        certificationsViewModel = await this._certificationFacade.getAllByUser(token, false);
+      }
       res.status(200).json(certificationsViewModel);
     } catch (err: any) {
       if (err.id) {

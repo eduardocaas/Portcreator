@@ -5,7 +5,7 @@ import { CertificationViewModel } from "../../models/view/certification/Certific
 
 export interface ICertificationFacade {
   save(token: string | undefined, input: CertificationSaveInputModel): Promise<CertificationPartialViewModel>;
-  getAllByUser(token: string | undefined):  Promise<CertificationPartialViewModel[]>;
+  getAllByUser(token: string | undefined, portfolio: boolean):  Promise<CertificationPartialViewModel[] | CertificationViewModel[]>;
   getById(id: string): Promise<CertificationViewModel>;
   delete(id: string): Promise<void>;
   update(id: string, input: CertificationUpdateInputModel): Promise<boolean>;

@@ -49,7 +49,7 @@ export class CertificationFacade implements ICertificationFacade {
     return new CertificationPartialViewModel(certificationCreated.id, certificationCreated.title, certificationCreated.hours);
   }
 
-  async getAllByUser(token: string | undefined): Promise<CertificationPartialViewModel[]> {
+  async getAllByUser(token: string | undefined, portfolio: boolean): Promise<CertificationPartialViewModel[] | CertificationViewModel[]> {
     let id = this._authService.getIdByToken(token!);
     if (!id || id == undefined) {
       throw ({ id: 400, msg: "Token inválido" });
@@ -58,12 +58,24 @@ export class CertificationFacade implements ICertificationFacade {
     let user = await this._userService.getById(id);
     let certifications = await this._certificationService.getAll(user);
 
+    if (portfolio) {
+      let certificationsViewModel: CertificationViewModel[] = certifications.map(cert => ({
+        id: cert.id,
+        title: cert.title,
+        description: cert.description,
+        type: cert.type,
+        issueDate: cert.issueDate,
+        hours: cert.hours,
+        institutionName: cert.institutionName,
+        imagePath: cert.imagePath
+      }));
+      return certificationsViewModel;
+    }
     let certificationsViewModel: CertificationPartialViewModel[] = certifications.map(cert => ({
       id: cert.id,
       title: cert.title,
       hours: cert.hours
     }));
-
     return certificationsViewModel;
   }
 
@@ -97,8 +109,8 @@ export class CertificationFacade implements ICertificationFacade {
 
   async update(id: string, input: CertificationUpdateInputModel): Promise<boolean> {
     if (!id || !validator.isUUID(id!)) {
-        throw ({ id: 400, msg: "Id inválido" });
-      }
+      throw ({ id: 400, msg: "Id inválido" });
+    }
 
     if (!input?.title || !input?.description || input?.type === undefined || !input?.issueDate || !input?.hours || !input?.institutionName) {
       throw ({ id: 400, msg: "Campos obrigatórios: Título, descrição, tipo, data de emissão, horas, nome da instituição" });
