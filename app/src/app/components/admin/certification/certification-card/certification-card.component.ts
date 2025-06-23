@@ -14,7 +14,8 @@ export class CertificationCardComponent {
   constructor(
     private readonly _service: CertificationService,
   ) { }
-
+  @Input()
+  portfolio!: boolean;
   @Input()
   certification!: CertificationPartial;
   @Output()
