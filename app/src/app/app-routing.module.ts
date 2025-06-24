@@ -11,6 +11,7 @@ import { NotFoundComponent } from './components/public/not-found/not-found.compo
 import { HomeComponent } from './components/public/home/home.component';
 import { FormCertificationComponent } from './components/admin/certification/form-certification/form-certification.component';
 import { CertificationDetailsComponent } from './components/admin/certification/certification-details/certification-details.component';
+import { PortfolioComponent } from './components/admin/portfolio/portfolio/portfolio.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -24,6 +25,7 @@ const routes: Routes = [
       { path: 'certifications/create', component: FormCertificationComponent },
       { path: 'certifications/create/:id', component: FormCertificationComponent },
       { path: 'certifications/:id', component: CertificationDetailsComponent },
+      { path: 'portfolio', component: PortfolioComponent },
       { path: '**', redirectTo: '' }
     ]
   },
