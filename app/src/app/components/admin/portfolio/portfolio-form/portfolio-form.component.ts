@@ -13,7 +13,11 @@ export class PortfolioFormComponent implements OnInit {
 
   constructor(
     private readonly _userService: UserService,
-    private readonly _certificationService: CertificationService) { }
+    private readonly _certificationService: CertificationService) {
+    }
+
+  portfolioIn: Portfolio | undefined;
+  portfolioOut: Portfolio | undefined;
 
   ngOnInit(): void {
     this._userService.getById().subscribe((user) => {
@@ -35,8 +39,10 @@ export class PortfolioFormComponent implements OnInit {
     if (isChecked) {
       const value: Portfolio[T] = this.portfolioIn.get(property);
       this.portfolioOut[property] = value;
+      console.log(this.portfolioOut[property]);
     } else {
       this.portfolioOut.setNull(property);
+      console.log(this.portfolioOut[property]);
     }
   }
 
@@ -46,7 +52,4 @@ export class PortfolioFormComponent implements OnInit {
   isGoalChecked: boolean = false;
   isGithubChecked: boolean = false;
   isLinkedinChecked: boolean = false;
-
-  portfolioIn: Portfolio | undefined;
-  portfolioOut: Portfolio | undefined;
 }
