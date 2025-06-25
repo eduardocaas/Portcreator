@@ -16,8 +16,8 @@ export class PortfolioFormComponent implements OnInit {
     private readonly _certificationService: CertificationService) {
     }
 
-  portfolioIn: Portfolio | undefined;
-  portfolioOut: Portfolio | undefined;
+  portfolioIn: Portfolio = new Portfolio();
+  portfolioOut: Portfolio = new Portfolio();
 
   ngOnInit(): void {
     this._userService.getById().subscribe((user) => {
@@ -25,6 +25,7 @@ export class PortfolioFormComponent implements OnInit {
     })
     this._certificationService.getAll(true).subscribe((certifications) => {
       this.portfolioIn?.setCertifications(certifications);
+      console.log(this.portfolioIn)
     })
   }
 

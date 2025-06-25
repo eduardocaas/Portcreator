@@ -16,7 +16,8 @@ export class Portfolio {
   linkedin?: string | null;
   certifications?: Certification[] | null;
 
-  private constructor(
+  constructor();
+  constructor(
     id: string,
     name: string,
     email: string,
@@ -25,8 +26,28 @@ export class Portfolio {
     goal: string,
     github: string,
     linkedin: string,
-    certifications: Certification[]
-  ) { }
+    certifications: Certification[]);
+  constructor(
+    id?: string,
+    name?: string,
+    email?: string,
+    location?: string,
+    description?: string,
+    goal?: string,
+    github?: string,
+    linkedin?: string,
+    certifications?: Certification[]
+  ) {
+    this.id = id;
+    this.name = name;
+    this.email = email;
+    this.location = location;
+    this.description = description;
+    this.goal = goal;
+    this.github = github;
+    this.linkedin = linkedin;
+    this.certifications = certifications;
+  }
 
   setUser(user: User) {
     this.id = user.id;
