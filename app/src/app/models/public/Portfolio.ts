@@ -1,16 +1,32 @@
 import { Certification } from "../admin/Certification";
 import { User } from "../admin/UserUpdate";
 
+export type PortfolioFieldsOnly = {
+  [K in keyof Portfolio as Portfolio[K] extends Function ? never : K]: Portfolio[K];
+};
+
 export class Portfolio {
   id?: string | null;
-  name?: string;
+  name?: string | null;
   email?: string | null;
-  location?: string;
-  description?: string;
-  goal?: string;
-  github?: string;
-  linkedin?: string;
-  certifications?: Certification[];
+  location?: string | null;
+  description?: string | null;
+  goal?: string | null;
+  github?: string | null;
+  linkedin?: string | null;
+  certifications?: Certification[] | null;
+
+  private constructor(
+    id: string,
+    name: string,
+    email: string,
+    location: string,
+    description: string,
+    goal: string,
+    github: string,
+    linkedin: string,
+    certifications: Certification[]
+  ) { }
 
   setUser(user: User) {
     this.id = user.id;
@@ -25,5 +41,27 @@ export class Portfolio {
 
   setCertifications(certifications: Certification[]) {
     this.certifications = certifications;
+  }
+
+  clone(): Portfolio {
+    return new Portfolio(
+      this.id!,
+      this.name!,
+      this.email!,
+      this.location!,
+      this.description!,
+      this.goal!,
+      this.github!,
+      this.linkedin!,
+      this.certifications!
+    )
+  }
+
+  get<K extends keyof Portfolio>(property: K): Portfolio[K] {
+    return this[property];
+  }
+
+  setNull<K extends keyof PortfolioFieldsOnly>(property: K) {
+    this[property] = null;
   }
 }

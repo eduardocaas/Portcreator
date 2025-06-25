@@ -3,32 +3,32 @@
 
 <div class="form-profile">
   <div class="form-check form-switch">
-    <input class="form-check-input" type="checkbox" role="switch" id="switchEmail" checked>
-    <label class="form-check-label" for="switchEmail">{{ portfolio?.name }}</label>
+    <input class="form-check-input" [(ngModel)]="isEmailChecked" (change)="checkValue('email', isEmailChecked)" type="checkbox" role="switch" id="switchEmail" checked>
+    <label class="form-check-label" for="switchEmail">{{ portfolioIn?.email }}</label>
   </div>
 
   <div class="form-check form-switch">
     <input class="form-check-input" type="checkbox" role="switch" id="switchLocation" checked>
-    <label class="form-check-label" for="switchLocation">{{ portfolio?.location }}</label>
+    <label class="form-check-label" for="switchLocation">{{ portfolioIn?.location }}</label>
   </div>
 
   <div class="form-check form-switch">
     <input class="form-check-input" type="checkbox" role="switch" id="switchDescription" checked>
-    <label class="form-check-label" for="switchDescription">{{ portfolio?.description }}</label>
+    <label class="form-check-label" for="switchDescription">{{ portfolioIn?.description }}</label>
   </div>
 
   <div class="form-check form-switch">
     <input class="form-check-input" type="checkbox" role="switch" id="switchGoal" checked>
-    <label class="form-check-label" for="switchGoal">{{ portfolio?.goal }}</label>
+    <label class="form-check-label" for="switchGoal">{{ portfolioIn?.goal }}</label>
   </div>
 
   <div class="form-check form-switch">
     <input class="form-check-input" type="checkbox" role="switch" id="switchGithub" checked>
-    <label class="form-check-label" for="switchGithub">{{ portfolio?.github }}</label>
+    <label class="form-check-label" for="switchGithub">{{ portfolioIn?.github }}</label>
   </div>
 
   <div class="form-check form-switch">
     <input class="form-check-input" type="checkbox" role="switch" id="switchLinkedin" checked>
-    <label class="form-check-label" for="switchLinkedin">{{ portfolio?.linkedin }}</label>
+    <label class="form-check-label" for="switchLinkedin">{{ portfolioIn?.linkedin }}</label>
   </div>
 </div>
