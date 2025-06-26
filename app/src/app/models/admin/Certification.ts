@@ -9,4 +9,5 @@ export interface Certification {
   hours: number,
   institutionName: string;
   imagePath: string;
+  isChecked?: boolean;
 }

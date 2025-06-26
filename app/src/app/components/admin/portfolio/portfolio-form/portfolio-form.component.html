@@ -22,8 +22,8 @@
         <div class="d-flex align-items-center form-check form-switch">
           <input class="form-check-input" [(ngModel)]="isDescriptionChecked"
             (change)="checkValue('description', isDescriptionChecked)" type="checkbox" role="switch"
-            [disabled]="!portfolioIn.description" id="switchDescription" [ariaChecked]="isDescriptionChecked">
-          <label class="form-check-label" for="switchDescription">&nbsp;{{ portfolioIn.description ?
+            [disabled]="!portfolioIn.description" id="switchDescription" [ariaChecked]="isDescriptionChecked">&nbsp;
+          <label class="form-check-label" for="switchDescription">{{ portfolioIn.description ?
             portfolioIn.description :
             'Não cadastrado' }}</label>
         </div>
@@ -45,8 +45,9 @@
         <span class="fs-6 fw-bold">Objetivo</span>
         <div class="d-flex align-items-center form-check form-switch">
           <input class="form-check-input" [(ngModel)]="isGoalChecked" (change)="checkValue('goal', isGoalChecked)"
-            [disabled]="!portfolioIn.goal" type="checkbox" role="switch" id="switchGoal" [ariaChecked]="isGoalChecked">
-          <label class="form-check-label" for="switchGoal">&nbsp;{{ portfolioIn.goal ? portfolioIn.goal : 'Não
+            [disabled]="!portfolioIn.goal" type="checkbox" role="switch" id="switchGoal"
+            [ariaChecked]="isGoalChecked">&nbsp;
+          <label class="form-check-label" for="switchGoal">{{ portfolioIn.goal ? portfolioIn.goal : 'Não
             cadastrado'
             }}</label>
         </div>
@@ -82,13 +83,14 @@
     <button class="btn btn-outline-dark" (click)="toggleEdit()"> <i
         [class]="showCertification ? 'bi bi-chevron-up' : 'bi bi-chevron-down'" class="me-2"></i>Certificações</button>
     <hr>
-    <div *ngIf="showCertification" [@fadeInOut]>
+    <div *ngIf="showCertification" class="row" [@fadeInOut]>
       <h5 class="mb-3">Selecione as certificações que deseja exibir no portfólio</h5>
       <div *ngFor="let cert of portfolioIn.certifications" class="col-12 col-md-6 col-xl-4 mb-3">
         <app-certification-card [certification]="cert" [portfolio]="true">
           <div class="form-check form-switch" details>
             <!-- TODO: Adicionar ngModel isCertificationChecked -> método com índice? -->
-            <input class="form-check-input" type="checkbox" (change)="checkCertification(cert)" role="switch" id="switchCheckDefault">
+            <input class="form-check-input" type="checkbox" [(ngModel)]="cert.isChecked"
+              (change)="checkCertification(cert, cert.isChecked!)" role="switch" id="switchCheckDefault">
           </div>
         </app-certification-card>
       </div>
