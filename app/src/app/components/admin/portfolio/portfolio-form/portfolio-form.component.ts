@@ -1,6 +1,7 @@
 import { animate, style, transition, trigger } from '@angular/animations';
 import { Component, OnInit } from '@angular/core';
 import { timer } from 'rxjs';
+import { Certification } from 'src/app/models/admin/Certification';
 import { Portfolio, PortfolioFieldsOnly } from 'src/app/models/public/Portfolio';
 import { CertificationService } from 'src/app/services/certification.service';
 import { UserService } from 'src/app/services/user.service';
@@ -62,6 +63,10 @@ export class PortfolioFormComponent implements OnInit {
     } else {
       this.portfolioOut.setNull(property);
     }
+  }
+
+  checkCertification(cert: Certification) {
+
   }
 
   generate() {
