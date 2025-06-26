@@ -40,11 +40,13 @@ export class PortfolioFormComponent implements OnInit {
     if (isChecked) {
       const value: Portfolio[T] = this.portfolioIn.get(property);
       this.portfolioOut[property] = value;
-      console.log(this.portfolioOut[property]);
     } else {
       this.portfolioOut.setNull(property);
-      console.log(this.portfolioOut[property]);
     }
+  }
+
+  generate() {
+    console.log(this.portfolioOut);
   }
 
   isEmailChecked: boolean = false;
