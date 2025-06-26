@@ -1,3 +1,4 @@
+import { animate, style, transition, trigger } from '@angular/animations';
 import { Component, OnInit } from '@angular/core';
 import { timer } from 'rxjs';
 import { Portfolio, PortfolioFieldsOnly } from 'src/app/models/public/Portfolio';
@@ -7,14 +8,33 @@ import { UserService } from 'src/app/services/user.service';
 @Component({
   selector: 'app-portfolio-form',
   templateUrl: './portfolio-form.component.html',
-  styleUrl: './portfolio-form.component.css'
+  styleUrl: './portfolio-form.component.css',
+  animations: [
+    trigger('fadeInOut', [
+      transition(':enter', [   // fade in
+        style({ opacity: 0 }),
+        animate('200ms ease-in', style({ opacity: 1 }))
+      ]),
+      transition(':leave', [   // fade out
+        animate('200ms ease-out', style({ opacity: 0 }))
+      ])
+    ])
+  ]
 })
 export class PortfolioFormComponent implements OnInit {
 
   constructor(
     private readonly _userService: UserService,
     private readonly _certificationService: CertificationService) {
-    }
+  }
+
+  showProfile: boolean = true;
+  showCertification: boolean = false;
+  toggleEdit() {
+    this.showProfile = !this.showProfile;
+    this.showCertification = !this.showCertification;
+
+  }
 
   portfolioIn: Portfolio = new Portfolio();
   portfolioOut: Portfolio = new Portfolio();
@@ -25,7 +45,6 @@ export class PortfolioFormComponent implements OnInit {
     })
     this._certificationService.getAll(true).subscribe((certifications) => {
       this.portfolioIn?.setCertifications(certifications);
-      console.log(this.portfolioIn)
     })
   }
 

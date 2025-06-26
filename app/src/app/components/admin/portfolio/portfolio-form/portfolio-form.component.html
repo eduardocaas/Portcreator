@@ -1,74 +1,100 @@
 <div class="container mt-5">
-  <h2>Perfil</h2>
+  <button class="btn btn-outline-dark" (click)="toggleEdit()"> <i
+      [class]="showProfile ? 'bi bi-chevron-up' : 'bi bi-chevron-down'" class="me-2"></i>Perfil</button>
+  <hr>
+  <div *ngIf="showProfile" [@fadeInOut]>
+    <h5 class="mb-3">Selecione as informações que deseja exibir no portfólio</h5>
+    <div class="form-profile border border-secondary border-3 rounded">
+      <div class="text-bg-secondary p-3">
+        <span class="fs-6 fw-bold">Email</span>
+        <div class="d-flex align-items-center form-check form-switch">
+          <input class="form-check-input" [(ngModel)]="isEmailChecked" (change)="checkValue('email', isEmailChecked)"
+            [disabled]="!portfolioIn.email" type="checkbox" role="switch" id="switchEmail"
+            [ariaChecked]="isEmailChecked">
+          <label class="form-check-label" for="switchEmail">&nbsp;{{ portfolioIn.email ? portfolioIn.email : 'Não
+            cadastrado'
+            }}</label>
+        </div>
+      </div>
+
+      <div class="p-3">
+        <span class="fs-6 fw-bold">Descrição</span>
+        <div class="d-flex align-items-center form-check form-switch">
+          <input class="form-check-input" [(ngModel)]="isDescriptionChecked"
+            (change)="checkValue('description', isDescriptionChecked)" type="checkbox" role="switch"
+            [disabled]="!portfolioIn.description" id="switchDescription" [ariaChecked]="isDescriptionChecked">
+          <label class="form-check-label" for="switchDescription">&nbsp;{{ portfolioIn.description ?
+            portfolioIn.description :
+            'Não cadastrado' }}</label>
+        </div>
+      </div>
+
+      <div class="text-bg-secondary p-3">
+        <span class="fs-6 fw-bold">Localização</span>
+        <div class="d-flex align-items-center form-check form-switch">
+          <input class="form-check-input" [(ngModel)]="isLocationChecked"
+            (change)="checkValue('location', isLocationChecked)" type="checkbox" role="switch" id="switchLocation"
+            [disabled]="!portfolioIn.location" [ariaChecked]="isLocationChecked">
+          <label class="form-check-label" for="switchLocation">&nbsp;{{ portfolioIn.location ? portfolioIn.location :
+            'Não
+            cadastrado' }}</label>
+        </div>
+      </div>
+
+      <div class="p-3">
+        <span class="fs-6 fw-bold">Objetivo</span>
+        <div class="d-flex align-items-center form-check form-switch">
+          <input class="form-check-input" [(ngModel)]="isGoalChecked" (change)="checkValue('goal', isGoalChecked)"
+            [disabled]="!portfolioIn.goal" type="checkbox" role="switch" id="switchGoal" [ariaChecked]="isGoalChecked">
+          <label class="form-check-label" for="switchGoal">&nbsp;{{ portfolioIn.goal ? portfolioIn.goal : 'Não
+            cadastrado'
+            }}</label>
+        </div>
+      </div>
+
+      <div class="p-3 text-bg-secondary">
+        <span class="fs-6 fw-bold">Github</span>
+        <div class="d-flex align-items-center form-check form-switch">
+          <input class="form-check-input" [(ngModel)]="isGithubChecked" (change)="checkValue('github', isGithubChecked)"
+            [disabled]="!portfolioIn.github" type="checkbox" role="switch" id="switchGithub"
+            [ariaChecked]="isGithubChecked">
+          <label class="form-check-label" for="switchGithub">&nbsp;{{ portfolioIn.github ? portfolioIn.github : 'Não
+            cadastrado'
+            }}</label>
+        </div>
+      </div>
+
+      <div class="p-3">
+        <span class="fs-6 fw-bold">LinkedIn</span>
+        <div class="d-flex align-items-center form-check form-switch">
+          <input class="form-check-input" [(ngModel)]="isLinkedinChecked" [disabled]="!portfolioIn.linkedin"
+            (change)="checkValue('linkedin', isLinkedinChecked)" type="checkbox" role="switch" id="switchLinkedin"
+            [ariaChecked]="isLinkedinChecked">
+          <label class="form-check-label" for="switchLinkedin">&nbsp;{{ portfolioIn.linkedin ? portfolioIn.linkedin :
+            'Não
+            cadastrado' }}</label>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="mt-3">
+    <button class="btn btn-outline-dark" (click)="toggleEdit()"> <i
+        [class]="showCertification ? 'bi bi-chevron-up' : 'bi bi-chevron-down'" class="me-2"></i>Certificações</button>
     <hr>
-  <h4 class="mb-3">Selecione as informações que deseja exibir no portfólio</h4>
-  <div class="form-profile">
-    <div class="text-bg-secondary p-3">
-      <span class="fs-6 fw-bold">Email</span>
-      <div class="d-flex align-items-center form-check form-switch">
-        <input class="form-check-input" [(ngModel)]="isEmailChecked" (change)="checkValue('email', isEmailChecked)"
-          [disabled]="!portfolioIn.email" type="checkbox" role="switch" id="switchEmail" [ariaChecked]="isEmailChecked">
-        <span class=""></span>
-        <label class="form-check-label" for="switchEmail">{{ portfolioIn.email ? portfolioIn.email : 'Não cadastrado'
-          }}</label>
+    <div *ngIf="showCertification" [@fadeInOut]>
+      <h5 class="mb-3">Selecione as certificações que deseja exibir no portfólio</h5>
+      <div *ngFor="let cert of portfolioIn.certifications" class="col-12 col-md-6 col-xl-4 mb-3">
+        <app-certification-card [certification]="cert" [portfolio]="true">
+          <div class="form-check form-switch" details>
+            <input class="form-check-input" type="checkbox" role="switch" id="switchCheckDefault">
+          </div>
+        </app-certification-card>
       </div>
+      <p class="text-secondary mt-1" *ngIf="portfolioIn.certifications?.length == 0">Você não possui certificações
+        registradas!</p>
     </div>
-
-    <div class="p-3">
-      <span class="fs-6 fw-bold">Descrição</span>
-      <div class="d-flex align-items-center form-check form-switch">
-        <input class="form-check-input" [(ngModel)]="isDescriptionChecked"
-          (change)="checkValue('description', isDescriptionChecked)" type="checkbox" role="switch"
-          [disabled]="!portfolioIn.description" id="switchDescription" [ariaChecked]="isDescriptionChecked">
-        <label class="form-check-label" for="switchDescription">{{ portfolioIn.description ? portfolioIn.description :
-          'Não cadastrado' }}</label>
-      </div>
-    </div>
-
-    <div class="text-bg-secondary p-3">
-      <span class="fs-6 fw-bold">Localização</span>
-      <div class="d-flex align-items-center form-check form-switch">
-        <input class="form-check-input" [(ngModel)]="isLocationChecked"
-          (change)="checkValue('location', isLocationChecked)" type="checkbox" role="switch" id="switchLocation"
-          [disabled]="!portfolioIn.location" [ariaChecked]="isLocationChecked">
-        <label class="form-check-label" for="switchLocation">{{ portfolioIn.location ? portfolioIn.location : 'Não
-          cadastrado' }}</label>
-      </div>
-    </div>
-
-    <div class="p-3">
-      <span class="fs-6 fw-bold">Objetivo</span>
-      <div class="d-flex align-items-center form-check form-switch">
-        <input class="form-check-input" [(ngModel)]="isGoalChecked" (change)="checkValue('goal', isGoalChecked)"
-          [disabled]="!portfolioIn.goal" type="checkbox" role="switch" id="switchGoal" [ariaChecked]="isGoalChecked">
-        <label class="form-check-label" for="switchGoal">{{ portfolioIn.goal ? portfolioIn.goal : 'Não cadastrado'
-          }}</label>
-      </div>
-    </div>
-
-    <div class="p-3 text-bg-secondary">
-      <span class="fs-6 fw-bold">Github</span>
-      <div class="d-flex align-items-center form-check form-switch">
-        <input class="form-check-input" [(ngModel)]="isGithubChecked" (change)="checkValue('github', isGithubChecked)"
-          [disabled]="!portfolioIn.github" type="checkbox" role="switch" id="switchGithub"
-          [ariaChecked]="isGithubChecked">
-        <label class="form-check-label" for="switchGithub">{{ portfolioIn.github ? portfolioIn.github : 'Não cadastrado'
-          }}</label>
-      </div>
-    </div>
-
-    <div class="p-3">
-      <span class="fs-6 fw-bold">LinkedIn</span>
-      <div class="d-flex align-items-center form-check form-switch">
-        <input class="form-check-input" [(ngModel)]="isLinkedinChecked" [disabled]="!portfolioIn.linkedin"
-          (change)="checkValue('linkedin', isLinkedinChecked)" type="checkbox" role="switch" id="switchLinkedin"
-          [ariaChecked]="isLinkedinChecked">
-        <label class="form-check-label" for="switchLinkedin">{{ portfolioIn.linkedin ? portfolioIn.linkedin : 'Não
-          cadastrado' }}</label>
-      </div>
-    </div>
-
-    <div class="btn btn-primary" (click)="generate()">Gerar portfólio</div>
 
   </div>
+  <div class="btn btn-primary" (click)="generate()">Gerar portfólio</div>
 </div>
