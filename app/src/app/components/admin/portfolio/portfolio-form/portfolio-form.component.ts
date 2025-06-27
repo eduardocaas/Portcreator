@@ -66,11 +66,10 @@ export class PortfolioFormComponent implements OnInit {
   }
 
   checkCertification(cert: Certification, check: boolean) {
-    console.log(`${cert.id} - ${check}`)
     if(check) {
       this.portfolioOut.certifications?.push(cert)
     } else {
-      this.portfolioOut.certifications?.filter(c => c.id != cert.id)
+      this.portfolioOut.certifications = this.portfolioOut.certifications?.filter(c => c.id !== cert.id)
     }
     console.log(this.portfolioOut.certifications)
   }

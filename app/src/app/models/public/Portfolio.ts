@@ -46,7 +46,7 @@ export class Portfolio {
     this.goal = goal;
     this.github = github;
     this.linkedin = linkedin;
-    this.certifications = certifications;
+    this.certifications = [];
   }
 
   setUser(user: User) {

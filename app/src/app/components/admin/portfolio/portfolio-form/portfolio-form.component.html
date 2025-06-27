@@ -1,5 +1,5 @@
 <div class="container mt-5">
-  <button class="btn btn-outline-dark" (click)="toggleEdit()"> <i
+  <button class="btn btn-outline-secondary" (click)="toggleEdit()"> <i
       [class]="showProfile ? 'bi bi-chevron-up' : 'bi bi-chevron-down'" class="me-2"></i>Perfil</button>
   <hr>
   <div *ngIf="showProfile" [@fadeInOut]>
@@ -80,7 +80,7 @@
   </div>
 
   <div class="mt-3">
-    <button class="btn btn-outline-dark" (click)="toggleEdit()"> <i
+    <button class="btn btn-outline-secondary" (click)="toggleEdit()"> <i
         [class]="showCertification ? 'bi bi-chevron-up' : 'bi bi-chevron-down'" class="me-2"></i>Certificações</button>
     <hr>
     <div *ngIf="showCertification" class="row" [@fadeInOut]>
