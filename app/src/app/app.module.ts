@@ -28,6 +28,9 @@ import { PortfolioDetailsComponent } from './components/admin/portfolio/portfoli
 import { PortfolioFormComponent } from './components/admin/portfolio/portfolio-form/portfolio-form.component';
 import { PortfolioComponent } from './components/admin/portfolio/portfolio/portfolio.component';
 import { FooterComponent } from './components/admin/footer/footer.component';
+import { initializeApp, provideFirebaseApp } from '@angular/fire/app';
+import { getFirestore, provideFirestore } from '@angular/fire/firestore';
+import { getStorage, provideStorage } from '@angular/fire/storage';
 
 @NgModule({
   declarations: [
