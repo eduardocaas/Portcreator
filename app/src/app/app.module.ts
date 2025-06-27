@@ -27,6 +27,7 @@ import { CertificationSearchPipe } from './pipes/certification-search.pipe';
 import { PortfolioDetailsComponent } from './components/admin/portfolio/portfolio-details/portfolio-details.component';
 import { PortfolioFormComponent } from './components/admin/portfolio/portfolio-form/portfolio-form.component';
 import { PortfolioComponent } from './components/admin/portfolio/portfolio/portfolio.component';
+import { FooterComponent } from './components/admin/footer/footer.component';
 
 @NgModule({
   declarations: [
@@ -49,6 +50,7 @@ import { PortfolioComponent } from './components/admin/portfolio/portfolio/portf
     PortfolioDetailsComponent,
     PortfolioFormComponent,
     PortfolioComponent,
+    FooterComponent,
   ],
   imports: [
     // Angular

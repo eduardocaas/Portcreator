@@ -1,41 +1,47 @@
-<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
-  <div class="container-fluid">
-    <!-- Logo -->
-    <a class="navbar-brand" href="#">Portcreator</a>
+<div class="d-flex flex-column min-vh-100">
+  <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+    <div class="container-fluid">
+      <!-- Logo -->
+      <a class="navbar-brand" href="#">Portcreator</a>
 
-    <!-- Botão para menu responsivo (mobile) -->
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
-      aria-controls="navbarNav" aria-expanded="false" aria-label="Alternar navegação">
-      <span class="navbar-toggler-icon"></span>
-    </button>
+      <!-- Botão para menu responsivo (mobile) -->
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+        aria-controls="navbarNav" aria-expanded="false" aria-label="Alternar navegação">
+        <span class="navbar-toggler-icon"></span>
+      </button>
 
-    <!-- Links logo após o logo -->
-    <div class="collapse navbar-collapse" id="navbarNav">
-      <ul class="navbar-nav">
-        <li class="nav-item">
-          <a class="nav-link" routerLink="/app" routerLinkActive="active"
-            [routerLinkActiveOptions]="{exact: true}">Dashboard</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" routerLink="/app/certifications" routerLinkActive="active"
-            [routerLinkActiveOptions]="{exact: true}">Certificações</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" routerLink="/app/profile" routerLinkActive="active"
-            [routerLinkActiveOptions]="{exact: true}">Perfil</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" routerLink="/app/portfolio" routerLinkActive="active"
-            [routerLinkActiveOptions]="{exact: true}">Portfolio</a>
-        </li>
-      </ul>
-      <ul class="navbar-nav ms-auto">
-        <li class="nav-item">
-          <button class="btn btn-outline-light" (click)="logout()">Logout</button>
-        </li>
-      </ul>
+      <!-- Links logo após o logo -->
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav">
+          <li class="nav-item">
+            <a class="nav-link" routerLink="/app" routerLinkActive="active"
+              [routerLinkActiveOptions]="{exact: true}">Dashboard</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" routerLink="/app/certifications" routerLinkActive="active"
+              [routerLinkActiveOptions]="{exact: true}">Certificações</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" routerLink="/app/profile" routerLinkActive="active"
+              [routerLinkActiveOptions]="{exact: true}">Perfil</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" routerLink="/app/portfolio" routerLinkActive="active"
+              [routerLinkActiveOptions]="{exact: true}">Portfolio</a>
+          </li>
+        </ul>
+        <ul class="navbar-nav ms-auto">
+          <li class="nav-item">
+            <button class="btn btn-outline-light" (click)="logout()">Logout</button>
+          </li>
+        </ul>
+      </div>
     </div>
-  </div>
-</nav>
+  </nav>
 
-<router-outlet></router-outlet>
+  <div class="flex-fill">
+    <router-outlet></router-outlet>
+  </div>
+
+  <app-footer></app-footer>
+</div>
