@@ -1,4 +1,4 @@
-<div class="container mt-5 mb-5">
+<div class="container mt-5">
   <button class="btn btn-outline-dark" (click)="toggleEdit()"> <i
       [class]="showEdit ? 'bi bi-chevron-up' : 'bi bi-chevron-down'" class="me-2"></i>Editar perfil</button>
   <app-form-profile *ngIf="showEdit" [@fadeInOut] [user]="user!" (updated)="onUpdate()"></app-form-profile>

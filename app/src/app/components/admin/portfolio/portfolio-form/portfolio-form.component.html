@@ -5,7 +5,8 @@
   <div *ngIf="showProfile" [@fadeInOut]>
     <h5 class="mb-3">Selecione as informações que deseja exibir no portfólio</h5>
     <div class="border rounded border-secondary border-1 form-profile" style="--bs-border-opacity: .75;">
-      <div class="border-bottom border-2 border-secondary p-3 bg-secondary" style="--bs-border-opacity: .2; --bs-bg-opacity: .1;">
+      <div class="border-bottom border-2 border-secondary p-3 bg-secondary"
+        style="--bs-border-opacity: .2; --bs-bg-opacity: .1;">
         <span class="fs-6 fw-bold">Email</span>
         <div class="d-flex align-items-center form-check form-switch">
           <input class="form-check-input" [(ngModel)]="isEmailChecked" (change)="checkValue('email', isEmailChecked)"
@@ -29,7 +30,8 @@
         </div>
       </div>
 
-      <div class="border-bottom border-2 border-secondary bg-secondary p-3" style="--bs-border-opacity: .2;  --bs-bg-opacity: .1;">
+      <div class="border-bottom border-2 border-secondary bg-secondary p-3"
+        style="--bs-border-opacity: .2;  --bs-bg-opacity: .1;">
         <span class="fs-6 fw-bold">Localização</span>
         <div class="d-flex align-items-center form-check form-switch">
           <input class="form-check-input" [(ngModel)]="isLocationChecked"
@@ -53,7 +55,8 @@
         </div>
       </div>
 
-      <div class="p-3 border-top border-2 border-secondary bg-secondary " style="--bs-border-opacity: .2;  --bs-bg-opacity: .1;">
+      <div class="p-3 border-top border-2 border-secondary bg-secondary "
+        style="--bs-border-opacity: .2;  --bs-bg-opacity: .1;">
         <span class="fs-6 fw-bold">Github</span>
         <div class="d-flex align-items-center form-check form-switch">
           <input class="form-check-input" [(ngModel)]="isGithubChecked" (change)="checkValue('github', isGithubChecked)"
@@ -65,7 +68,7 @@
         </div>
       </div>
 
-      <div class="p-3 border-top border-2 border-secondary"  style="--bs-border-opacity: .2;">
+      <div class="p-3 border-top border-2 border-secondary" style="--bs-border-opacity: .2;">
         <span class="fs-6 fw-bold">LinkedIn</span>
         <div class="d-flex align-items-center form-check form-switch">
           <input class="form-check-input" [(ngModel)]="isLinkedinChecked" [disabled]="!portfolioIn.linkedin"
@@ -99,5 +102,7 @@
     </div>
 
   </div>
-  <div class="btn btn-primary" (click)="generate()">Gerar portfólio</div>
+  <button class="btn btn-primary" (click)="generate()">
+    <i class="bi bi-file-earmark-text-fill me-2"></i>Gerar portfólio
+  </button>
 </div>
