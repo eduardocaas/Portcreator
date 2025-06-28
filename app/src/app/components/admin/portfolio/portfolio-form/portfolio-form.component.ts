@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { timer } from 'rxjs';
 import { Certification } from 'src/app/models/admin/Certification';
 import { Portfolio, PortfolioFieldsOnly } from 'src/app/models/public/Portfolio';
+import { PortfolioPOJO } from 'src/app/models/public/PortfolioPOJO';
 import { CertificationService } from 'src/app/services/certification.service';
 import { PortfolioService } from 'src/app/services/portfolio.service';
 import { UserService } from 'src/app/services/user.service';
@@ -73,12 +74,24 @@ export class PortfolioFormComponent implements OnInit {
     } else {
       this.portfolioOut.certifications = this.portfolioOut.certifications?.filter(c => c.id !== cert.id)
     }
-    console.log(this.portfolioOut.certifications)
   }
 
   generate() {
-    let id = this._portfolioService.save(this.portfolioOut);
-    alert(`Portfólio criado, id: ${id}!`)
+    this.setDefaultProperties()
+    let pojo: PortfolioPOJO = this.portfolioOut.toPOJO();
+    this._portfolioService.save(pojo)
+      .then(() => {
+        alert(`Portfólio criado, id: ${this.portfolioOut.id}!`)
+      })
+      .catch((error: any) => {
+        alert("Erro ao gerar portfólio! MSG: " + error)
+      });
+
+  }
+
+  setDefaultProperties() {
+    this.portfolioOut.id = this.portfolioIn.id;
+    this.portfolioOut.name = this.portfolioIn.name;
   }
 
   isEmailChecked: boolean = false;

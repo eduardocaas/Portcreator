@@ -1,13 +1,13 @@
 import { Certification } from "../admin/Certification";
 
 export interface PortfolioPOJO {
-  id: string;
-  name: string;
-  email: string;
-  location: string;
-  description: string;
-  goal: string;
-  github: string;
-  linkedin: string;
-  certifications: Certification[];
+  id?: string | null;
+  name?: string | null;
+  email?: string | null;
+  location?: string | null;
+  description?: string | null;
+  goal?: string | null;
+  github?: string | null;
+  linkedin?: string | null;
+  certifications?: Certification[] | null;
 }

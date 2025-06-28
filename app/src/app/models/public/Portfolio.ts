@@ -1,5 +1,6 @@
 import { Certification } from "../admin/Certification";
 import { User } from "../admin/UserUpdate";
+import { PortfolioPOJO } from "./PortfolioPOJO";
 
 export type PortfolioFieldsOnly = {
   [K in keyof Portfolio as Portfolio[K] extends Function ? never : K]: Portfolio[K];
@@ -84,5 +85,19 @@ export class Portfolio {
 
   setNull<K extends keyof PortfolioFieldsOnly>(property: K) {
     this[property] = null;
+  }
+
+  toPOJO(): PortfolioPOJO {
+    return {
+      id: this.id,
+      name: this.name,
+      email: this.email,
+      location: this.location,
+      description: this.description,
+      goal: this.goal,
+      github: this.github,
+      linkedin: this.linkedin,
+      certifications: this.certifications
+    }
   }
 }

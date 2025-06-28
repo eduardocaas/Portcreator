@@ -1,6 +1,6 @@
 import { inject, Injectable } from '@angular/core';
-import { addDoc, collection, CollectionReference, DocumentReference, Firestore } from '@angular/fire/firestore';
-import { Portfolio } from '../models/public/Portfolio';
+import { collection, CollectionReference, doc, Firestore, setDoc } from '@angular/fire/firestore';
+import { PortfolioPOJO } from '../models/public/PortfolioPOJO';
 
 @Injectable({
   providedIn: 'root'
@@ -14,11 +14,8 @@ export class PortfolioService {
     this._portfolioCollection = collection(this._firestore, 'portfolio')
   }
 
-  save(portfolio: Portfolio){
-    if (!portfolio) return;
-
-    addDoc(this._portfolioCollection, portfolio).then((document: DocumentReference) => {
-      return document.id;
-    })
+  async save(portfolio: PortfolioPOJO): Promise<void> {
+    if (!portfolio?.id) throw new Error("Portfólio inválido");
+    await setDoc(doc(this._portfolioCollection, portfolio.id), portfolio);
   }
 }
