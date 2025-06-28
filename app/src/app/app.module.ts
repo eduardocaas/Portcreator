@@ -31,6 +31,7 @@ import { FooterComponent } from './components/admin/footer/footer.component';
 import { initializeApp, provideFirebaseApp } from '@angular/fire/app';
 import { getFirestore, provideFirestore } from '@angular/fire/firestore';
 import { getStorage, provideStorage } from '@angular/fire/storage';
+import { environment } from 'src/environments/environment';
 
 @NgModule({
   declarations: [
@@ -63,7 +64,11 @@ import { getStorage, provideStorage } from '@angular/fire/storage';
     ReactiveFormsModule,
     BrowserAnimationsModule
   ],
-  providers: [provideHttpClient(withInterceptors([authInterceptor]))],
+  providers: [
+    provideHttpClient(withInterceptors([authInterceptor])),
+    provideFirebaseApp(() => initializeApp(environment.firebase)),
+    provideFirestore(() => getFirestore()),
+    provideStorage(() => getStorage())],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
