@@ -4,6 +4,7 @@ import { timer } from 'rxjs';
 import { Certification } from 'src/app/models/admin/Certification';
 import { Portfolio, PortfolioFieldsOnly } from 'src/app/models/public/Portfolio';
 import { CertificationService } from 'src/app/services/certification.service';
+import { PortfolioService } from 'src/app/services/portfolio.service';
 import { UserService } from 'src/app/services/user.service';
 
 @Component({
@@ -26,7 +27,8 @@ export class PortfolioFormComponent implements OnInit {
 
   constructor(
     private readonly _userService: UserService,
-    private readonly _certificationService: CertificationService) {
+    private readonly _certificationService: CertificationService,
+    private readonly _portfolioService: PortfolioService) {
   }
 
   showProfile: boolean = true;
@@ -66,7 +68,7 @@ export class PortfolioFormComponent implements OnInit {
   }
 
   checkCertification(cert: Certification, check: boolean) {
-    if(check) {
+    if (check) {
       this.portfolioOut.certifications?.push(cert)
     } else {
       this.portfolioOut.certifications = this.portfolioOut.certifications?.filter(c => c.id !== cert.id)
@@ -75,7 +77,8 @@ export class PortfolioFormComponent implements OnInit {
   }
 
   generate() {
-    console.log(this.portfolioOut);
+    let id = this._portfolioService.save(this.portfolioOut);
+    alert(`Portfólio criado, id: ${id}!`)
   }
 
   isEmailChecked: boolean = false;
