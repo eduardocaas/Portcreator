@@ -28,8 +28,8 @@ import { PortfolioDetailsComponent } from './components/admin/portfolio/portfoli
 import { PortfolioFormComponent } from './components/admin/portfolio/portfolio-form/portfolio-form.component';
 import { PortfolioComponent } from './components/admin/portfolio/portfolio/portfolio.component';
 import { FooterComponent } from './components/admin/footer/footer.component';
-import { initializeApp, provideFirebaseApp } from '@angular/fire/app';
-import { getFirestore, provideFirestore } from '@angular/fire/firestore';
+import { getApp, initializeApp, provideFirebaseApp } from '@angular/fire/app';
+import { getFirestore, initializeFirestore, provideFirestore } from '@angular/fire/firestore';
 import { getStorage, provideStorage } from '@angular/fire/storage';
 import { environment } from 'src/environments/environment';
 
@@ -67,7 +67,10 @@ import { environment } from 'src/environments/environment';
   providers: [
     provideHttpClient(withInterceptors([authInterceptor])),
     provideFirebaseApp(() => initializeApp(environment.firebase)),
-    provideFirestore(() => getFirestore()),
+    provideFirestore(() =>
+      initializeFirestore(getApp(), {
+        ignoreUndefinedProperties: true
+      })),
     provideStorage(() => getStorage())],
   bootstrap: [AppComponent]
 })
