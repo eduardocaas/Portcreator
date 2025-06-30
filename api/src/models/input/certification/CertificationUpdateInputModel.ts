@@ -8,6 +8,7 @@ export class CertificationUpdateInputModel {
   issueDate: Date;
   hours: number;
   institutionName: string;
+  imagePath?: string;
 
   constructor(
     id: string,

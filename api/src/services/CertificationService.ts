@@ -70,6 +70,10 @@ export class CertificationService implements ICertificationService {
         throw ({ id: 404, msg: "Certificação não encontrada" });
       }
 
+      if (inputModel.imagePath) {
+        certification.updateImage(inputModel.imagePath);
+      }
+
       certification.update(
         inputModel.title,
         inputModel.description,
