@@ -1,13 +1,36 @@
-# Welcome to Cloud Functions for Firebase for Python!
-# To get started, simply uncomment the below code or create your own.
-# Deploy with `firebase deploy`
+import io, pathlib
+from PIL import Image
 
-from firebase_functions import https_fn
-from firebase_admin import initialize_app
+from firebase_functions import storage_fn
+from firebase_admin import initialize_app, storage
 
-# initialize_app()
-#
-#
-# @https_fn.on_request()
-# def on_request_example(req: https_fn.Request) -> https_fn.Response:
-#     return https_fn.Response("Hello world!")
+initialize_app()
+
+@storage_fn.on_object_finalized()
+def generate_thumbnail(event: storage_fn.CloudEvent[storage_fn.StorageObjectData]):
+
+  bucket_name = event.data.bucket
+  file_path = pathlib.PurePath(event.data.name)
+  content_type = event.data.content_type
+  
+  if not content_type or not content_type.startswith('/image'):
+    print(f"[IGNORADO]. Arquivo {file_path} não é uma imagem.")
+    return
+  
+  if file_path.name.startswith('thumb_'):
+    print(f"[IGNORADO]. Arquivo {file_path} já é uma thumbnail.")
+    return
+  
+  bucket = storage.bucket(bucket_name)
+  
+  image_blob = bucket.blob(str(file_path))
+  image_bytes = image_blob.download_as_bytes()
+  image = Image.open(io.BytesIO(image_bytes))
+  
+  size = (220, 220)
+  
+  image.thumbnail(size=size, resample=Image.Resampling.LANCZOS)
+  thumbnail_io = io.BytesIO()
+  thumbnail_path = file_path.parent / pathlib.PurePath(f"thumb_{file_path.stem}.png")
+  thumbnail_blob = bucket.blob(str(thumbnail_path))
+  thumbnail_blob.upload_from_string(thumbnail_io.getvalue(), content_type="image/png")
