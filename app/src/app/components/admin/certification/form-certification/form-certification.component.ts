@@ -74,8 +74,9 @@ export class FormCertificationComponent implements OnInit {
       const originalFile = input.files[0];
       const fileType = originalFile.type;
 
-      this.fileName = `${this.idRoute}.${fileType}`;
-      const newFile = new File([originalFile], this.idRoute, { type: fileType })
+      const fileExtension = fileType.split('/')[1];
+      this.fileName = `${this.idRoute}.${fileExtension}`;
+      const newFile = new File([originalFile], this.fileName, { type: fileType })
 
       this.file = newFile;
     }
