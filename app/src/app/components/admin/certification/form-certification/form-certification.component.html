@@ -3,6 +3,12 @@
       class="bi bi-chevron-left me-2"></i><span class="me-2">Voltar</span></button>
   <h2>Registrar certificação</h2>
   <div class="row">
+    <div class="col-12 mb-3" *ngIf="this.idRoute">
+      <div class="mb-3 col-lg-4 col-12">
+        <label for="formFile" class="form-label">Imagem</label>
+        <input class="form-control form-control-sm" (change)="onFileChange($event)" id="formFile" type="file">
+      </div>
+    </div>
     <div class="mb-3 col-12 col-md-6">
       <label for="title" class="form-label">Título</label>
       <input type="text" class="form-control" [ngClass]="isInvalid(titleControl) ? 'is-invalid' : ''" id="title"
@@ -57,6 +63,7 @@
           Certificação
         </label>
       </div>
+
       <div class="form-check">
         <input class="form-check-input" type="radio" formControlName="typeControl" [value]="1" id="radioCourse">
         <label class="form-check-label" for="radioCourse">

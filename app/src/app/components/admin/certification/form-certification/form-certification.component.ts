@@ -65,6 +65,22 @@ export class FormCertificationComponent implements OnInit {
     }
   }
 
+  file: File | null = null;
+  fileName: string | null = null;
+
+  onFileChange(event: Event) {
+    const input = event.target as HTMLInputElement;
+    if (input.files && input.files.length > 0 && this.idRoute) {
+      const originalFile = input.files[0];
+      const fileType = originalFile.type;
+
+      this.fileName = `${this.idRoute}.${fileType}`;
+      const newFile = new File([originalFile], this.idRoute, { type: fileType })
+
+      this.file = newFile;
+    }
+  }
+
   update() {
     this.toastMessage = null;
     if (this.certificationFormGroup.valid) {
@@ -75,10 +91,14 @@ export class FormCertificationComponent implements OnInit {
         issueDate: new Date(formValues.issueDateControl! + "T00:00:00"),
         hours: formValues.hoursControl!,
         institutionName: formValues.institutionControl!,
-        type: formValues.typeControl as CertificationType
+        type: formValues.typeControl as CertificationType,
+        imagePath: this.fileName ?? undefined
       };
       this._service.update(this.idRoute!, this.certification).subscribe({
         next: (res) => {
+          if (this.file && this.fileName) {
+            this._service.uploadImage(this.file);
+          }
           this.toastMessage = "Certificação atualizada com sucesso!"
           this.showSuccessToast();
           timer(500).subscribe(x => { this.loadCertification() })

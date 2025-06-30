@@ -7,4 +7,5 @@ export interface CertificationSave {
     issueDate?: Date,
     hours: number,
     institutionName: string;
+    imagePath?: string;
 }

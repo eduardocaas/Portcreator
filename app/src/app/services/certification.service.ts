@@ -1,11 +1,12 @@
 import { HttpClient, HttpErrorResponse, HttpHeaders, HttpParams } from '@angular/common/http';
-import { Injectable } from '@angular/core';
+import { inject, Injectable } from '@angular/core';
 import { Observable, throwError } from 'rxjs';
 import { Certification } from '../models/admin/Certification';
 import { environment } from 'src/environments/environment';
 import { CertificationMessage } from '../models/messages/CertificationMessage';
 import { CertificationPartial } from '../models/admin/CertificationPartial';
 import { CertificationSave } from '../models/admin/CertificationSave';
+import { ref, Storage, uploadBytesResumable } from '@angular/fire/storage';
 
 const httpOptions = {
   headers: new HttpHeaders({
@@ -23,6 +24,8 @@ const portfolioParam = {
   providedIn: 'root'
 })
 export class CertificationService {
+
+  private readonly _storage = inject(Storage);
 
   constructor(
     private readonly _http: HttpClient,
@@ -67,5 +70,12 @@ export class CertificationService {
       observe: 'response',
       responseType: 'json'
     })
+  }
+
+  uploadImage(file: File) {
+    if (!file) return;
+
+    const storageRef = ref(this._storage, file.name);
+    uploadBytesResumable(storageRef, file);
   }
 }
