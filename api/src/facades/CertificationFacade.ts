@@ -74,7 +74,8 @@ export class CertificationFacade implements ICertificationFacade {
     let certificationsViewModel: CertificationPartialViewModel[] = certifications.map(cert => ({
       id: cert.id,
       title: cert.title,
-      hours: cert.hours
+      hours: cert.hours,
+      imagePath: cert.imagePath
     }));
     return certificationsViewModel;
   }
