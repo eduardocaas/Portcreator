@@ -6,7 +6,7 @@ import { environment } from 'src/environments/environment';
 import { CertificationMessage } from '../models/messages/CertificationMessage';
 import { CertificationPartial } from '../models/admin/CertificationPartial';
 import { CertificationSave } from '../models/admin/CertificationSave';
-import { ref, Storage, uploadBytesResumable } from '@angular/fire/storage';
+import { getDownloadURL, ref, Storage, uploadBytesResumable, UploadTaskSnapshot } from '@angular/fire/storage';
 
 const httpOptions = {
   headers: new HttpHeaders({
@@ -72,10 +72,19 @@ export class CertificationService {
     })
   }
 
-  uploadImage(file: File) {
-    if (!file) return;
-
+  async uploadImage(file: File): Promise<string> {
+    if (!file) {
+      throw new Error('Nenhuma imagem inserida para upload');
+    }
     const storageRef = ref(this._storage, file.name);
-    uploadBytesResumable(storageRef, file);
+    try {
+      const uploadTaskSnapshot: UploadTaskSnapshot = await uploadBytesResumable(storageRef, file);
+      const downloadUrl = await getDownloadURL(uploadTaskSnapshot.ref);
+      return downloadUrl;
+    }
+    catch (error) {
+      console.error('Erro ao fazer upload da imagem:', error);
+      throw new Error(`Falha no upload da imagem: ${error}`);
+    }
   }
 }

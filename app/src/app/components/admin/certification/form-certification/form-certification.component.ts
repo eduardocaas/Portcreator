@@ -66,7 +66,6 @@ export class FormCertificationComponent implements OnInit {
   }
 
   file: File | null = null;
-  fileName: string | null = null;
 
   onFileChange(event: Event) {
     const input = event.target as HTMLInputElement;
@@ -75,14 +74,14 @@ export class FormCertificationComponent implements OnInit {
       const fileType = originalFile.type;
 
       const fileExtension = fileType.split('/')[1];
-      this.fileName = `${this.idRoute}.${fileExtension}`;
-      const newFile = new File([originalFile], this.fileName, { type: fileType })
+      let fileName = `${this.idRoute}.${fileExtension}`;
+      const newFile = new File([originalFile], fileName, { type: fileType })
 
       this.file = newFile;
     }
   }
 
-  update() {
+  async update() {
     this.toastMessage = null;
     if (this.certificationFormGroup.valid) {
       const formValues = this.certificationFormGroup.value;
@@ -93,13 +92,20 @@ export class FormCertificationComponent implements OnInit {
         hours: formValues.hoursControl!,
         institutionName: formValues.institutionControl!,
         type: formValues.typeControl as CertificationType,
-        imagePath: this.fileName ?? undefined
+        imagePath: ''
       };
+      if (this.file) {
+        try {
+          let url = await this._service.uploadImage(this.file);
+          this.certification.imagePath = url;
+        } catch (uploadError) {
+          this.toastMessage = "Erro ao fazer upload da imagem.";
+          this.showErrorToast();
+          return;
+        }
+      }
       this._service.update(this.idRoute!, this.certification).subscribe({
         next: (res) => {
-          if (this.file && this.fileName) {
-            this._service.uploadImage(this.file);
-          }
           this.toastMessage = "Certificação atualizada com sucesso!"
           this.showSuccessToast();
           timer(500).subscribe(x => { this.loadCertification() })
