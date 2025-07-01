@@ -36,6 +36,7 @@ export class CertificationCardComponent {
 
   showModal() {
     const modalElement = document.getElementById('deleteModal');
+    console.log('certification.imagePath:', this.certification.imagePath);
     if (modalElement) {
       const modal = Modal.getOrCreateInstance(modalElement);
       modal.show();
@@ -49,4 +50,14 @@ export class CertificationCardComponent {
       modal.hide();
     }
   }
+
+  thumbPath() {
+    if (this.certification.imagePath) {
+      let splitPath = this.certification.imagePath.split('/o/');
+      let thumbPath = 'thumb_' + splitPath[1];
+      return splitPath[0] + thumbPath;
+    }
+    return null;
+  }
+
 }
