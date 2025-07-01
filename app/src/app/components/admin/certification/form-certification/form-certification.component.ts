@@ -37,7 +37,8 @@ export class FormCertificationComponent implements OnInit {
     issueDateControl: new FormControl('', [Validators.required, this.validDateValidator.bind(this)]),
     hoursControl: new FormControl<number | null>(null, [Validators.required, Validators.min(1)]),
     institutionControl: new FormControl('', [Validators.required]),
-    typeControl: new FormControl(CertificationType.CERTIFICATION, [Validators.required])
+    typeControl: new FormControl(CertificationType.CERTIFICATION, [Validators.required]),
+    imageControl: new FormControl('')
   })
 
   toastMessage: string | null = null;
@@ -53,7 +54,8 @@ export class FormCertificationComponent implements OnInit {
             issueDateControl: res.issueDate ? new Date(res.issueDate).toISOString().substring(0, 10) : '',
             hoursControl: res.hours,
             institutionControl: res.institutionName,
-            typeControl: res.type
+            typeControl: res.type,
+            imageControl: res.imagePath ?? ''
           })
         },
         error: (err: HttpErrorResponse) => {
@@ -92,7 +94,7 @@ export class FormCertificationComponent implements OnInit {
         hours: formValues.hoursControl!,
         institutionName: formValues.institutionControl!,
         type: formValues.typeControl as CertificationType,
-        imagePath: ''
+        imagePath: formValues.imageControl!
       };
       if (this.file) {
         try {
