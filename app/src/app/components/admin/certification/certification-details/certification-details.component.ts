@@ -24,6 +24,18 @@ export class CertificationDetailsComponent {
     this.loadCertification();
   }
 
+  thumbPath() {
+    if (this.certification) {
+      if (this.certification.imagePath) {
+        let splitPath = this.certification.imagePath.split('/o/');
+        let thumbPath = '/o/thumb_' + splitPath[1];
+        return splitPath[0] + thumbPath;
+      }
+      return null;
+    }
+    return null;
+  }
+
   loadCertification() {
     this._service.getById(this.id).subscribe({
       next: (res) => {
@@ -41,6 +53,16 @@ export class CertificationDetailsComponent {
     if (toastElement) {
       const toast = new Toast(toastElement);
       toast.show();
+    }
+  }
+
+  openImage() {
+    if (this.certification) {
+      if (this.certification.imagePath) {
+        let splitPath = this.certification.imagePath.split('thumb_');
+        let fullPath = splitPath[0] + splitPath[1]
+        window.open(fullPath, '_blank');
+      }
     }
   }
 }

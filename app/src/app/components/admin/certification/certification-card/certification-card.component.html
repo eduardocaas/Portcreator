@@ -13,7 +13,7 @@
       </button>
     </div>
     <div>
-      <img [src]="thumbPath() || 'img/not_found.jpg'" class="img-thumbnail" style="max-width: 100px;" alt="Certificado">
+      <img [src]="thumbPath() || 'img/not_found.jpg'" (click)="openImage()" class="img-thumbnail" style="max-width: 100px; cursor: pointer;" alt="Certificado">
     </div>
   </div>
 </div>

@@ -60,4 +60,11 @@ export class CertificationCardComponent {
     return null;
   }
 
+  openImage() {
+    if (this.certification.imagePath) {
+      let splitPath = this.certification.imagePath.split('thumb_');
+      let fullPath = splitPath[0] + splitPath[1]
+      window.open(fullPath,'_blank');
+    }
+  }
 }

@@ -1,8 +1,11 @@
 <div class="container mt-5">
-  <button class="btn btn-outline-primary" routerLink="/app/certifications"><i class="bi bi-arrow-left me-2"></i>Voltar</button>
+  <button class="btn btn-outline-primary" routerLink="/app/certifications"><i
+      class="bi bi-arrow-left me-2"></i>Voltar</button>
   <hr>
   <h3>Informações</h3>
-  <!-- TODO: Imagem aqui -->
+  <div class="mt-1 mb-2">
+    <img [src]="thumbPath() || 'img/not_found.jpg'" class="img-thumbnail" (click)="openImage()" style="max-width: 100px; cursor: pointer;" alt="Certificado">
+  </div>
   <h5>Título</h5>
   <p>{{ certification?.title }}</p>
   <h5>Descrição</h5>
