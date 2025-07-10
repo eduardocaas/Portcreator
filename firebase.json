@@ -12,5 +12,19 @@
       ],
       "runtime": "python313"
     }
-  ]
+  ],
+  "hosting": {
+    "public": "app/dist/app/browser",
+    "ignore": [
+      "firebase.json",
+      "**/.*",
+      "**/node_modules/**"
+    ],
+    "rewrites": [
+      {
+        "source": "**",
+        "destination": "/index.html"
+      }
+    ]
+  }
 }
