@@ -54,7 +54,7 @@ export class CertificationCardComponent {
   thumbPath() {
     if (this.certification.imagePath) {
       let splitPath = this.certification.imagePath.split('/o/');
-      let thumbPath = 'thumb_' + splitPath[1];
+      let thumbPath = '/o/thumb_' + splitPath[1];
       return splitPath[0] + thumbPath;
     }
     return null;
