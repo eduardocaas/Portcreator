@@ -15,6 +15,7 @@ import { PortfolioComponent } from './components/admin/portfolio/portfolio/portf
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
+  { path: '/:id', component: PortfolioComponent }
   { path: 'signup', component: SignupComponent },
   { path: 'signin', component: SigninComponent },
   {
