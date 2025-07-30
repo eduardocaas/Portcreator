@@ -1,6 +1,7 @@
 import { Certification } from "../admin/Certification";
 import { User } from "../admin/UserUpdate";
 import { PortfolioPOJO } from "./PortfolioPOJO";
+import { PortfolioStatus } from "./PortfolioStatus";
 
 export type PortfolioFieldsOnly = {
   [K in keyof Portfolio as Portfolio[K] extends Function ? never : K]: Portfolio[K];
@@ -16,6 +17,7 @@ export class Portfolio {
   github?: string | null;
   linkedin?: string | null;
   certifications?: Certification[] | null;
+  status?: PortfolioStatus | null;
 
   constructor();
   constructor(
@@ -27,7 +29,8 @@ export class Portfolio {
     goal: string,
     github: string,
     linkedin: string,
-    certifications: Certification[]);
+    certifications: Certification[],
+    status: PortfolioStatus)
   constructor(
     id?: string,
     name?: string,
@@ -37,7 +40,8 @@ export class Portfolio {
     goal?: string,
     github?: string,
     linkedin?: string,
-    certifications?: Certification[]
+    certifications?: Certification[],
+    status?: PortfolioStatus
   ) {
     this.id = id;
     this.name = name;
@@ -48,6 +52,7 @@ export class Portfolio {
     this.github = github;
     this.linkedin = linkedin;
     this.certifications = [];
+    this.status = status;
   }
 
   setUser(user: User) {
@@ -75,7 +80,8 @@ export class Portfolio {
       this.goal!,
       this.github!,
       this.linkedin!,
-      this.certifications!
+      this.certifications!,
+      this.status!
     )
   }
 
