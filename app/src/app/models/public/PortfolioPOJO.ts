@@ -10,5 +10,5 @@ export interface PortfolioPOJO {
   github?: string | null;
   linkedin?: string | null;
   certifications?: Certification[] | null;
-  status?: boolean;
+  status?: boolean | null;
 }

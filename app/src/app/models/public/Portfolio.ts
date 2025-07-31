@@ -51,7 +51,7 @@ export class Portfolio {
     this.github = github;
     this.linkedin = linkedin;
     this.certifications = [];
-    this.status = status;
+    this.status = false;
   }
 
   setUser(user: User) {
@@ -102,6 +102,7 @@ export class Portfolio {
       goal: this.goal,
       github: this.github,
       linkedin: this.linkedin,
+      status: this.status,
       certifications: this.certifications
     }
   }

@@ -60,10 +60,22 @@ export class PortfolioFormComponent implements OnInit {
 
   checkValue<T extends keyof PortfolioFieldsOnly>(property: T, isChecked: boolean) {
     if (!this.portfolioOut || !this.portfolioIn) return;
-    if (isChecked) {
+    if (isChecked && property != 'status') {
+      // Passando de portfolioIn para portfolioOut
       const value: Portfolio[T] = this.portfolioIn.get(property);
       this.portfolioOut[property] = value;
-    } else {
+    }
+    // Caminho especifico para status
+    else if (property == 'status') {
+      if (isChecked) {
+        this.portfolioOut.status = true;
+      }
+      else {
+        this.portfolioOut.status = false;
+      }
+    }
+    else {
+      // Se estiver desmarcado deixa como nulo
       this.portfolioOut.setNull(property);
     }
   }
