@@ -1,5 +1,4 @@
 import { Certification } from "../admin/Certification";
-import { PortfolioStatus } from "./PortfolioStatus";
 
 export interface PortfolioPOJO {
   id?: string | null;
@@ -11,5 +10,5 @@ export interface PortfolioPOJO {
   github?: string | null;
   linkedin?: string | null;
   certifications?: Certification[] | null;
-  status?: PortfolioStatus;
+  status?: boolean;
 }
