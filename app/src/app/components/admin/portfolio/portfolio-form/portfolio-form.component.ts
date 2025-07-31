@@ -100,4 +100,5 @@ export class PortfolioFormComponent implements OnInit {
   isGoalChecked: boolean = false;
   isGithubChecked: boolean = false;
   isLinkedinChecked: boolean = false;
+  isStatusChecked: boolean = false;
 }
