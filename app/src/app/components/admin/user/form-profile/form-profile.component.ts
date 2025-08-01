@@ -53,36 +53,38 @@ export class FormProfileComponent {
     this.user.email = this._authService.getEmail();
     this.toastMessage = null;
     if (this.nameControl.valid) {
-      if (this.file) {
-        try {
+      try {
+        if (this.file) {
           let url = await this._userService.uploadImage(this.file);
           this.user.imagePath = url;
-        } catch (uploadError) {
-          this.toastMessage = "Erro ao fazer upload da imagem.";
-          this.showErrorToast();
-          return;
         }
+      } catch (uploadError) {
+        this.toastMessage = "Erro ao fazer upload da imagem.";
+        this.showErrorToast();
+        return;
+      } finally {
+        this._userService.update(this.user).subscribe({
+          next: (res) => {
+            this.showSuccessToast()
+            timer(1000).subscribe(x => { this.updated.emit() })
+          },
+          error: (err: HttpErrorResponse) => {
+            if (err.status == 400) {
+              this.toastMessage = err.error.message;
+              this.showErrorToast();
+            }
+            else if (err.status == 404) {
+              this.toastMessage = UserMessage.ERROR_404;
+              this.showErrorToast();
+            }
+            else {
+              this.toastMessage = UserMessage.ERROR_500;
+              this.showErrorToast();
+            }
+          }
+        })
       }
-      this._userService.update(this.user).subscribe({
-        next: (res) => {
-          this.showSuccessToast()
-          timer(1000).subscribe(x => { this.updated.emit() })
-        },
-        error: (err: HttpErrorResponse) => {
-          if (err.status == 400) {
-            this.toastMessage = err.error.message;
-            this.showErrorToast();
-          }
-          else if (err.status == 404) {
-            this.toastMessage = UserMessage.ERROR_404;
-            this.showErrorToast();
-          }
-          else {
-            this.toastMessage = UserMessage.ERROR_500;
-            this.showErrorToast();
-          }
-        }
-      })
+
     } else {
       this.toastMessage = "Campos inválidos";
       this.showErrorToast();

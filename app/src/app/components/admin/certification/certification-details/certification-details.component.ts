@@ -24,14 +24,23 @@ export class CertificationDetailsComponent {
     this.loadCertification();
   }
 
-  thumbPath() {
+  thumbPath(): string | null {
     if (this.certification) {
-      if (this.certification.imagePath) {
-        let splitPath = this.certification.imagePath.split('/o/');
-        let thumbPath = '/o/thumb_' + splitPath[1];
-        return splitPath[0] + thumbPath;
+      if (!this.certification.imagePath) {
+        return null;
       }
-      return null;
+
+      const splitPath = this.certification.imagePath.split('/o/');
+
+      if (splitPath.length < 2) {
+        return this.certification.imagePath;
+      }
+
+      // Adiciona prefixo thumbnail
+      const thumbUrl = splitPath[0] + '/o/thumb_' + splitPath[1];
+
+      // Troca extensão do arquivo para .png
+      return thumbUrl.replace(/\.[^.?]+(?=\?|$)/, '.png');
     }
     return null;
   }

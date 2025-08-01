@@ -71,7 +71,8 @@ export class UserService implements IUserService {
         input.description,
         input.goal,
         input.github,
-        input.linkedin);
+        input.linkedin,
+        input.imagePath);
       let userUpdated = await this._repository.save(user);
       if (!userUpdated?.id) {
         return false;
