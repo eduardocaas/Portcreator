@@ -1,6 +1,8 @@
+import { HttpErrorResponse } from '@angular/common/http';
 import { Component, Input } from '@angular/core';
 import { timer } from 'rxjs';
 import { User } from 'src/app/models/admin/UserUpdate';
+import { UserService } from 'src/app/services/user.service';
 
 @Component({
   selector: 'app-details-profile',
@@ -9,8 +11,12 @@ import { User } from 'src/app/models/admin/UserUpdate';
 })
 export class DetailsProfileComponent {
 
+  constructor(private readonly _userService: UserService) {}
+
   @Input()
   user!: User;
+
+  protected notFoundImage = 'https://firebasestorage.googleapis.com/v0/b/portcreator.firebasestorage.app/o/not_found.jpg?alt=media&token=231902c8-7f16-48a1-97a5-71e489b4e21e';
 
   thumbPath(): string | null {
     if (!this.user.imagePath) {
@@ -28,6 +34,18 @@ export class DetailsProfileComponent {
 
     // Troca extensão do arquivo para .png
     return thumbUrl.replace(/\.[^.?]+(?=\?|$)/, '.png');
+  }
+
+  async removeImage() {
+    this.user.imagePath = this.notFoundImage;
+    this._userService.update(this.user).subscribe({
+      next: (res) => {
+        timer(1000).subscribe(x => { alert('Imagem removida com sucesso!') })
+      },
+      error: (err: HttpErrorResponse) => {
+       alert('Falha ao remover imagem, tente novamente mais tarde.')
+      }
+    })
   }
 
   /* openImage() {

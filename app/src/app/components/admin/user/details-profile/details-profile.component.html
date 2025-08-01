@@ -1,7 +1,8 @@
 <h3>Informações</h3>
 <div>
   <img [src]="thumbPath() || 'img/not_found.jpg'" class="img-thumbnail"
-    style="max-width: 140px; cursor: pointer; margin: 20px 0;" alt="Perfil">
+    style="max-width: 140px; cursor: default; margin: 20px 0;" alt="Perfil">
+  <button (click)="removeImage()" *ngIf="user.imagePath && user.imagePath.toString() && !user.imagePath.toString().includes('not_found')" class="ms-3 btn btn-outline-secondary"><i class="bi bi-trash"></i></button>
 </div>
 <h5>Sobre</h5>
 <p *ngIf="user.description">{{ user.description }}</p>
