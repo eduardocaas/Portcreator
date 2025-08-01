@@ -15,6 +15,7 @@ export class Portfolio {
   goal?: string | null;
   github?: string | null;
   linkedin?: string | null;
+  imagePath?: string | null;
   certifications?: Certification[] | null;
   status?: boolean | null;
 
@@ -28,6 +29,7 @@ export class Portfolio {
     goal: string,
     github: string,
     linkedin: string,
+    imagePath: string,
     certifications: Certification[],
     status: boolean)
   constructor(
@@ -39,6 +41,7 @@ export class Portfolio {
     goal?: string,
     github?: string,
     linkedin?: string,
+    imagePath?: string,
     certifications?: Certification[],
     status?: boolean
   ) {
@@ -50,6 +53,7 @@ export class Portfolio {
     this.goal = goal;
     this.github = github;
     this.linkedin = linkedin;
+    this.imagePath = imagePath;
     this.certifications = [];
     this.status = false;
   }
@@ -63,6 +67,7 @@ export class Portfolio {
     this.goal = user.goal;
     this.github = user.github;
     this.linkedin = user.linkedin;
+    this.imagePath = user.imagePath;
   }
 
   setCertifications(certifications: Certification[]) {
@@ -79,6 +84,7 @@ export class Portfolio {
       this.goal!,
       this.github!,
       this.linkedin!,
+      this.imagePath!,
       this.certifications!,
       this.status!
     )
@@ -102,6 +108,7 @@ export class Portfolio {
       goal: this.goal,
       github: this.github,
       linkedin: this.linkedin,
+      imagePath: this.imagePath,
       status: this.status,
       certifications: this.certifications
     }

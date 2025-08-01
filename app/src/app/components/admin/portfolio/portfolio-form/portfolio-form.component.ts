@@ -106,6 +106,7 @@ export class PortfolioFormComponent implements OnInit {
     this.portfolioOut.name = this.portfolioIn.name;
   }
 
+  isImageChecked: boolean = false;
   isEmailChecked: boolean = false;
   isLocationChecked: boolean = false;
   isDescriptionChecked: boolean = false;
@@ -113,4 +114,22 @@ export class PortfolioFormComponent implements OnInit {
   isGithubChecked: boolean = false;
   isLinkedinChecked: boolean = false;
   isStatusChecked: boolean = false;
+
+  thumbPath(): string | null {
+    if (!this.portfolioIn.imagePath) {
+      return null;
+    }
+
+    const splitPath = this.portfolioIn.imagePath.split('/o/');
+
+    if (splitPath.length < 2) {
+      return this.portfolioIn.imagePath;
+    }
+
+    // Adiciona prefixo thumbnail
+    const thumbUrl = splitPath[0] + '/o/thumb_' + splitPath[1];
+
+    // Troca extensão do arquivo para .png
+    return thumbUrl.replace(/\.[^.?]+(?=\?|$)/, '.png');
+  }
 }
