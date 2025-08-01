@@ -7,6 +7,7 @@ export class UserUpdateInputModel {
   goal?: string;
   github?: string;
   linkedin?: string;
+  imagePath?: string;
 
   constructor(
     id: string,
@@ -16,7 +17,8 @@ export class UserUpdateInputModel {
     description?: string,
     goal?: string,
     github?: string,
-    linkedin?: string) {
+    linkedin?: string,
+    imagePath?: string) {
     this.id = id;
     this.name = name;
     this.email = email;
@@ -25,5 +27,6 @@ export class UserUpdateInputModel {
     this.goal = goal;
     this.github = github;
     this.linkedin = linkedin;
+    this.imagePath = imagePath;
   }
 }

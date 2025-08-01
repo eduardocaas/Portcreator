@@ -7,4 +7,5 @@ export interface User {
   goal?: string,
   github?: string,
   linkedin?: string
+  imagePath?: string;
 }

@@ -83,7 +83,8 @@ export class User extends BaseEntity {
     description?: string,
     goal?: string,
     github?: string,
-    linkedin?: string) {
+    linkedin?: string,
+    imagePath?: string) {
     this.name = name;
     this.email = email;
     this.location = location;
@@ -91,6 +92,7 @@ export class User extends BaseEntity {
     this.goal = goal;
     this.github = github;
     this.linkedin = linkedin;
+    this.imagePath = imagePath;
     this.firstUpdate = false;
   }
 

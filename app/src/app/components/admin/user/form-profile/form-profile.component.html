@@ -2,9 +2,15 @@
   <h2>Atualize seus dados</h2>
   <div class="row">
     <div class="mb-3 col-12 col-md-6">
+      <label for="formFile" class="form-label">Imagem</label>
+      <input class="form-control form-control-sm" (change)="onFileChange($event)" id="formFile" type="file">
+      <input type="hidden" class="form-control" id="image" name="image" formControlName="imageControl">
+    </div>
+
+    <div class="mb-3 col-12 col-md-6">
       <label for="name" class="form-label">Nome</label>
-      <input type="text" class="form-control" [ngClass]="!nameControl.valid ? 'is-invalid' : ''" [formControl]="nameControl" [(ngModel)]="user.name" name="name" id="name"
-        [required]="true">
+      <input type="text" class="form-control" [ngClass]="!nameControl.valid ? 'is-invalid' : ''"
+        [formControl]="nameControl" [(ngModel)]="user.name" name="name" id="name" [required]="true">
       <div class="invalid-feedback d-block" [style.visibility]="isNameInvalid() ? 'visible' : 'hidden'">
         {{ isNameInvalid() ? getErrorMessageName() : '&nbsp;' }}
       </div>
@@ -12,18 +18,19 @@
 
     <div class="mb-3 col-12 col-md-6">
       <label for="email" class="form-label">Email</label>
-      <input type="email" class="form-control" id="email" name="email" [(ngModel)]="user.email"
-        [required]="true" [disabled]="true" disabled>
+      <input type="email" class="form-control" id="email" name="email" [(ngModel)]="user.email" [required]="true"
+        [disabled]="true" disabled>
     </div>
 
-    <div class="mb-3 col-12">
+    <div class="mb-3 col-12 col-md-6">
       <label for="location" class="form-label">Localização</label>
       <input type="text" class="form-control" [(ngModel)]="user.location" name="location" id="location">
     </div>
 
     <div class="mb-3 col-12 col-lg-6">
       <label for="description" class="form-label">Descrição</label>
-      <textarea class="form-control" id="description" [(ngModel)]="user.description" name="description" rows="3"></textarea>
+      <textarea class="form-control" id="description" [(ngModel)]="user.description" name="description"
+        rows="3"></textarea>
     </div>
 
     <div class="mb-3 col-12 col-lg-6">
@@ -42,32 +49,33 @@
     </div>
 
     <div class="mt-2 col-12 col-md-4 col-lg-2">
-      <button type="submit" [disabled]="!this.nameControl.valid" (click)="update()" class="btn btn-primary w-100 w-md-auto px-md-4 py-md-2">Atualizar</button>
+      <button type="submit" [disabled]="!this.nameControl.valid" (click)="update()"
+        class="btn btn-primary w-100 w-md-auto px-md-4 py-md-2">Atualizar</button>
     </div>
   </div>
 
 </form>
 <div class="toast-container position-fixed bottom-0 start-50 translate-middle-x p-3">
-    <div id="errorToast" class="toast bg-danger bg-opacity-75 text-white" role="alert" aria-live="assertive"
-      aria-atomic="true">
-      <div class="toast-header bg-danger bg-opacity-75 text-white border-0">
-        <strong class="me-auto">❌ Erro</strong>
-        <small class="text-white-50">Falha ao atualizar</small>
-        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="toast" aria-label="Close"></button>
-      </div>
-      <div *ngIf="toastMessage != null" class="toast-body">
-        {{ toastMessage }}
-      </div>
+  <div id="errorToast" class="toast bg-danger bg-opacity-75 text-white" role="alert" aria-live="assertive"
+    aria-atomic="true">
+    <div class="toast-header bg-danger bg-opacity-75 text-white border-0">
+      <strong class="me-auto">❌ Erro</strong>
+      <small class="text-white-50">Falha ao atualizar</small>
+      <button type="button" class="btn-close btn-close-white" data-bs-dismiss="toast" aria-label="Close"></button>
     </div>
-    <div id="successToast" class="toast bg-success bg-opacity-75 text-white" role="alert" aria-live="assertive"
-      aria-atomic="true">
-      <div class="toast-header bg-success bg-opacity-75 text-white border-0">
-        <strong class="me-auto">&#9989; Sucesso</strong>
-        <small class="text-white-50">Atualização</small>
-        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="toast" aria-label="Close"></button>
-      </div>
-      <div class="toast-body">
-        Atualizado com sucesso!
-      </div>
+    <div *ngIf="toastMessage != null" class="toast-body">
+      {{ toastMessage }}
     </div>
   </div>
+  <div id="successToast" class="toast bg-success bg-opacity-75 text-white" role="alert" aria-live="assertive"
+    aria-atomic="true">
+    <div class="toast-header bg-success bg-opacity-75 text-white border-0">
+      <strong class="me-auto">&#9989; Sucesso</strong>
+      <small class="text-white-50">Atualização</small>
+      <button type="button" class="btn-close btn-close-white" data-bs-dismiss="toast" aria-label="Close"></button>
+    </div>
+    <div class="toast-body">
+      Atualizado com sucesso!
+    </div>
+  </div>
+</div>

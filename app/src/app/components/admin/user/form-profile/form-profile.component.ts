@@ -32,11 +32,37 @@ export class FormProfileComponent {
   @Output()
   updated = new EventEmitter<void>();
 
-  update() { // TODO: Remover opção de trocar email
+  file: File | null = null;
+
+  onFileChange(event: Event) {
+    const input = event.target as HTMLInputElement;
+    if (input.files && input.files.length > 0 && this.user.id) {
+      const originalFile = input.files[0];
+      const fileType = originalFile.type;
+
+      const fileExtension = fileType.split('/')[1];
+      let fileName = `${this.user.id}.${fileExtension}`;
+      const newFile = new File([originalFile], fileName, { type: fileType })
+
+      this.file = newFile;
+    }
+  }
+
+  async update() { // TODO: Remover opção de trocar email
     this.user.id = this._authService.getId();
     this.user.email = this._authService.getEmail();
     this.toastMessage = null;
     if (this.nameControl.valid) {
+      if (this.file) {
+        try {
+          let url = await this._userService.uploadImage(this.file);
+          this.user.imagePath = url;
+        } catch (uploadError) {
+          this.toastMessage = "Erro ao fazer upload da imagem.";
+          this.showErrorToast();
+          return;
+        }
+      }
       this._userService.update(this.user).subscribe({
         next: (res) => {
           this.showSuccessToast()

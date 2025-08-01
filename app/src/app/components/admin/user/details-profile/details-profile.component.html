@@ -1,4 +1,8 @@
 <h3>Informações</h3>
+<div>
+  <img [src]="thumbPath() || 'img/not_found.jpg'" (click)="openImage()" class="img-thumbnail"
+    style="max-width: 140px; cursor: pointer; margin: 20px 0;" alt="Perfil">
+</div>
 <h5>Sobre</h5>
 <p *ngIf="user.description">{{ user.description }}</p>
 <p class="text-secondary" *ngIf="!user.description">Adicione uma descrição</p>
