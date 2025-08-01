@@ -1,4 +1,21 @@
-<p *ngIf="this.portfolioStatus == PublicPortfolioStatus.LOADING">Carregando...</p>
-<p *ngIf="this.portfolioStatus == PublicPortfolioStatus.NOT_FOUND">Portfólio não encontrado...</p>
 <p *ngIf="this.portfolioStatus == PublicPortfolioStatus.PUBLIC">Portfólio público...</p>
-<p *ngIf="this.portfolioStatus == PublicPortfolioStatus.PRIVATE">Portfólio privado...</p>
+
+<div class="d-flex justify-content-center align-items-center min-vh-100">
+  <div *ngIf="this.portfolioStatus == PublicPortfolioStatus.LOADING">
+    <div class="loader"></div>
+  </div>
+
+  <div class="portfolio-warning text-center" *ngIf="this.portfolioStatus == PublicPortfolioStatus.PRIVATE">
+    <img src="icons/public/portfolio_private.svg" class="private-icon" alt="Ícone de pasta com bloqueio">
+    <h2>Portfólio privado</h2>
+    <p>O dono deste portfólio o definiu como privado<br>Clique no botão abaixo para retornar a página inicial</p>
+    <button class="btn btn-outline-secondary">Voltar a página inicial</button>
+  </div>
+
+  <div class="portfolio-warning text-center" *ngIf="this.portfolioStatus == PublicPortfolioStatus.NOT_FOUND">
+    <img src="icons/public/portfolio_not_found.svg" class="private-icon" alt="Ícone de pasta com bloqueio">
+    <h2>Não encontrado</h2>
+    <p>Não encontramos o portfólio que você buscou<br>Clique no botão abaixo para retornar a página inicial</p>
+    <button class="btn btn-outline-secondary">Voltar a página inicial</button>
+  </div>
+</div>

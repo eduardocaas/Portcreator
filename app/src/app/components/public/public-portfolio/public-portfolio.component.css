@@ -1,0 +1,52 @@
+/*
+* Seção não-portfolio (não encontrado, privado ou carregando)
+  */
+
+.private-icon {
+  width: 250px;
+}
+
+.portfolio-warning p {
+  font-size: 120%;
+  margin: 20px 0 30px 0;
+}
+
+.portfolio-warning button {
+  font-size: 120%;
+  padding: 8px 20px;
+}
+
+/*
+* Loader do enum "LOADING"
+   */
+.loader {
+  width: fit-content;
+  font-weight: bold;
+  font-family: monospace;
+  letter-spacing: -1px;
+  font-size: 40px;
+  background: radial-gradient(circle closest-side,#000 94%,#0000) right/calc(200% - 1em) 100%;
+  animation: l24 1.3s infinite alternate linear;
+}
+.loader::before {
+  content: "Buscando portfólio...";
+  line-height: 1em;
+  color: #0000;
+  background: inherit;
+  background-image: radial-gradient(circle closest-side,#fff 94%,#000);
+  -webkit-background-clip:text;
+          background-clip:text;
+}
+
+@keyframes l24{
+  100%{background-position: left}
+}
+
+@media only screen and (max-width: 500px) {
+  .loader {
+    animation: l24 1s infinite alternate linear;
+  }
+  .loader::before {
+    content: "Buscando...";
+  }
+}
