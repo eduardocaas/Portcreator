@@ -12,12 +12,13 @@ import { HomeComponent } from './components/public/home/home.component';
 import { FormCertificationComponent } from './components/admin/certification/form-certification/form-certification.component';
 import { CertificationDetailsComponent } from './components/admin/certification/certification-details/certification-details.component';
 import { PortfolioComponent } from './components/admin/portfolio/portfolio/portfolio.component';
+import { PublicPortfolioComponent } from './components/public/public-portfolio/public-portfolio.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
-  { path: '/:id', component: PortfolioComponent },
   { path: 'signup', component: SignupComponent },
   { path: 'signin', component: SigninComponent },
+  { path: 'public/:id', component: PublicPortfolioComponent },
   {
     path: 'app', component: NavComponent, canActivate: [authGuard], children: [
       { path: '', component: DashboardComponent },

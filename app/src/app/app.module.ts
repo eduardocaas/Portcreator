@@ -32,6 +32,7 @@ import { getApp, initializeApp, provideFirebaseApp } from '@angular/fire/app';
 import { getFirestore, initializeFirestore, provideFirestore } from '@angular/fire/firestore';
 import { getStorage, provideStorage } from '@angular/fire/storage';
 import { environment } from 'src/environments/environment';
+import { PublicPortfolioComponent } from './components/public/public-portfolio/public-portfolio.component';
 
 @NgModule({
   declarations: [
@@ -55,6 +56,7 @@ import { environment } from 'src/environments/environment';
     PortfolioFormComponent,
     PortfolioComponent,
     FooterComponent,
+    PublicPortfolioComponent,
   ],
   imports: [
     // Angular

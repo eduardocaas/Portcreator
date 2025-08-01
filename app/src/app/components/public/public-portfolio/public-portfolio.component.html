@@ -1,1 +1,4 @@
-<p>public-portfolio works!</p>
+<p *ngIf="this.portfolioStatus == PublicPortfolioStatus.LOADING">Carregando...</p>
+<p *ngIf="this.portfolioStatus == PublicPortfolioStatus.NOT_FOUND">Portfólio não encontrado...</p>
+<p *ngIf="this.portfolioStatus == PublicPortfolioStatus.PUBLIC">Portfólio público...</p>
+<p *ngIf="this.portfolioStatus == PublicPortfolioStatus.PRIVATE">Portfólio privado...</p>
