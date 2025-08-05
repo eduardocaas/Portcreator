@@ -36,7 +36,6 @@ export class PublicPortfolioComponent implements OnInit {
   }
 
   async loadPortfolio() {
-
     if (this.routeId) {
       try {
         this.portfolio = await this._service.get(this.routeId);
@@ -55,5 +54,27 @@ export class PublicPortfolioComponent implements OnInit {
     else {
       this.portfolioStatus = PublicPortfolioStatus.NOT_FOUND;
     }
+  }
+
+  thumbPath(): string {
+    if (!this.portfolio?.imagePath) {
+      return 'img/portfolio_not_found.svg';
+    }
+
+    if(this.portfolio.imagePath.includes('not_found')) {
+      return 'img/portfolio_not_found.svg';
+    }
+
+    const splitPath = this.portfolio.imagePath.split('/o/');
+
+    if (splitPath.length < 2) {
+      return this.portfolio.imagePath;
+    }
+
+    // Adiciona prefixo thumbnail
+    const thumbUrl = splitPath[0] + '/o/thumb_' + splitPath[1];
+
+    // Troca extensão do arquivo para .png
+    return thumbUrl.replace(/\.[^.?]+(?=\?|$)/, '.png');
   }
 }

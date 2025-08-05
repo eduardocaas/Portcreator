@@ -1,10 +1,28 @@
-<p *ngIf="this.portfolioStatus == PublicPortfolioStatus.PUBLIC">Portfólio público...</p>
+<!-- Portfolio público -->
+<div class="container mt-5" *ngIf="this.portfolioStatus == PublicPortfolioStatus.PUBLIC">
+  <div class="d-flex">
+    <div>
+      <img [src]="thumbPath()" style="max-width: 180px;" alt="Foto de perfil">
+      <h2 class="mt-1">{{this.portfolio?.name}}</h2>
+      <img src="icons/public/logo-linkedin.svg" style="max-width: 32px;" alt="Icone Linkedin">
+      <img src="icons/public/logo-github.svg" style="max-width: 32px;" alt="Icone Github">
+    </div>
 
+    <div class="ms-5">
+      <h1>Bem-vindo</h1>
+      <p  style="font-size: 115%;">{{ this.portfolio?.description }}</p>
+    </div>
+  </div>
+
+</div>
+
+<!-- Loading portfolio -->
 <div class="d-flex justify-content-center align-items-center min-vh-100">
   <div *ngIf="this.portfolioStatus == PublicPortfolioStatus.LOADING">
     <div class="loader"></div>
   </div>
 
+  <!-- Alertas (not found e privado) -->
   <div class="portfolio-warning text-center" *ngIf="this.portfolioStatus == PublicPortfolioStatus.PRIVATE">
     <img src="icons/public/portfolio_private.svg" class="private-icon" alt="Ícone de pasta com bloqueio">
     <h2>Portfólio privado</h2>
