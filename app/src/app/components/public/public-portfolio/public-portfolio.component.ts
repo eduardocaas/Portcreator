@@ -77,4 +77,18 @@ export class PublicPortfolioComponent implements OnInit {
     // Troca extensão do arquivo para .png
     return thumbUrl.replace(/\.[^.?]+(?=\?|$)/, '.png');
   }
+
+  thumbPathCertification(url: string | null): string | null {
+    if (!url) {
+      return null;
+    }
+    const splitPath = url.split('/o/');
+
+    // Adiciona prefixo thumbnail
+    const thumbUrl = splitPath[0] + '/o/thumb_' + splitPath[1];
+
+    // Troca extensão do arquivo para .png
+    return thumbUrl.replace(/\.[^.?]+(?=\?|$)/, '.png');
+  }
+
 }

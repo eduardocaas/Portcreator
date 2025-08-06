@@ -1,16 +1,62 @@
 <!-- Portfolio público -->
-<div class="container mt-5" *ngIf="this.portfolioStatus == PublicPortfolioStatus.PUBLIC">
-  <div class="d-flex">
-    <div>
-      <img [src]="thumbPath()" style="max-width: 180px;" alt="Foto de perfil">
-      <h2 class="mt-1">{{this.portfolio?.name}}</h2>
-      <img src="icons/public/logo-linkedin.svg" style="max-width: 32px;" alt="Icone Linkedin">
-      <img src="icons/public/logo-github.svg" style="max-width: 32px;" alt="Icone Github">
+<div class="container-md mt-5" *ngIf="this.portfolioStatus == PublicPortfolioStatus.PUBLIC">
+  <div class="d-flex row">
+    <div class="col-12 col-md-3 col-xl-2 box-left">
+      <img [src]="thumbPath()" style="max-width: 160px;" alt="Foto de perfil">
+      <div>
+        <h4 class="mt-2">{{this.portfolio?.name}}</h4>
+        <a [href]="this.portfolio?.linkedin" *ngIf="this.portfolio?.linkedin"><img src="icons/public/logo-linkedin.svg"
+            class="me-1" style="max-width: 32px;" alt="Icone Linkedin"></a>
+        <a [href]="this.portfolio?.github" *ngIf="this.portfolio?.github"><img src="icons/public/logo-github.svg"
+            style="max-width: 32px;" alt="Icone Github"></a>
+        <div class="mt-2">
+          <div *ngIf="this.portfolio?.location" class="d-flex align-items-center">
+            <img src="icons/public/location.svg" alt="Localização">
+            <p class="fw-bold mb-0 ms-1">{{ this.portfolio?.location }}</p>
+          </div>
+          <div *ngIf="this.portfolio?.email" class="d-flex align-items-center">
+            <img src="icons/public/mail.svg" alt="Email">
+            <p class="fw-bold mb-0 ms-1">{{ this.portfolio?.email }}</p>
+          </div>
+        </div>
+      </div>
     </div>
 
-    <div class="ms-5">
+    <div class="col-12 col-md-9 col-xl-10 box-right">
       <h1>Bem-vindo</h1>
-      <p  style="font-size: 115%;">{{ this.portfolio?.description }}</p>
+      <hr>
+      <div>
+        <h4>Quem sou eu?</h4>
+        <p *ngIf="this.portfolio?.description" class="fs-115">{{ this.portfolio?.description }}</p>
+      </div>
+      <div *ngIf="this.portfolio?.goal">
+        <h4>Objetivos</h4>
+        <p class="fs-115">{{ this.portfolio?.goal }}</p>
+      </div>
+      <hr class="mt-2">
+      <h4 class="mb-3">Cursos e certificações</h4>
+      <p *ngIf="!this.portfolio?.certifications" class="fw-bold opacity-75">Nenhuma certificação cadastrada.
+      </p>
+      <div class="row">
+        <div *ngFor="let cert of portfolio?.certifications" class="col-12 col-lg-6 d-flex align-items-stretch">
+          <!-- Card certification -->
+          <div class="card-certification d-flex align-items-center justify-content-evenly w-100">
+            <div class="certification-right">
+              <div>
+                <p class="fw-bold mb-0 fs-115">{{ cert.title }}</p>
+                <p class="fw-bold opacity-75">{{ cert.institutionName }}</p>
+              </div>
+              <p>{{ cert.description }}</p>
+              <div class="certification-boxes">
+                <p>{{ cert.hours }} horas</p>
+                <p>{{ cert.issueDate | date:'dd/MM/yyyy' }}</p>
+              </div>
+            </div>
+            <img [src]="thumbPathCertification(cert.imagePath) || 'img/not_found.jpg'" class="certification-left"
+              alt="Certificado">
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 

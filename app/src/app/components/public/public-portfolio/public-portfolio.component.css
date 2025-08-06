@@ -1,4 +1,86 @@
 /*
+* Seção portfolio (público)
+  */
+.fs-115 {
+  font-size: 115%;
+}
+
+/*
+* Certification card */
+.card-certification {
+  height: 200px;
+  background-color: #ececec;
+}
+
+.certification-left {
+  padding-right: 20px;
+  width: 25%;
+  margin-left: 10px;
+}
+
+.certification-right {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 15px 0 0 20px;
+  width: 75%;
+  height: 100%;
+}
+
+.certification-boxes {
+  display: flex;
+  gap: 10px
+}
+
+.certification-boxes p {
+  text-align: center;
+  font-weight: bold;
+  width: 120px;
+  padding: 5px 0;
+  background-color: #fff;
+}
+
+@media only screen and (max-width: 991px) {
+  .card-certification {
+    margin-bottom: 15px;
+  }
+}
+
+@media only screen and (max-width: 767px) {
+  .box-left {
+    display: flex;
+    width: 100%;
+
+  }
+
+  .box-left > div {
+    padding-left: 20px;
+  }
+
+  .box-left h2 {
+    margin-top: -8px !important;
+  }
+
+  .box-right h1 {
+    margin-top: 30px;
+  }
+}
+
+@media only screen and (max-width: 480px) {
+  .certification-left {
+    width: 30%;
+  }
+
+  .certification-right {
+    width: 70%;
+  }
+
+  .certification-boxes p {
+  width: 100px;
+}
+}
+
+/*
 * Seção não-portfolio (não encontrado, privado ou carregando)
   */
 
